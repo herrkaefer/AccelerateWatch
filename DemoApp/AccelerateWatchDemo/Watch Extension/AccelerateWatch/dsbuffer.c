@@ -1,5 +1,5 @@
 /*  =========================================================================
-    dsbuffer - fixed-length circular digital signal buffer
+    dsbuffer - fixed-length circular buffer for windowed signal processing
 
     Copyright (c) 2016, Yang LIU <gloolar@gmail.com>
     =========================================================================
@@ -172,6 +172,19 @@ void dsbuffer_push (dsbuffer_t *self, float new_value) {
 }
 
 
+void dsbuffer_dump (dsbuffer_t *self, float *output) {
+    assert (self);
+    assert (output);
+    if (self->fft_supported)
+        memcpy (output, &self->data[self->head], sizeof (float) * self->size);
+    else {
+        memcpy (output, &self->data[self->head], sizeof (float) * (self->size - self->head));
+        memcpy (output + self->size - self->head, self->data, sizeof (float) * self->head);
+    }
+
+}
+
+
 void dsbuffer_fftr (dsbuffer_t *self, dsbuffer_complex *output) {
     assert (self);
     assert (output);
@@ -315,13 +328,20 @@ void dsbuffer_test () {
     assert (buf);
     dsbuffer_setup_fir (buf, fir_taps, num_fir_taps);
 
+    float *dumped = (float *) malloc (sizeof (float) * size);
+
     float signal1[] = {1, 4, 2, 5};
     for (size_t t = 0; t < 4; t++) {
         dsbuffer_push (buf, signal1[t]);
+        dsbuffer_dump (buf, dumped);
+        for (size_t i = 0; i < size; i++)
+            printf ("dumped idx: %zu, value: %.3f\n", i, dumped[i]);
         printf ("FIR output: %.3f\n", dsbuffer_latest_fir_output (buf));
     }
 
     dsbuffer_print (buf, false);
+
+    free (dumped);
 
     float *output = (float *) malloc (sizeof (float) * size);
     assert (output);
@@ -342,12 +362,19 @@ void dsbuffer_test () {
     assert (buf);
     dsbuffer_print (buf, true);
 
+    dumped = (float *) malloc (sizeof (float) * size);
+
     for (size_t t = 0; t < size; t++) {
         dsbuffer_push (buf, signal2[t]);
         dsbuffer_print (buf, true);
         // if (t == 3)
         //     dsbuffer_clear (buf);
+        dsbuffer_dump (buf, dumped);
+        for (size_t i = 0; i < size; i++)
+            printf ("dumped idx: %zu, value: %.3f\n", i, dumped[i]);
     }
+
+    free (dumped);
 
     dsbuffer_complex *fft_data =
         (dsbuffer_complex *) malloc (sizeof (dsbuffer_complex) * (size/2+1));

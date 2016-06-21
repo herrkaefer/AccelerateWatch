@@ -1,5 +1,5 @@
 /*  =========================================================================
-    dsbuffer - fixed-length circular digital signal buffer
+    dsbuffer - fixed-length circular buffer for windowed signal processing
 
     Copyright (c) 2016, Yang LIU <gloolar@gmail.com>
     =========================================================================
@@ -32,6 +32,9 @@ void dsbuffer_free (dsbuffer_t **self_p);
 
 // Add new value to buffer
 void dsbuffer_push (dsbuffer_t *self, float new_value);
+
+// Dump buffer as array
+void dsbuffer_dump (dsbuffer_t *self, float *output);
 
 // Perform FFT on data buffer (real value time series)
 // Return results in param output (size/2+1 complex points)
