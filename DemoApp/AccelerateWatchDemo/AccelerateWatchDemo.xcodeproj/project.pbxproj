@@ -21,10 +21,8 @@
 		EBD80C161D18098900274D37 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EBD80BFC1D18098900274D37 /* Watch.app */; };
 		EBD80C2B1D1809B900274D37 /* AccelerateWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C201D1809B900274D37 /* AccelerateWatch.swift */; };
 		EBD80C2C1D1809B900274D37 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C211D1809B900274D37 /* dsbuffer.c */; };
-		EBD80C2D1D1809B900274D37 /* firfilter_taps.ini in Resources */ = {isa = PBXBuildFile; fileRef = EBD80C231D1809B900274D37 /* firfilter_taps.ini */; };
 		EBD80C2E1D1809B900274D37 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C261D1809B900274D37 /* kiss_fft.c */; };
 		EBD80C2F1D1809B900274D37 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C281D1809B900274D37 /* kiss_fftr.c */; };
-		EBD80C301D1809B900274D37 /* selftest.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C2A1D1809B900274D37 /* selftest.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,13 +87,11 @@
 		EBD80C201D1809B900274D37 /* AccelerateWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerateWatch.swift; sourceTree = "<group>"; };
 		EBD80C211D1809B900274D37 /* dsbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsbuffer.c; sourceTree = "<group>"; };
 		EBD80C221D1809B900274D37 /* dsbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
-		EBD80C231D1809B900274D37 /* firfilter_taps.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = firfilter_taps.ini; sourceTree = "<group>"; };
 		EBD80C251D1809B900274D37 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
 		EBD80C261D1809B900274D37 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
 		EBD80C271D1809B900274D37 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
 		EBD80C281D1809B900274D37 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
 		EBD80C291D1809B900274D37 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
-		EBD80C2A1D1809B900274D37 /* selftest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = selftest.c; sourceTree = "<group>"; };
 		EBD80C311D1809EA00274D37 /* AccelerateWatchDemo-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatchDemo-Briding-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,9 +175,7 @@
 				EBD80C201D1809B900274D37 /* AccelerateWatch.swift */,
 				EBD80C211D1809B900274D37 /* dsbuffer.c */,
 				EBD80C221D1809B900274D37 /* dsbuffer.h */,
-				EBD80C231D1809B900274D37 /* firfilter_taps.ini */,
 				EBD80C241D1809B900274D37 /* kissfft */,
-				EBD80C2A1D1809B900274D37 /* selftest.c */,
 			);
 			path = AccelerateWatch;
 			sourceTree = "<group>";
@@ -319,7 +313,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBD80C2D1D1809B900274D37 /* firfilter_taps.ini in Resources */,
 				EBD80C121D18098900274D37 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,7 +336,6 @@
 				EBD80C2E1D1809B900274D37 /* kiss_fft.c in Sources */,
 				EBD80C2C1D1809B900274D37 /* dsbuffer.c in Sources */,
 				EBD80C101D18098900274D37 /* ExtensionDelegate.swift in Sources */,
-				EBD80C301D1809B900274D37 /* selftest.c in Sources */,
 				EBD80C2B1D1809B900274D37 /* AccelerateWatch.swift in Sources */,
 				EBD80C0E1D18098900274D37 /* InterfaceController.swift in Sources */,
 				EBD80C2F1D1809B900274D37 /* kiss_fftr.c in Sources */,
@@ -507,7 +499,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AccelerateWatchDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AccelerateWatchDemo-Briding-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -522,7 +514,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AccelerateWatchDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AccelerateWatchDemo-Briding-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};

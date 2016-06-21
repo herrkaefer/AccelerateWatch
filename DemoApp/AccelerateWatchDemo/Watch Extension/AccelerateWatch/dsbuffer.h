@@ -34,27 +34,22 @@ void dsbuffer_free (dsbuffer_t **self_p);
 void dsbuffer_push (dsbuffer_t *self, float new_value);
 
 // Perform FFT on data buffer (real value time series)
-// Return array of size/2+1 complex points
-const dsbuffer_complex *dsbuffer_fftr (dsbuffer_t *self);
+// Return results in param output (size/2+1 complex points)
+void dsbuffer_fftr (dsbuffer_t *self, dsbuffer_complex *output);
 
 // Get FFT frequencies
-const float *dsbuffer_fft_freq (dsbuffer_t *self, float fs);
+// Return results in param output (size/2+1 points)
+void dsbuffer_fft_freq (dsbuffer_t *self, float fs, float *output);
 
-// Get the square of FFT magnitudes.
-// Return array of size/2+1 points.
-// Note that this function does not perform FFT, it is computed from the last
-// fft results.
-const float *dsbuffer_fft_magnitudes_square (dsbuffer_t *self);
-
+// Setup FIR filter
 void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_taps);
 
 // Get latest FIR filtered output
-float dsbuffer_lastest_fir_output (dsbuffer_t *self);
+float dsbuffer_latest_fir_output (dsbuffer_t *self);
 
 // Perform FIR filtering for the whole time series in buffer.
-// Return output array which size is the same as the signal. The caller is
-// responsible for freeing it after use.
-float *dsbuffer_fir_filter (dsbuffer_t *self);
+// Return results in param output which size is the same as the buffer.
+void dsbuffer_fir_filter (dsbuffer_t *self, float *output);
 
 // Reset buffer to zero values
 void dsbuffer_clear (dsbuffer_t *self);

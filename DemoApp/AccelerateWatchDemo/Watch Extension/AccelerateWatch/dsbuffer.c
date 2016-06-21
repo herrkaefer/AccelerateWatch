@@ -23,14 +23,11 @@ struct _dsbuffer_t {
     // for FFT
     bool fft_supported;
     kiss_fftr_cfg fft_cfg; // fft configuration
-    float *fft_freq; // sample frequencies
-    kiss_fft_cpx *fft_data; // fft results
-    float *fft_magnitudes_square; // square of fft maginitudes
 
     // for FIR filter
     const float *fir_taps;
     size_t num_fir_taps;
-    float (*fir_getter)(dsbuffer_t *f); // func of getting filtered signal
+    float (*fir_getter)(dsbuffer_t *buf); // func of getting filtered signal
 };
 
 
@@ -147,18 +144,18 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
         self->fft_supported = true;
         self->fft_cfg = kiss_fftr_alloc (size, 0, NULL, NULL);
         assert (self->fft_cfg);
-        self->fft_freq = (float *) malloc (sizeof (float) * (size/2+1));
-        assert (self->fft_freq);
-        self->fft_data = (kiss_fft_cpx *) malloc (sizeof (kiss_fft_cpx) * (size/2+1));
-        assert (self->fft_data);
-        self->fft_magnitudes_square = (float *) malloc (sizeof (float) * (size/2+1));
-        assert (self->fft_magnitudes_square);
+        // self->fft_freq = (float *) malloc (sizeof (float) * (size/2+1));
+        // assert (self->fft_freq);
+        // self->fft_data = (kiss_fft_cpx *) malloc (sizeof (kiss_fft_cpx) * (size/2+1));
+        // assert (self->fft_data);
+        // self->fft_magnitudes_square = (float *) malloc (sizeof (float) * (size/2+1));
+        // assert (self->fft_magnitudes_square);
     }
     else {
         self->fft_cfg = NULL;
-        self->fft_freq = NULL;
-        self->fft_data = NULL;
-        self->fft_magnitudes_square = NULL;
+        // self->fft_freq = NULL;
+        // self->fft_data = NULL;
+        // self->fft_magnitudes_square = NULL;
     }
 
     self->fir_taps = NULL;
@@ -167,6 +164,43 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
 
     return self;
 }
+
+
+void dsbuffer_push (dsbuffer_t *self, float new_value) {
+    assert (self);
+    return self->pusher (self, new_value);
+}
+
+
+void dsbuffer_fftr (dsbuffer_t *self, dsbuffer_complex *output) {
+    assert (self);
+    assert (output);
+    kiss_fftr (self->fft_cfg, &self->data[self->head], (kiss_fft_cpx *)output);
+}
+
+
+void dsbuffer_fft_freq (dsbuffer_t *self, float fs, float *output) {
+    assert (self);
+    assert (output);
+    assert (fs > 0);
+    float interval = fs/self->size;
+    output[0] = 0;
+    for (size_t idx = 1; idx < self->size/2+1; idx++) {
+        output[idx] = output[idx-1] + interval;
+    }
+}
+
+
+// void dsbuffer_power_spectrum (dsbuffer_t *self, float *output) {
+//     assert (self);
+//     assert (self->fft_cfg);
+//     for (size_t idx = 0; idx < self->size/2+1; idx++) {
+//         self->fft_magnitudes_square[idx] =
+//             self->fft_data[idx].r * self->fft_data[idx].r +
+//             self->fft_data[idx].i * self->fft_data[idx].i;
+//     }
+//     return self->fft_magnitudes_square;
+// }
 
 
 void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_taps) {
@@ -184,13 +218,7 @@ void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_tap
 }
 
 
-void dsbuffer_push (dsbuffer_t *self, float new_value) {
-    assert (self);
-    return self->pusher (self, new_value);
-}
-
-
-float dsbuffer_lastest_fir_output (dsbuffer_t *self) {
+float dsbuffer_latest_fir_output (dsbuffer_t *self) {
     assert (self);
     assert (self->fir_taps);
     return self->fir_getter (self);
@@ -220,11 +248,9 @@ float dsbuffer_lastest_fir_output (dsbuffer_t *self) {
 // }
 
 
-float *dsbuffer_fir_filter (dsbuffer_t *self) {
+void dsbuffer_fir_filter (dsbuffer_t *self, float *output) {
     assert (self);
     assert (self->fir_taps);
-
-    float *output = (float *) calloc (self->size, sizeof (float));
     assert (output);
 
     // Convolution
@@ -239,39 +265,6 @@ float *dsbuffer_fir_filter (dsbuffer_t *self) {
         }
         output[ind_fsig] = s;
     }
-    return output;
-}
-
-
-const dsbuffer_complex *dsbuffer_fftr (dsbuffer_t *self) {
-    assert (self);
-    assert (self->fft_cfg);
-    kiss_fftr (self->fft_cfg, &self->data[self->head], self->fft_data);
-    return (dsbuffer_complex *) self->fft_data;
-}
-
-
-const float *dsbuffer_fft_freq (dsbuffer_t *self, float fs) {
-    assert (self);
-    assert (fs > 0);
-    float interval = fs/self->size;
-    self->fft_freq[0] = 0;
-    for (size_t idx = 1; idx < self->size/2+1; idx++) {
-        self->fft_freq[idx] = self->fft_freq[idx-1] + interval;
-    }
-    return self->fft_freq;
-}
-
-
-const float *dsbuffer_fft_magnitudes_square (dsbuffer_t *self) {
-    assert (self);
-    assert (self->fft_cfg);
-    for (size_t idx = 0; idx < self->size/2+1; idx++) {
-        self->fft_magnitudes_square[idx] =
-            self->fft_data[idx].r * self->fft_data[idx].r +
-            self->fft_data[idx].i * self->fft_data[idx].i;
-    }
-    return self->fft_magnitudes_square;
 }
 
 
@@ -290,12 +283,6 @@ void dsbuffer_free (dsbuffer_t **self_p) {
         free (self->data);
         if (self->fft_cfg)
             free (self->fft_cfg);
-        if (self->fft_freq)
-            free (self->fft_freq);
-        if (self->fft_data)
-            free (self->fft_data);
-        if (self->fft_magnitudes_square)
-            free (self->fft_magnitudes_square);
         free (self);
         *self_p = NULL;
     }
@@ -312,30 +299,33 @@ void dsbuffer_test () {
     // 1
     buf = dsbuffer_new (num_fir_taps, false);
     assert (buf);
-    dsbuffer_setup_fir_filter (buf, fir_taps, num_fir_taps);
+    dsbuffer_setup_fir (buf, fir_taps, num_fir_taps);
 
     for (size_t t = 0; t < 10000000; t++) {
         float x = t * 1.0;
         dsbuffer_push (buf, x);
-        dsbuffer_lastest_fir_output (buf);
+        dsbuffer_latest_fir_output (buf);
     }
 
     dsbuffer_free (&buf);
 
     // 2
+    size = num_fir_taps;
     buf = dsbuffer_new (num_fir_taps, false);
     assert (buf);
-    dsbuffer_setup_fir_filter (buf, fir_taps, num_fir_taps);
+    dsbuffer_setup_fir (buf, fir_taps, num_fir_taps);
 
     float signal1[] = {1, 4, 2, 5};
     for (size_t t = 0; t < 4; t++) {
         dsbuffer_push (buf, signal1[t]);
-        printf ("FIR output: %.3f\n", dsbuffer_lastest_fir_output (buf));
+        printf ("FIR output: %.3f\n", dsbuffer_latest_fir_output (buf));
     }
 
     dsbuffer_print (buf, false);
 
-    float *output = dsbuffer_fir_filter (buf);
+    float *output = (float *) malloc (sizeof (float) * size);
+    assert (output);
+    dsbuffer_fir_filter (buf, output);
     for (size_t i = 0; i < num_fir_taps; i++)
         printf ("%.3f ", output[i]);
     printf ("\n");
@@ -345,28 +335,30 @@ void dsbuffer_test () {
 
     // 3. FFT
 
-    size = 8;
+    float signal2[] = {1, 4, 2, 5, 6, 7, -1, -8};
+    size = sizeof (signal2) / sizeof (float);
+
     buf = dsbuffer_new (size, true);
     assert (buf);
-
     dsbuffer_print (buf, true);
 
-    float signal2[] = {1, 4, 2, 5, 6, 7, -1, -8};
-    for (size_t t = 0; t < 8; t++) {
+    for (size_t t = 0; t < size; t++) {
         dsbuffer_push (buf, signal2[t]);
         dsbuffer_print (buf, true);
         // if (t == 3)
         //     dsbuffer_clear (buf);
     }
 
-    const dsbuffer_complex *fft_data = dsbuffer_fftr (buf);
-    const float *fft_freq = dsbuffer_fft_freq (buf, 9.0);
-    const float *fft_sm = dsbuffer_fft_magnitudes_square (buf);
-    dsbuffer_print (buf, true);
+    dsbuffer_complex *fft_data =
+        (dsbuffer_complex *) malloc (sizeof (dsbuffer_complex) * (size/2+1));
+    dsbuffer_fftr (buf, fft_data);
+
+    float *fft_freq = (float *) malloc (sizeof (float) * (size/2+1));
+    dsbuffer_fft_freq (buf, 9.0, fft_freq);
 
     for (size_t idx = 0; idx < size/2+1; idx++) {
-        printf("idx: %zu, freq: %.3f, real: %.3f, imag: %.3f, sm: %.3f\n",
-               idx, fft_freq[idx], fft_data[idx].real, fft_data[idx].imag, fft_sm[idx]);
+        printf("idx: %zu, freq: %.3f, real: %.3f, imag: %.3f\n",
+               idx, fft_freq[idx], fft_data[idx].real, fft_data[idx].imag);
     }
 
 
