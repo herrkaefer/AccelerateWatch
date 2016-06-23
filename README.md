@@ -21,7 +21,7 @@ Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com
 
 [Instructions: ADDING A SWIFT BRIDGING HEADER](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)
 
-Content:
+add content:
 
 ```C
 #include "dsbuffer.h"
@@ -41,7 +41,13 @@ Push new data
 buf.push(value: Float)
 ```
 
-Perform fft
+Dump buffer as array
+
+```Swift
+let dumpedSignal = buf.dump()
+```
+
+Perform FFT
 
 ```Swift
 let fftData = buf.fft()

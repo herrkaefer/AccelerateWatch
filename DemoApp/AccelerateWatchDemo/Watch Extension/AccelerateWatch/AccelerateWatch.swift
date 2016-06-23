@@ -48,7 +48,7 @@ class DSBuffer {
     
     
     // Dump as array
-    func dump() -> [Float] {
+    var signals: [Float] {
         var dumpedSignal = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_dump(self.buffer, &dumpedSignal)
         return dumpedSignal
@@ -122,6 +122,7 @@ class DSBuffer {
     func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
         assert (fromFreq >= 0)
         assert (toFreq <= fs/2.0)
+        assert (fromFreq <= toFreq)
         
         updateFFT()
         
@@ -131,10 +132,7 @@ class DSBuffer {
         let toIdx = Int(ceil(toFreq * Float(self.size) / fs))
         
 //        let fftBand = Array(self.fftData![fromIdx...toIdx])
-        var bandPower = self.fftData![fromIdx...toIdx].map{($0.real*$0.real+$0.imag*$0.imag) * 2}
-        if (fromIdx == 0) {
-            bandPower[0] /= 2.0 // DC
-        }
+        let bandPower = self.fftData![fromIdx...toIdx].map{$0.real*$0.real+$0.imag*$0.imag}
         
         // Averaging
         return bandPower.reduce(0.0, combine: +) / Float(toIdx - fromIdx + 1)
@@ -171,19 +169,35 @@ class DSBuffer {
     
     // Self test
     class func test() {
-//        dsbuffer_test()
+        print("DSBuffer test:\n\n")
+        
+        let size = 16
+        let buf = DSBuffer(size: size, fftIsSupported: true)
+        
         let signalData: [Float] = [1.0, 4, 2, 5, 6, 7, -1, -8]
-        let buf = DSBuffer(size: signalData.count-2, fftIsSupported: true)
         for value in signalData {
             buf.push(value)
-            print(buf.dump())
+//            print(buf.signals)
         }
         
-        let fft = buf.fft()
-        print(fft)
+//        let fft = buf.fft()
+//        print(fft)
+//        
+//        let fftSM = buf.SquaredPowerSpectrum()
+//        print(fftSM)
         
-        let fftSM = buf.SquaredPowerSpectrum()
-        print(fftSM)
+        
+        buf.clear()
+        for _ in 0 ..< 10000 {
+            let a = Float(arc4random_uniform(100))
+            buf.push(a)
+            let signals = buf.signals
+            print(a)
+            print(signals)
+            assert(signals[size-1] == a)
+        }
+        
+        print("\nDSBuffer test OK:\n\n")
     }
     
     

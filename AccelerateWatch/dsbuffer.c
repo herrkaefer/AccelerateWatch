@@ -38,14 +38,9 @@ static bool is_power_of_2 (size_t x) {
 
 
 static void dsbuffer_push_fast_with_fft (dsbuffer_t *self, float new_value) {
-    size_t idx = (self->head++) & (self->size-1);
-    self->data[idx] = new_value;
-    self->data[idx + self->size] = new_value;
-}
-
-
-static void dsbuffer_push_fast (dsbuffer_t *self, float new_value) {
-    self->data[(self->head++) & (self->size-1)] = new_value;
+    self->data[self->head] = new_value;
+    self->data[self->head + self->size] = new_value;
+    self->head = (++self->head) & (self->size-1);
 }
 
 
@@ -57,9 +52,15 @@ static void dsbuffer_push_normal_with_fft (dsbuffer_t *self, float new_value) {
 }
 
 
+static void dsbuffer_push_fast (dsbuffer_t *self, float new_value) {
+    self->data[self->head] = new_value;
+    self->head = (++self->head) & (self->size-1);
+}
+
+
 static void dsbuffer_push_normal (dsbuffer_t *self, float new_value) {
-    self->data[self->head++] = new_value;
-    if (self->head == self->size)
+    self->data[self->head] = new_value;
+    if (++self->head == self->size)
         self->head = 0;
 }
 
@@ -114,7 +115,7 @@ static void dsbuffer_print (dsbuffer_t *self, bool fft_supported) {
 
 dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
     if (fft_supported && size % 2 == 1) {
-        printf("buffer size must be even for FFT.\n");
+        printf("ERROR: buffer size must be even for FFT.\n");
         return NULL;
     }
 
@@ -140,23 +141,13 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
                        dsbuffer_push_normal_with_fft :
                        dsbuffer_push_normal;
 
+    self->fft_supported = fft_supported;
     if (fft_supported) {
-        self->fft_supported = true;
         self->fft_cfg = kiss_fftr_alloc (size, 0, NULL, NULL);
         assert (self->fft_cfg);
-        // self->fft_freq = (float *) malloc (sizeof (float) * (size/2+1));
-        // assert (self->fft_freq);
-        // self->fft_data = (kiss_fft_cpx *) malloc (sizeof (kiss_fft_cpx) * (size/2+1));
-        // assert (self->fft_data);
-        // self->fft_magnitudes_square = (float *) malloc (sizeof (float) * (size/2+1));
-        // assert (self->fft_magnitudes_square);
     }
-    else {
+    else
         self->fft_cfg = NULL;
-        // self->fft_freq = NULL;
-        // self->fft_data = NULL;
-        // self->fft_magnitudes_square = NULL;
-    }
 
     self->fir_taps = NULL;
     self->num_fir_taps = 0;
@@ -176,12 +167,15 @@ void dsbuffer_dump (dsbuffer_t *self, float *output) {
     assert (self);
     assert (output);
     if (self->fft_supported)
-        memcpy (output, &self->data[self->head], sizeof (float) * self->size);
+        memcpy (output, self->data + self->head, sizeof (float) * self->size);
     else {
-        memcpy (output, &self->data[self->head], sizeof (float) * (self->size - self->head));
-        memcpy (output + self->size - self->head, self->data, sizeof (float) * self->head);
+        memcpy (output,
+                self->data + self->head,
+                sizeof (float) * (self->size - self->head));
+        memcpy (output + self->size - self->head,
+                self->data,
+                sizeof (float) * self->head);
     }
-
 }
 
 
@@ -204,18 +198,6 @@ void dsbuffer_fft_freq (dsbuffer_t *self, float fs, float *output) {
 }
 
 
-// void dsbuffer_power_spectrum (dsbuffer_t *self, float *output) {
-//     assert (self);
-//     assert (self->fft_cfg);
-//     for (size_t idx = 0; idx < self->size/2+1; idx++) {
-//         self->fft_magnitudes_square[idx] =
-//             self->fft_data[idx].r * self->fft_data[idx].r +
-//             self->fft_data[idx].i * self->fft_data[idx].i;
-//     }
-//     return self->fft_magnitudes_square;
-// }
-
-
 void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_taps) {
     assert (self);
     assert (self->size >= num_taps);
@@ -236,29 +218,6 @@ float dsbuffer_latest_fir_output (dsbuffer_t *self) {
     assert (self->fir_taps);
     return self->fir_getter (self);
 }
-
-
-// double *dsbuffer_filter (dsbuffer_t *self,
-//                         double *input_signal,
-//                         size_t len_signal) {
-//     assert (self);
-//     assert (input_signal);
-
-//     double *filtered_signal = (double *) calloc (len_signal, sizeof (double));
-//     assert (filtered_signal);
-
-//     // Convolution
-//     for (size_t ind_fsig = 0; ind_fsig < len_signal; ind_fsig++) {
-//         double s = 0.0;
-//         for (size_t ind_tap = 0; ind_tap < num_taps; ind_tap++) {
-//             if (ind_fsig < ind_tap)
-//                 break;
-//             s += filter_taps[ind_tap] * input_signal[ind_fsig-ind_tap];
-//         }
-//         filtered_signal[ind_fsig] = s;
-//     }
-//     return filtered_signal;
-// }
 
 
 void dsbuffer_fir_filter (dsbuffer_t *self, float *output) {
@@ -307,7 +266,9 @@ void dsbuffer_test () {
     #include "fir_taps.ini"
 
     dsbuffer_t *buf = NULL;
+    float *dumped = NULL;
     size_t size;
+    bool fft_supported;
 
     // 1
     buf = dsbuffer_new (num_fir_taps, false);
@@ -328,7 +289,7 @@ void dsbuffer_test () {
     assert (buf);
     dsbuffer_setup_fir (buf, fir_taps, num_fir_taps);
 
-    float *dumped = (float *) malloc (sizeof (float) * size);
+    dumped = (float *) malloc (sizeof (float) * size);
 
     float signal1[] = {1, 4, 2, 5};
     for (size_t t = 0; t < 4; t++) {
@@ -388,8 +349,102 @@ void dsbuffer_test () {
                idx, fft_freq[idx], fft_data[idx].real, fft_data[idx].imag);
     }
 
-
     dsbuffer_free (&buf);
+
+
+    // 4.
+    size = 64;
+    fft_supported = false;
+    buf = dsbuffer_new (size, fft_supported);
+    assert (buf);
+    dumped = (float *) malloc (sizeof (float) * size);
+    assert (dumped);
+
+    for (size_t t = 0; t < 100000; t++) {
+        float a = (int)(rand()*10000.0/RAND_MAX)/100.0;
+        dsbuffer_push (buf, a);
+        // dsbuffer_print (buf, fft_supported);
+        dsbuffer_dump (buf, dumped);
+        // for (size_t i = 0; i < size; i++)
+        //     printf("%.3f, ", dumped[i]);
+        // printf("\n");
+        // printf("push: %.3f, get: %.3f\n", a, dumped[size-1]);
+        assert (dumped[size-1] == a);
+    }
+
+    free (dumped);
+    dsbuffer_free (&buf);
+
+    // 5.
+    size = 64;
+    fft_supported = true;
+    buf = dsbuffer_new (size, fft_supported);
+    assert (buf);
+    dumped = (float *) malloc (sizeof (float) * size);
+    assert (dumped);
+
+    for (size_t t = 0; t < 100000; t++) {
+        float a = (int)(rand()*10000.0/RAND_MAX)/100.0;
+        dsbuffer_push (buf, a);
+        // dsbuffer_print (buf, fft_supported);
+        dsbuffer_dump (buf, dumped);
+        // for (size_t i = 0; i < size; i++)
+        //     printf("%.3f, ", dumped[i]);
+        // printf("\n");
+        // printf("push: %.3f, get: %.3f\n", a, dumped[size-1]);
+        assert (dumped[size-1] == a);
+    }
+
+    free (dumped);
+    dsbuffer_free (&buf);
+
+
+    // 6.
+    size = 100;
+    fft_supported = true;
+    buf = dsbuffer_new (size, fft_supported);
+    assert (buf);
+    dumped = (float *) malloc (sizeof (float) * size);
+    assert (dumped);
+
+    for (size_t t = 0; t < 100000; t++) {
+        float a = (int)(rand()*10000.0/RAND_MAX)/100.0;
+        dsbuffer_push (buf, a);
+        // dsbuffer_print (buf, fft_supported);
+        dsbuffer_dump (buf, dumped);
+        // for (size_t i = 0; i < size; i++)
+        //     printf("%.3f, ", dumped[i]);
+        // printf("\n");
+        // printf("push: %.3f, get: %.3f\n", a, dumped[size-1]);
+        assert (dumped[size-1] == a);
+    }
+
+    free (dumped);
+    dsbuffer_free (&buf);
+
+    // 7.
+    size = 100;
+    fft_supported = false;
+    buf = dsbuffer_new (size, fft_supported);
+    assert (buf);
+    dumped = (float *) malloc (sizeof (float) * size);
+    assert (dumped);
+
+    for (size_t t = 0; t < 100000; t++) {
+        float a = (int)(rand()*10000.0/RAND_MAX)/100.0;
+        dsbuffer_push (buf, a);
+        // dsbuffer_print (buf, fft_supported);
+        dsbuffer_dump (buf, dumped);
+        // for (size_t i = 0; i < size; i++)
+        //     printf("%.3f, ", dumped[i]);
+        // printf("\n");
+        // printf("push: %.3f, get: %.3f\n", a, dumped[size-1]);
+        assert (dumped[size-1] == a);
+    }
+
+    free (dumped);
+    dsbuffer_free (&buf);
+
 
     printf ("OK\n");
 }
