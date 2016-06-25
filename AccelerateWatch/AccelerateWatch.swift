@@ -19,7 +19,7 @@ class DSBuffer {
     private var fftIsUpdated: Bool?
     
     
-    // Initilization
+    // Initialization
     init(size: Int, fftIsSupported: Bool = true) {
         if (fftIsSupported && size % 2 == 1) {
             print("WARNING: size must be even for FFT. Reset size to: %d.", size+1)

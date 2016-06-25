@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB5E3C911D1E6E1F00892590 /* AccelerateWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5E3C861D1E6E1F00892590 /* AccelerateWatch.swift */; };
+		EB5E3C921D1E6E1F00892590 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EB5E3C871D1E6E1F00892590 /* dsbuffer.c */; };
+		EB5E3C931D1E6E1F00892590 /* fir_taps.ini in Resources */ = {isa = PBXBuildFile; fileRef = EB5E3C891D1E6E1F00892590 /* fir_taps.ini */; };
+		EB5E3C941D1E6E1F00892590 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB5E3C8C1D1E6E1F00892590 /* kiss_fft.c */; };
+		EB5E3C951D1E6E1F00892590 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB5E3C8E1D1E6E1F00892590 /* kiss_fftr.c */; };
 		EBD80BE91D18097900274D37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD80BE81D18097900274D37 /* AppDelegate.swift */; };
 		EBD80BEB1D18097900274D37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD80BEA1D18097900274D37 /* ViewController.swift */; };
 		EBD80BEE1D18097900274D37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD80BEC1D18097900274D37 /* Main.storyboard */; };
@@ -19,10 +24,6 @@
 		EBD80C101D18098900274D37 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C0F1D18098900274D37 /* ExtensionDelegate.swift */; };
 		EBD80C121D18098900274D37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD80C111D18098900274D37 /* Assets.xcassets */; };
 		EBD80C161D18098900274D37 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EBD80BFC1D18098900274D37 /* Watch.app */; };
-		EBD80C2B1D1809B900274D37 /* AccelerateWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C201D1809B900274D37 /* AccelerateWatch.swift */; };
-		EBD80C2C1D1809B900274D37 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C211D1809B900274D37 /* dsbuffer.c */; };
-		EBD80C2E1D1809B900274D37 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C261D1809B900274D37 /* kiss_fft.c */; };
-		EBD80C2F1D1809B900274D37 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EBD80C281D1809B900274D37 /* kiss_fftr.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB5E3C861D1E6E1F00892590 /* AccelerateWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerateWatch.swift; sourceTree = "<group>"; };
+		EB5E3C871D1E6E1F00892590 /* dsbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsbuffer.c; sourceTree = "<group>"; };
+		EB5E3C881D1E6E1F00892590 /* dsbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
+		EB5E3C891D1E6E1F00892590 /* fir_taps.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fir_taps.ini; sourceTree = "<group>"; };
+		EB5E3C8B1D1E6E1F00892590 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
+		EB5E3C8C1D1E6E1F00892590 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
+		EB5E3C8D1D1E6E1F00892590 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
+		EB5E3C8E1D1E6E1F00892590 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
+		EB5E3C8F1D1E6E1F00892590 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		EBD80BE51D18097900274D37 /* AccelerateWatchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccelerateWatchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD80BE81D18097900274D37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBD80BEA1D18097900274D37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,14 +94,6 @@
 		EBD80C0F1D18098900274D37 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		EBD80C111D18098900274D37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBD80C131D18098900274D37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBD80C201D1809B900274D37 /* AccelerateWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerateWatch.swift; sourceTree = "<group>"; };
-		EBD80C211D1809B900274D37 /* dsbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsbuffer.c; sourceTree = "<group>"; };
-		EBD80C221D1809B900274D37 /* dsbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
-		EBD80C251D1809B900274D37 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
-		EBD80C261D1809B900274D37 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
-		EBD80C271D1809B900274D37 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
-		EBD80C281D1809B900274D37 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
-		EBD80C291D1809B900274D37 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		EBD80C311D1809EA00274D37 /* AccelerateWatchDemo-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatchDemo-Briding-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB5E3C851D1E6E1F00892590 /* AccelerateWatch */ = {
+			isa = PBXGroup;
+			children = (
+				EB5E3C861D1E6E1F00892590 /* AccelerateWatch.swift */,
+				EB5E3C871D1E6E1F00892590 /* dsbuffer.c */,
+				EB5E3C881D1E6E1F00892590 /* dsbuffer.h */,
+				EB5E3C891D1E6E1F00892590 /* fir_taps.ini */,
+				EB5E3C8A1D1E6E1F00892590 /* kissfft */,
+			);
+			name = AccelerateWatch;
+			path = ../../AccelerateWatch;
+			sourceTree = "<group>";
+		};
+		EB5E3C8A1D1E6E1F00892590 /* kissfft */ = {
+			isa = PBXGroup;
+			children = (
+				EB5E3C8B1D1E6E1F00892590 /* _kiss_fft_guts.h */,
+				EB5E3C8C1D1E6E1F00892590 /* kiss_fft.c */,
+				EB5E3C8D1D1E6E1F00892590 /* kiss_fft.h */,
+				EB5E3C8E1D1E6E1F00892590 /* kiss_fftr.c */,
+				EB5E3C8F1D1E6E1F00892590 /* kiss_fftr.h */,
+			);
+			path = kissfft;
+			sourceTree = "<group>";
+		};
 		EBD80BDC1D18097900274D37 = {
 			isa = PBXGroup;
 			children = (
@@ -160,36 +187,13 @@
 		EBD80C0C1D18098900274D37 /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				EBD80C1F1D1809B900274D37 /* AccelerateWatch */,
+				EB5E3C851D1E6E1F00892590 /* AccelerateWatch */,
 				EBD80C0D1D18098900274D37 /* InterfaceController.swift */,
 				EBD80C0F1D18098900274D37 /* ExtensionDelegate.swift */,
 				EBD80C111D18098900274D37 /* Assets.xcassets */,
 				EBD80C131D18098900274D37 /* Info.plist */,
 			);
 			path = "Watch Extension";
-			sourceTree = "<group>";
-		};
-		EBD80C1F1D1809B900274D37 /* AccelerateWatch */ = {
-			isa = PBXGroup;
-			children = (
-				EBD80C201D1809B900274D37 /* AccelerateWatch.swift */,
-				EBD80C211D1809B900274D37 /* dsbuffer.c */,
-				EBD80C221D1809B900274D37 /* dsbuffer.h */,
-				EBD80C241D1809B900274D37 /* kissfft */,
-			);
-			path = AccelerateWatch;
-			sourceTree = "<group>";
-		};
-		EBD80C241D1809B900274D37 /* kissfft */ = {
-			isa = PBXGroup;
-			children = (
-				EBD80C251D1809B900274D37 /* _kiss_fft_guts.h */,
-				EBD80C261D1809B900274D37 /* kiss_fft.c */,
-				EBD80C271D1809B900274D37 /* kiss_fft.h */,
-				EBD80C281D1809B900274D37 /* kiss_fftr.c */,
-				EBD80C291D1809B900274D37 /* kiss_fftr.h */,
-			);
-			path = kissfft;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB5E3C931D1E6E1F00892590 /* fir_taps.ini in Resources */,
 				EBD80C121D18098900274D37 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,12 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBD80C2E1D1809B900274D37 /* kiss_fft.c in Sources */,
-				EBD80C2C1D1809B900274D37 /* dsbuffer.c in Sources */,
+				EB5E3C941D1E6E1F00892590 /* kiss_fft.c in Sources */,
+				EB5E3C921D1E6E1F00892590 /* dsbuffer.c in Sources */,
 				EBD80C101D18098900274D37 /* ExtensionDelegate.swift in Sources */,
-				EBD80C2B1D1809B900274D37 /* AccelerateWatch.swift in Sources */,
+				EB5E3C911D1E6E1F00892590 /* AccelerateWatch.swift in Sources */,
 				EBD80C0E1D18098900274D37 /* InterfaceController.swift in Sources */,
-				EBD80C2F1D1809B900274D37 /* kiss_fftr.c in Sources */,
+				EB5E3C951D1E6E1F00892590 /* kiss_fftr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +576,7 @@
 				EBD80BF91D18097900274D37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBD80C171D18098900274D37 /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
 			isa = XCConfigurationList;
@@ -579,6 +585,7 @@
 				EBD80C191D18098900274D37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBD80C1B1D18098900274D37 /* Build configuration list for PBXNativeTarget "Watch" */ = {
 			isa = XCConfigurationList;
@@ -587,6 +594,7 @@
 				EBD80C1D1D18098900274D37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

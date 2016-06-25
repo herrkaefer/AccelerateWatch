@@ -65,6 +65,7 @@ static void dsbuffer_push_normal (dsbuffer_t *self, float new_value) {
 }
 
 
+// Get latest FIR filter output (fast version)
 static float dsbuffer_fir_get_fast (dsbuffer_t *self) {
     float fvalue = 0;
     int index = self->head, i;
@@ -74,6 +75,7 @@ static float dsbuffer_fir_get_fast (dsbuffer_t *self) {
 }
 
 
+// Get latest FIR filter output (normal version)
 static float dsbuffer_fir_get_normal (dsbuffer_t *self) {
     float fvalue = 0;
     int index = self->head, i;
