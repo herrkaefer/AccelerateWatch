@@ -24,10 +24,12 @@ Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com
 add content:
 
 ```C
-#include "dsbuffer.h"
+#include "acceleratelib.h"
 ```
 
 ## Sample usage
+
+### DSBuffer
 
 Create a DSBuffer object
 
@@ -93,3 +95,14 @@ Clear buffer (reset to zeros)
 ```Swift
 buf.clear()
 ```
+
+### Vector
+
+- mean
+- length
+- add
+- multiply
+- remove_mean
+- normalize
+- dot_product
+

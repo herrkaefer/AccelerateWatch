@@ -9,6 +9,6 @@
 #ifndef AccelerateWatchDemoApp_Briding_Header_h
 #define AccelerateWatchDemoApp_Briding_Header_h
 
-#include "dsbuffer.h"
+#include "acceleratelib.h"
 
 #endif /* AccelerateWatchDemoApp_Briding_Header_h */

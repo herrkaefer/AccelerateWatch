@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include <assert.h>
 
 #include "dsbuffer.h"
@@ -334,7 +335,7 @@ void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
         for (size_t i = 0; i < self->size; i++) {
             length += output[i] * output[i];
         }
-        length = sqrt (length);
+        length = sqrtf (length);
 
         for (size_t i = 0; i < self->size; i++)
             output[i] /= length;

@@ -24,6 +24,7 @@
 		EB8AD3EA1D2128EE00F63323 /* fir_taps.ini in Resources */ = {isa = PBXBuildFile; fileRef = EB8AD3DE1D2128EE00F63323 /* fir_taps.ini */; };
 		EB8AD3EB1D2128EE00F63323 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3E11D2128EE00F63323 /* kiss_fft.c */; };
 		EB8AD3EC1D2128EE00F63323 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3E31D2128EE00F63323 /* kiss_fftr.c */; };
+		EB8AD47E1D215F7700F63323 /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD47C1D215F7700F63323 /* vectorf.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,9 @@
 		EB8AD3E31D2128EE00F63323 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
 		EB8AD3E41D2128EE00F63323 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		EB8AD3EE1D21290500F63323 /* AccelerateWatchDemoApp-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatchDemoApp-Briding-Header.h"; sourceTree = "<group>"; };
+		EB8AD47C1D215F7700F63323 /* vectorf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectorf.c; sourceTree = "<group>"; };
+		EB8AD47D1D215F7700F63323 /* vectorf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorf.h; sourceTree = "<group>"; };
+		EB8AD4801D2160C100F63323 /* acceleratelib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acceleratelib.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				EB8AD3DA1D2128EE00F63323 /* AccelerateWatch.swift */,
+				EB8AD4801D2160C100F63323 /* acceleratelib.h */,
+				EB8AD47C1D215F7700F63323 /* vectorf.c */,
+				EB8AD47D1D215F7700F63323 /* vectorf.h */,
 				EB8AD3DC1D2128EE00F63323 /* dsbuffer.c */,
 				EB8AD3DD1D2128EE00F63323 /* dsbuffer.h */,
 				EB8AD3DE1D2128EE00F63323 /* fir_taps.ini */,
@@ -341,6 +348,7 @@
 				EB8AD3EB1D2128EE00F63323 /* kiss_fft.c in Sources */,
 				EB8AD3E91D2128EE00F63323 /* dsbuffer.c in Sources */,
 				EB8AD3C91D2128D900F63323 /* ExtensionDelegate.swift in Sources */,
+				EB8AD47E1D215F7700F63323 /* vectorf.c in Sources */,
 				EB8AD3E71D2128EE00F63323 /* AccelerateWatch.swift in Sources */,
 				EB8AD3C71D2128D900F63323 /* InterfaceController.swift in Sources */,
 				EB8AD3EC1D2128EE00F63323 /* kiss_fftr.c in Sources */,
@@ -576,6 +584,7 @@
 				EB8AD3B21D2128C200F63323 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB8AD3D01D2128D900F63323 /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
 			isa = XCConfigurationList;
@@ -584,6 +593,7 @@
 				EB8AD3D21D2128D900F63323 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB8AD3D41D2128D900F63323 /* Build configuration list for PBXNativeTarget "Watch" */ = {
 			isa = XCConfigurationList;
@@ -592,6 +602,7 @@
 				EB8AD3D61D2128D900F63323 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
