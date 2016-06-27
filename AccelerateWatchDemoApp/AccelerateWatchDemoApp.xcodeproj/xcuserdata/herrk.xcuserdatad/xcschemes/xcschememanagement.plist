@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AccelerateWatchDemo.xcscheme</key>
+		<key>AccelerateWatchDemoApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -17,12 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>EBD80BE41D18097900274D37</key>
+		<key>EB8AD39D1D2128C200F63323</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EBD80BFB1D18098900274D37</key>
+		<key>EB8AD3B41D2128D900F63323</key>
 		<dict>
 			<key>primary</key>
 			<true/>

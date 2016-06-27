@@ -2,7 +2,7 @@
 //  InterfaceController.swift
 //  Watch Extension
 //
-//  Created by HerrKaefer on 16/6/20.
+//  Created by HerrKaefer on 16/6/27.
 //  Copyright © 2016年 Herrkaefer. All rights reserved.
 //
 
@@ -21,9 +21,6 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        
-        // test DSBuffer
-        DSBuffer.test()
     }
 
     override func didDeactivate() {

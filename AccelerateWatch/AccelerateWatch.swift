@@ -9,7 +9,7 @@
 import Foundation
 
 
-class DSBuffer {
+public class DSBuffer {
     
     private var buffer: COpaquePointer
     private var size: Int
@@ -38,6 +38,11 @@ class DSBuffer {
     }
     
     
+    deinit {
+        dsbuffer_free(&self.buffer)
+    }
+    
+    
     // Push new value to buffer
     func push(value: Float) {
         dsbuffer_push(self.buffer, value)
@@ -52,6 +57,61 @@ class DSBuffer {
         var dumpedSignal = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_dump(self.buffer, &dumpedSignal)
         return dumpedSignal
+    }
+    
+    
+    // Reset buffer to be zero filled
+    func clear() {
+        dsbuffer_clear(self.buffer)
+        if (self.fftIsSupported) {
+            self.fftIsUpdated = false
+        }
+    }
+    
+    
+    // MARK: Vector operations
+    
+    // Add value to buffer data
+    func add(value: Float) -> [Float] {
+        var result = [Float](count: self.size, repeatedValue: 0.0)
+        dsbuffer_add(self.buffer, value, &result)
+        return result
+    }
+    
+    
+    // Multiply buffer data with value
+    func multiply(value: Float) -> [Float] {
+        var result = [Float](count: self.size, repeatedValue: 0.0)
+        dsbuffer_multiply(self.buffer, value, &result)
+        return result
+    }
+    
+    
+    // Mean value
+    func mean() -> Float {
+        return dsbuffer_mean(self.buffer)
+    }
+    
+    
+    // Vector length
+    func length() -> Float {
+        return dsbuffer_length(self.buffer)
+    }
+    
+    
+    // Remove mean value (centralize)
+    func removeMean() -> [Float] {
+        var result = [Float](count: self.size, repeatedValue: 0.0)
+        dsbuffer_remove_mean(self.buffer, &result)
+        return result
+    }
+    
+    
+    // normalize vector to have unit length
+    func normalizeToUnitLength(centralized: Bool) -> [Float] {
+        var result = [Float](count: self.size, repeatedValue: 0.0)
+        dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
+        return result
     }
     
     
@@ -92,7 +152,7 @@ class DSBuffer {
     
     
     // Square of FFT magnitudes, i.e. (abs(fft()))^2
-    func SquaredPowerSpectrum() -> [Float] {
+    func squaredPowerSpectrum() -> [Float] {
         updateFFT()
         var sps = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2}
         sps[0] /= 2.0 // DC
@@ -158,15 +218,6 @@ class DSBuffer {
     }
     
     
-    // Reset buffer to be zero filled
-    func clear() {
-        dsbuffer_clear(self.buffer)
-        if (self.fftIsSupported) {
-            self.fftIsUpdated = false
-        }
-    }
-    
-    
     // Self test
     class func test() {
         print("DSBuffer test:\n\n")
@@ -200,10 +251,6 @@ class DSBuffer {
         print("\nDSBuffer test OK:\n\n")
     }
     
-    
-    deinit {
-        dsbuffer_free(&self.buffer)
-    }
 }
 
 

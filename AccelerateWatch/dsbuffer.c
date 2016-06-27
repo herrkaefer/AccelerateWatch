@@ -242,6 +242,131 @@ void dsbuffer_fir_filter (dsbuffer_t *self, float *output) {
 }
 
 
+// Get mean value of data
+float dsbuffer_mean (dsbuffer_t *self) {
+    assert (self);
+    float sum = 0.0;
+    for (size_t i = 0; i < self->size; i++)
+        sum += self->data[i];
+    return sum / self->size;
+}
+
+
+// Length of buffer data as vector
+float dsbuffer_length (dsbuffer_t *self) {
+    assert (self);
+    float ss = 0.0;
+    for (size_t i = 0; i < self->size; i++)
+        ss += self->data[i] * self->data[i];
+    return sqrt (ss);
+}
+
+
+void dsbuffer_add (dsbuffer_t *self, float value, float *output) {
+    assert (self);
+    assert (output);
+
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            output[i] = self->data[i] + value;
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            output[i] = self->data[idx] + value;
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+}
+
+
+void dsbuffer_multiply (dsbuffer_t *self, float value, float *output) {
+    assert (self);
+    assert (output);
+
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            output[i] = self->data[i] * value;
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            output[i] = self->data[idx] * value;
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+}
+
+
+void dsbuffer_remove_mean (dsbuffer_t *self, float *output) {
+    assert (self);
+    assert (output);
+
+    float mean = dsbuffer_mean (self);
+
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            output[i] = self->data[self->head + i] - mean;
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            output[i] = self->data[idx] - mean;
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+}
+
+
+void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
+                                        bool remove_mean,
+                                        float *output) {
+    assert (self);
+    assert (output);
+
+    if (remove_mean) {
+        dsbuffer_remove_mean (self, output);
+
+        float length = 0.0;
+        for (size_t i = 0; i < self->size; i++) {
+            length += output[i] * output[i];
+        }
+        length = sqrt (length);
+
+        for (size_t i = 0; i < self->size; i++)
+            output[i] /= length;
+    }
+    else {
+        float length = dsbuffer_length (self);
+        dsbuffer_multiply (self, 1/length, output);
+    }
+}
+
+
+float dsbuffer_dot_product (dsbuffer_t *self, float *vector) {
+    assert (self);
+    assert (vector);
+
+    float result = 0.0;
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            result += self->data[self->head + i] * vector[i];
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            result += self->data[idx] * vector[i];
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+    return result;
+}
+
+
 void dsbuffer_clear (dsbuffer_t *self) {
     assert (self);
     memset (self->data, 0, sizeof (float) *
@@ -443,6 +568,27 @@ void dsbuffer_test () {
         // printf("push: %.3f, get: %.3f\n", a, dumped[size-1]);
         assert (dumped[size-1] == a);
     }
+
+    free (dumped);
+    dsbuffer_free (&buf);
+
+    // 8. normalize
+    size = 5;
+    fft_supported = false;
+    buf = dsbuffer_new (size, fft_supported);
+    assert (buf);
+
+    float signal3[] = {4.5, 6.7, 99.3, 45.3, 78.6};
+    for (size_t t = 0; t < size; t++)
+        dsbuffer_push (buf, signal3[t]);
+    printf ("mean: %.2f, length: %.2f\n", dsbuffer_mean (buf), dsbuffer_length (buf));
+
+    dumped = (float *) malloc (sizeof (float) * size);
+    assert (dumped);
+
+    dsbuffer_normalize_to_unit_length (buf, true, dumped);
+    for (size_t i = 0; i < size; i++)
+        printf ("normalized idx: %zu, value: %.2f\n", i, dumped[i]);
 
     free (dumped);
     dsbuffer_free (&buf);

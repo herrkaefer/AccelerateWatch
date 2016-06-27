@@ -36,6 +36,13 @@ void dsbuffer_push (dsbuffer_t *self, float new_value);
 // Dump buffer as array
 void dsbuffer_dump (dsbuffer_t *self, float *output);
 
+// Reset buffer to zero values
+void dsbuffer_clear (dsbuffer_t *self);
+
+// Self test
+void dsbuffer_test (void);
+
+// ---------------------------------------------------------------------------
 // Perform FFT on data buffer (real value time series)
 // Return results in param output (size/2+1 complex points)
 void dsbuffer_fftr (dsbuffer_t *self, dsbuffer_complex *output);
@@ -44,6 +51,7 @@ void dsbuffer_fftr (dsbuffer_t *self, dsbuffer_complex *output);
 // Return results in param output (size/2+1 points)
 void dsbuffer_fft_freq (dsbuffer_t *self, float fs, float *output);
 
+// ---------------------------------------------------------------------------
 // Setup FIR filter
 void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_taps);
 
@@ -54,11 +62,32 @@ float dsbuffer_latest_fir_output (dsbuffer_t *self);
 // Return results in param output which size is the same as the buffer.
 void dsbuffer_fir_filter (dsbuffer_t *self, float *output);
 
-// Reset buffer to zero values
-void dsbuffer_clear (dsbuffer_t *self);
+// ---------------------------------------------------------------------------
+// Get mean value of data
+float dsbuffer_mean (dsbuffer_t *self);
 
-// Self test
-void dsbuffer_test (void);
+// Length of buffer data as vector
+float dsbuffer_length (dsbuffer_t *self);
+
+// Add value to dsbuffer data.
+// Return results in param output.
+void dsbuffer_add (dsbuffer_t *self, float value, float *output);
+
+// Multiply dsbuffer data with value.
+// Return results in param output.
+void dsbuffer_multiply (dsbuffer_t *self, float value, float *output);
+
+// Centralize buffer data as vector
+void dsbuffer_remove_mean (dsbuffer_t *self, float *output);
+
+// Normalize buffer data as vector to have unit length.
+// Return results in param output which size is the same as the buffer.
+// Set remove_mean to true to centralize vector.
+void dsbuffer_normalize_to_unit_length (dsbuffer_t *self, bool remove_mean, float *output);
+
+// Dot product with vector which size is same with buffer
+float dsbuffer_dot_product (dsbuffer_t *self, float *vector);
+
 
 #ifdef __cplusplus
 }

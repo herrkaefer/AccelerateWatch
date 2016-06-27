@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+               BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
                BuildableName = "Watch.app"
                BlueprintName = "Watch"
-               ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+               ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,24 +28,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBD80BE41D18097900274D37"
-               BuildableName = "AccelerateWatchDemo.app"
-               BlueprintName = "AccelerateWatchDemo"
-               ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBD80C071D18098900274D37"
+               BlueprintIdentifier = "EB8AD3C01D2128D900F63323"
                BuildableName = "Watch Extension.appex"
                BlueprintName = "Watch Extension"
-               ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+               ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB8AD39D1D2128C200F63323"
+               BuildableName = "AccelerateWatchDemoApp.app"
+               BlueprintName = "AccelerateWatchDemoApp"
+               ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -60,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+            BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
             BuildableName = "Watch.app"
             BlueprintName = "Watch"
-            ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+            ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,22 +82,22 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.carousel"
-         RemotePath = "/AccelerateWatchDemo">
+         RemotePath = "/AccelerateWatchDemoApp">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+            BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
             BuildableName = "Watch.app"
             BlueprintName = "Watch"
-            ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+            ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+            BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
             BuildableName = "Watch.app"
             BlueprintName = "Watch"
-            ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+            ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -112,22 +112,22 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.carousel"
-         RemotePath = "/AccelerateWatchDemo">
+         RemotePath = "/AccelerateWatchDemoApp">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+            BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
             BuildableName = "Watch.app"
             BlueprintName = "Watch"
-            ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+            ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD80BFB1D18098900274D37"
+            BlueprintIdentifier = "EB8AD3B41D2128D900F63323"
             BuildableName = "Watch.app"
             BlueprintName = "Watch"
-            ReferencedContainer = "container:AccelerateWatchDemo.xcodeproj">
+            ReferencedContainer = "container:AccelerateWatchDemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

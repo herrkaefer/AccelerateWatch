@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  AccelerateWatchDemo
+//  AccelerateWatchDemoApp
 //
-//  Created by HerrKaefer on 16/6/20.
+//  Created by HerrKaefer on 16/6/27.
 //  Copyright © 2016年 Herrkaefer. All rights reserved.
 //
 
