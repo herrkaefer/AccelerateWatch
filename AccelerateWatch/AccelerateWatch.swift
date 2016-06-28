@@ -116,6 +116,12 @@ public class DSBuffer {
     }
     
     
+    func dotProduct(withVector: [Float]) -> Float {
+        assert(self.size == withVector.count)
+        return dsbuffer_dot_product(self.buffer, withVector)
+    }
+    
+    
     // MARK: FFT
     
     // Perform FFT if it is not updated

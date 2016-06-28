@@ -347,7 +347,7 @@ void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
 }
 
 
-float dsbuffer_dot_product (dsbuffer_t *self, float *vector) {
+float dsbuffer_dot_product (dsbuffer_t *self, const float *vector) {
     assert (self);
     assert (vector);
 

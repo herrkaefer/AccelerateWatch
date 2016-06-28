@@ -99,9 +99,8 @@ void vectorf_normalize_to_unit_length (const float *self,
         vectorf_remove_mean (self, size, output);
 
         float length = 0.0;
-        for (size_t i = 0; i < size; i++) {
+        for (size_t i = 0; i < size; i++)
             length += output[i] * output[i];
-        }
         length = sqrt (length);
 
         for (size_t i = 0; i < size; i++)

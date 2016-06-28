@@ -86,7 +86,7 @@ void dsbuffer_remove_mean (dsbuffer_t *self, float *output);
 void dsbuffer_normalize_to_unit_length (dsbuffer_t *self, bool remove_mean, float *output);
 
 // Dot product with vector which size is same with buffer
-float dsbuffer_dot_product (dsbuffer_t *self, float *vector);
+float dsbuffer_dot_product (dsbuffer_t *self, const float *vector);
 
 
 #ifdef __cplusplus
