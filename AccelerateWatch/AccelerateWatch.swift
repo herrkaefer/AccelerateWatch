@@ -53,6 +53,12 @@ public class DSBuffer {
     }
     
     
+    // Buffer size
+    var bufferSize: Int {
+        return self.size
+    }
+    
+    
     // Dump as array
     var signals: [Float] {
         var dumpedSignal = [Float](count: self.size, repeatedValue: 0.0)
@@ -89,19 +95,19 @@ public class DSBuffer {
     
     
     // Mean value
-    func mean() -> Float {
+    var mean: Float {
         return dsbuffer_mean(self.buffer)
     }
     
     
     // Vector length
-    func length() -> Float {
+    var length: Float {
         return dsbuffer_length(self.buffer)
     }
     
     
     // Remove mean value (centralize)
-    func removeMean() -> [Float] {
+    func centralized() -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_remove_mean(self.buffer, &result)
         return result
@@ -109,16 +115,16 @@ public class DSBuffer {
     
     
     // normalize vector to have unit length
-    func normalizeToUnitLength(centralized: Bool) -> [Float] {
+    func normalizedToUnitLength(centralized: Bool) -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
         return result
     }
     
     
-    func dotProduct(withVector: [Float]) -> Float {
-        assert(self.size == withVector.count)
-        return dsbuffer_dot_product(self.buffer, withVector)
+    func dotProduct(with: [Float]) -> Float {
+        assert(self.size == with.count)
+        return dsbuffer_dot_product(self.buffer, with)
     }
     
     
@@ -250,10 +256,15 @@ public class DSBuffer {
             let a = Float(arc4random_uniform(100))
             buf.push(a)
             let signals = buf.signals
-            print(a)
-            print(signals)
+//            print(a)
+//            print(signals)
             assert(signals[size-1] == a)
         }
+        
+        
+        let norm = buf.normalizedToUnitLength(true)
+        let coeff = vDotProduct(norm, v2: norm)
+        print("coeff: %.2f\n", coeff)
         
         print("\nDSBuffer test OK:\n\n")
     }
