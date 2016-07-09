@@ -17,9 +17,9 @@ Current functionality is still much much less compared with Accelerate because o
 
 ## Install manually
 
-1. Copy AccelerateWatch folder to your project
+1. Copy AccelerateWatch folder to your project (usually the Watch Extension folder).
 
-2. Add a bridging header (here is a [Instructions: ADDING A SWIFT BRIDGING HEADER](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
+2. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
 
 ```C
 #include "acceleratelib.h"
@@ -145,3 +145,7 @@ Vector module includes operations on regular arrays.
 - vNormalizeToUnitLength
 - vDotProduct
 
+
+# Demo App
+
+AccelerateWatchDemoApp is a demo showing how to use AccelerateWatch for watch target.
