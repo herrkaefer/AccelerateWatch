@@ -5,15 +5,17 @@
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 [![Twitter](https://img.shields.io/badge/twitter-mrbeetle-blue.svg?style=flat)](http://twitter.com/mrbeetle)
 
-Some digital signal processing implementions in C, and Swift wrapper.
+Some basic digital signal processing algorithms implemented in C, and wrapped in Swift.
 
 # Where and why to use AccelerateWatch?
 
-Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable. This library will help those apps which need to process sensor datas in real time, just like what Accelerate does for iOS.
+Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable. This library will help those apps which need to process sensor datas in real time, just like what Accelerate does for iOS platform.
 
 # How to use AccelerateWatch?
 
 ## Install
+
+### Manually install
 
 1. Copy AccelerateWatch folder to your project
 
@@ -21,15 +23,17 @@ Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com
 
 [Instructions: ADDING A SWIFT BRIDGING HEADER](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)
 
-add content:
+add the following content to the bridging header:
 
 ```C
 #include "acceleratelib.h"
 ```
 
-## Sample usage
+## Usage
 
 ### DSBuffer
+
+DSBuffer represents a fixed length signal buffer (Float type).
 
 Create a DSBuffer object
 
@@ -37,39 +41,81 @@ Create a DSBuffer object
 let buf = DSBuffer(size: Int, fftIsSupported: Bool)
 ```
 
-Push new data
+Push new data to the end of the buffer
 
 ```Swift
 buf.push(value: Float)
 ```
 
-Dump buffer as array
+Get buffer size
+
+```swift
+buf.bufferSize
+```
+
+Dump signal array
 
 ```Swift
-let dumpedSignal = buf.dump()
+buf.signals
+```
+
+Reset all buffer values to zero
+
+```swift
+buf.clear()
+```
+
+Vector operations
+
+```swift
+func add(value: Float) -> [Float]
+func multiply(value: Float) -> [Float]
+var mean: Float
+var length: Float
+func centralized() -> [Float]
+func normalizedToUnitLength(centralized: Bool) -> [Float]
+func dotProduct(with: [Float]) -> Float
 ```
 
 Perform FFT
 
 ```Swift
-let fftData = buf.fft()
+func fft() -> (real: [Float], imaginary: [Float])
 ```
 
 Get FFT sample frequencies
 
 ```Swift
-let fftFreq = buf.fftFrequencies(fs: Float)
+func fftFrequencies(fs: Float) -> [Float]
 ```
 
 Get FFT magnitudes
 
 ```Swift
-let fftMagnitudes = buf.fftMagnitudes()
+func fftMagnitudes() -> [Float]
 ```
-Get power spectrum
+Square of FFT Magnitude, i.e. (abs(fft()))^2
+
+```swift
+func squaredPowerSpectrum() -> [Float]
+```
+
+Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
+
+```swift
+func meanSquaredPowerSpectrum() -> [Float]
+```
+
+Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
 
 ```Swift
-let psd = buf.powerSpectrum(fs: Float)
+func powerSpectralDensity(fs: Float) -> [Float]
+```
+
+Average power on specified frequency band, i.e. mean(abs(fft(from...to))^2)
+
+```swift
+func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 ```
 
 Setup a FIR filter
@@ -81,28 +127,24 @@ buf.setupFIRFilter(FIRTaps: [Float])
 Get latest FIR filter output
 
 ```Swift
-let firOutput = buf.latestFIROutput()
+func latestFIROutput() -> Float
 ```
 
 Get FIR filtered signal series in buffer
 
 ```Swift
-let firOutputs = buf.FIRFiltered()
+func FIRFiltered() -> [Float]
 ```
 
-Clear buffer (reset to zeros)
 
-```Swift
-buf.clear()
-```
 
 ### Vector
 
-- mean
-- length
-- add
-- multiply
-- remove_mean
-- normalize
-- dot_product
+- vMean
+- vLength
+- vAdd
+- vMultiply
+- vRemoveMean
+- vNormalizeToUnitLength
+- vDotProduct
 
