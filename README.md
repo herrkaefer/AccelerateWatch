@@ -9,60 +9,56 @@ Some basic digital signal processing algorithms implemented in C, and wrapped in
 
 # Where and why to use AccelerateWatch?
 
-Unfortunately, for watchOS 3, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable. This library will help those apps which need to process sensor datas in real time, just like what Accelerate does for iOS platform.
+Apple watchOS 3 opens opptunity to developers to obtain and process motion sensor data both in real time and longer running time. Unfortunately, at the same time, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
-# How to use AccelerateWatch?
+Current functionality is still much much less compared with Accelerate because only those I used in my projects are added. So **contributions are welcome!** 😃
 
-## Install
+# Install
 
-### Manually install
+## Install manually
 
 1. Copy AccelerateWatch folder to your project
 
-2. Add a bridging header
-
-[Instructions: ADDING A SWIFT BRIDGING HEADER](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)
-
-add the following content to the bridging header:
+2. Add a bridging header (here is a [Instructions: ADDING A SWIFT BRIDGING HEADER](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
 
 ```C
 #include "acceleratelib.h"
 ```
 
-## Usage
+# Usage
 
-### DSBuffer
+## DSBuffer
 
-DSBuffer represents a fixed length signal buffer (Float type).
+DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
 
-Create a DSBuffer object
+Create a DSBuffer object. If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more.
 
 ```Swift
-let buf = DSBuffer(size: Int, fftIsSupported: Bool)
+DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
 ```
 
 Push new data to the end of the buffer
 
 ```Swift
-buf.push(value: Float)
+func push(value: Float)
 ```
 
 Get buffer size
 
 ```swift
-buf.bufferSize
+var bufferSize: Int
 ```
 
 Dump signal array
 
 ```Swift
-buf.signals
+var signals: [Float]
 ```
 
 Reset all buffer values to zero
 
 ```swift
-buf.clear()
+func clear()
 ```
 
 Vector operations
@@ -137,8 +133,9 @@ func FIRFiltered() -> [Float]
 ```
 
 
+## Vector
 
-### Vector
+Vector module includes operations on regular arrays.
 
 - vMean
 - vLength
