@@ -5,21 +5,24 @@
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 [![Twitter](https://img.shields.io/badge/twitter-mrbeetle-blue.svg?style=flat)](http://twitter.com/mrbeetle)
 
-Some basic digital signal processing algorithms implemented in C, and wrapped in Swift.
+```AccelerateWatch```: High performance digital signal processing algorithms implemented in C, and wrapped in Swift.
 
 # Where and why to use AccelerateWatch?
 
-Apple watchOS 3 opens opptunity to developers to obtain and process motion sensor data both in real time and longer running time. Unfortunately, at the same time, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
+Apple watchOS 3 opens opptunities to developers to obtain and process motion sensor data both in real time and longer background running time. Unfortunately, meanwhile, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
-Current functionality is still much much less compared with Accelerate because only those I used in my projects are added. So **contributions are welcome!** 😃
+- Swift support.  C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.
+- Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like [Surge](https://github.com/mattt/Surge) exists. Would update to Swift 3 later.
+
+Currently the functionality set is still much small compared with Accelerate because only those I used in my projects are added (mostly focused on time series operations and analysis). So **contributions are welcome!** 😃
 
 # Install
 
 ## Install manually
 
 1. Copy AccelerateWatch folder to your project (usually the Watch Extension folder).
-
-2. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
+2. Check that every .swift and .c files has Watch Extension as target.
+3. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
 
 ```C
 #include "acceleratelib.h"
@@ -148,4 +151,12 @@ Vector module includes operations on regular arrays.
 
 # Demo App
 
-AccelerateWatchDemoApp is a demo showing how to use AccelerateWatch for watch target.
+```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target.
+
+
+
+# Acknowledgement
+
+- kissfft
+
+[kissfft](https://github.com/itdaniher/kissfft) is employed for FFT. It is a lightweighted and fast FFT library. Only the real-value FFT related part is included here.
