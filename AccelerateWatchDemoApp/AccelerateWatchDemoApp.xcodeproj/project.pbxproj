@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB03436B1D32A44F00519C73 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EB03435B1D32A44F00519C73 /* dsbuffer.c */; };
+		EB03436D1D32A44F00519C73 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343601D32A44F00519C73 /* kiss_fft.c */; };
+		EB03436E1D32A44F00519C73 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343621D32A44F00519C73 /* kiss_fftr.c */; };
+		EB03436F1D32A44F00519C73 /* selftest.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343641D32A44F00519C73 /* selftest.c */; };
+		EB0343701D32A44F00519C73 /* vectord.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343651D32A44F00519C73 /* vectord.c */; };
+		EB0343711D32A44F00519C73 /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343671D32A44F00519C73 /* vectorf.c */; };
 		EB74E4EB1D31486900BE5760 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB74E4EA1D31486900BE5760 /* Vector.swift */; };
-		EB74E4EE1D31497400BE5760 /* vectord.c in Sources */ = {isa = PBXBuildFile; fileRef = EB74E4EC1D31497400BE5760 /* vectord.c */; };
 		EB8AD3A21D2128C200F63323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3A11D2128C200F63323 /* AppDelegate.swift */; };
 		EB8AD3A41D2128C200F63323 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3A31D2128C200F63323 /* ViewController.swift */; };
 		EB8AD3A71D2128C200F63323 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB8AD3A51D2128C200F63323 /* Main.storyboard */; };
@@ -22,11 +27,6 @@
 		EB8AD3CB1D2128D900F63323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB8AD3CA1D2128D900F63323 /* Assets.xcassets */; };
 		EB8AD3CF1D2128D900F63323 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB8AD3B51D2128D900F63323 /* Watch.app */; };
 		EB8AD3E71D2128EE00F63323 /* DSBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3DA1D2128EE00F63323 /* DSBuffer.swift */; };
-		EB8AD3E91D2128EE00F63323 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3DC1D2128EE00F63323 /* dsbuffer.c */; };
-		EB8AD3EA1D2128EE00F63323 /* fir_taps.ini in Resources */ = {isa = PBXBuildFile; fileRef = EB8AD3DE1D2128EE00F63323 /* fir_taps.ini */; };
-		EB8AD3EB1D2128EE00F63323 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3E11D2128EE00F63323 /* kiss_fft.c */; };
-		EB8AD3EC1D2128EE00F63323 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3E31D2128EE00F63323 /* kiss_fftr.c */; };
-		EB8AD47E1D215F7700F63323 /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD47C1D215F7700F63323 /* vectorf.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,9 +72,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB0343591D32A44F00519C73 /* acceleratelib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acceleratelib.h; sourceTree = "<group>"; };
+		EB03435B1D32A44F00519C73 /* dsbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsbuffer.c; sourceTree = "<group>"; };
+		EB03435C1D32A44F00519C73 /* dsbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
+		EB03435F1D32A44F00519C73 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
+		EB0343601D32A44F00519C73 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
+		EB0343611D32A44F00519C73 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
+		EB0343621D32A44F00519C73 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
+		EB0343631D32A44F00519C73 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
+		EB0343641D32A44F00519C73 /* selftest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = selftest.c; sourceTree = "<group>"; };
+		EB0343651D32A44F00519C73 /* vectord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectord.c; sourceTree = "<group>"; };
+		EB0343661D32A44F00519C73 /* vectord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectord.h; sourceTree = "<group>"; };
+		EB0343671D32A44F00519C73 /* vectorf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectorf.c; sourceTree = "<group>"; };
+		EB0343681D32A44F00519C73 /* vectorf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorf.h; sourceTree = "<group>"; };
 		EB74E4EA1D31486900BE5760 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
-		EB74E4EC1D31497400BE5760 /* vectord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectord.c; sourceTree = "<group>"; };
-		EB74E4ED1D31497400BE5760 /* vectord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectord.h; sourceTree = "<group>"; };
 		EB8AD39E1D2128C200F63323 /* AccelerateWatchDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccelerateWatchDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8AD3A11D2128C200F63323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB8AD3A31D2128C200F63323 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,18 +103,7 @@
 		EB8AD3CA1D2128D900F63323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB8AD3CC1D2128D900F63323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB8AD3DA1D2128EE00F63323 /* DSBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSBuffer.swift; sourceTree = "<group>"; };
-		EB8AD3DC1D2128EE00F63323 /* dsbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsbuffer.c; sourceTree = "<group>"; };
-		EB8AD3DD1D2128EE00F63323 /* dsbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
-		EB8AD3DE1D2128EE00F63323 /* fir_taps.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fir_taps.ini; sourceTree = "<group>"; };
-		EB8AD3E01D2128EE00F63323 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
-		EB8AD3E11D2128EE00F63323 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
-		EB8AD3E21D2128EE00F63323 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
-		EB8AD3E31D2128EE00F63323 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
-		EB8AD3E41D2128EE00F63323 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		EB8AD3EE1D21290500F63323 /* AccelerateWatchDemoApp-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatchDemoApp-Briding-Header.h"; sourceTree = "<group>"; };
-		EB8AD47C1D215F7700F63323 /* vectorf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectorf.c; sourceTree = "<group>"; };
-		EB8AD47D1D215F7700F63323 /* vectorf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorf.h; sourceTree = "<group>"; };
-		EB8AD4801D2160C100F63323 /* acceleratelib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acceleratelib.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +124,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB0343571D32A44F00519C73 /* acceleratelib */ = {
+			isa = PBXGroup;
+			children = (
+				EB03435E1D32A44F00519C73 /* kissfft */,
+				EB0343591D32A44F00519C73 /* acceleratelib.h */,
+				EB0343641D32A44F00519C73 /* selftest.c */,
+				EB03435B1D32A44F00519C73 /* dsbuffer.c */,
+				EB03435C1D32A44F00519C73 /* dsbuffer.h */,
+				EB0343651D32A44F00519C73 /* vectord.c */,
+				EB0343661D32A44F00519C73 /* vectord.h */,
+				EB0343671D32A44F00519C73 /* vectorf.c */,
+				EB0343681D32A44F00519C73 /* vectorf.h */,
+			);
+			path = acceleratelib;
+			sourceTree = "<group>";
+		};
+		EB03435E1D32A44F00519C73 /* kissfft */ = {
+			isa = PBXGroup;
+			children = (
+				EB03435F1D32A44F00519C73 /* _kiss_fft_guts.h */,
+				EB0343601D32A44F00519C73 /* kiss_fft.c */,
+				EB0343611D32A44F00519C73 /* kiss_fft.h */,
+				EB0343621D32A44F00519C73 /* kiss_fftr.c */,
+				EB0343631D32A44F00519C73 /* kiss_fftr.h */,
+			);
+			path = kissfft;
+			sourceTree = "<group>";
+		};
 		EB8AD3951D2128C200F63323 = {
 			isa = PBXGroup;
 			children = (
@@ -183,32 +211,12 @@
 		EB8AD3D81D2128EE00F63323 /* AccelerateWatch */ = {
 			isa = PBXGroup;
 			children = (
+				EB0343571D32A44F00519C73 /* acceleratelib */,
 				EB8AD3DA1D2128EE00F63323 /* DSBuffer.swift */,
 				EB74E4EA1D31486900BE5760 /* Vector.swift */,
-				EB8AD4801D2160C100F63323 /* acceleratelib.h */,
-				EB8AD47C1D215F7700F63323 /* vectorf.c */,
-				EB8AD47D1D215F7700F63323 /* vectorf.h */,
-				EB74E4EC1D31497400BE5760 /* vectord.c */,
-				EB74E4ED1D31497400BE5760 /* vectord.h */,
-				EB8AD3DC1D2128EE00F63323 /* dsbuffer.c */,
-				EB8AD3DD1D2128EE00F63323 /* dsbuffer.h */,
-				EB8AD3DE1D2128EE00F63323 /* fir_taps.ini */,
-				EB8AD3DF1D2128EE00F63323 /* kissfft */,
 			);
 			name = AccelerateWatch;
 			path = ../../AccelerateWatch;
-			sourceTree = "<group>";
-		};
-		EB8AD3DF1D2128EE00F63323 /* kissfft */ = {
-			isa = PBXGroup;
-			children = (
-				EB8AD3E01D2128EE00F63323 /* _kiss_fft_guts.h */,
-				EB8AD3E11D2128EE00F63323 /* kiss_fft.c */,
-				EB8AD3E21D2128EE00F63323 /* kiss_fft.h */,
-				EB8AD3E31D2128EE00F63323 /* kiss_fftr.c */,
-				EB8AD3E41D2128EE00F63323 /* kiss_fftr.h */,
-			);
-			path = kissfft;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,7 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB8AD3EA1D2128EE00F63323 /* fir_taps.ini in Resources */,
 				EB8AD3CB1D2128D900F63323 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,15 +360,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB8AD3EB1D2128EE00F63323 /* kiss_fft.c in Sources */,
-				EB8AD3E91D2128EE00F63323 /* dsbuffer.c in Sources */,
 				EB74E4EB1D31486900BE5760 /* Vector.swift in Sources */,
 				EB8AD3C91D2128D900F63323 /* ExtensionDelegate.swift in Sources */,
-				EB74E4EE1D31497400BE5760 /* vectord.c in Sources */,
-				EB8AD47E1D215F7700F63323 /* vectorf.c in Sources */,
+				EB03436D1D32A44F00519C73 /* kiss_fft.c in Sources */,
 				EB8AD3E71D2128EE00F63323 /* DSBuffer.swift in Sources */,
+				EB0343701D32A44F00519C73 /* vectord.c in Sources */,
 				EB8AD3C71D2128D900F63323 /* InterfaceController.swift in Sources */,
-				EB8AD3EC1D2128EE00F63323 /* kiss_fftr.c in Sources */,
+				EB03436F1D32A44F00519C73 /* selftest.c in Sources */,
+				EB03436B1D32A44F00519C73 /* dsbuffer.c in Sources */,
+				EB03436E1D32A44F00519C73 /* kiss_fftr.c in Sources */,
+				EB0343711D32A44F00519C73 /* vectorf.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
