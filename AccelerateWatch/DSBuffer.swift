@@ -1,7 +1,7 @@
 //
 //  DSBuffer
 //
-//  Created by HerrKaefer on 16/6/20.
+//  Created by HerrKaefer (gloolar@gmail.com) on 16/6/20.
 //  Copyright © 2016年 HerrKaefer. All rights reserved.
 //
 

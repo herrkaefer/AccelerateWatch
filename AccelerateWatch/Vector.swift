@@ -1,7 +1,7 @@
 //
 //  Vector.swift
 //
-//  Created by HerrKaefer on 16/7/9.
+//  Created by HerrKaefer (gloolar@gmail.com) on 16/7/9.
 //  Copyright © 2016年 HerrKaefer. All rights reserved.
 //
 
