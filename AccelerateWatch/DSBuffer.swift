@@ -189,7 +189,7 @@ public class DSBuffer {
     }
     
     
-    // Average power on specified frequency band, i.e. mean(abs(fft(from...to))^2)
+    // Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
     func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
         assert (fromFreq >= 0)
         assert (toFreq <= fs/2.0)

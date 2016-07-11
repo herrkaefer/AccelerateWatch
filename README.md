@@ -11,14 +11,12 @@
 
 Apple watchOS 3 opens opptunities to developers to obtain and process motion sensor data both in real time and longer background running time. Unfortunately, meanwhile, [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/) is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
-- Swift support.  C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.
+- Swift APIs.  C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.
 - Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like [Surge](https://github.com/mattt/Surge) exists. Would update to Swift 3 later.
 
-Currently the functionality set is still much small compared with Accelerate because only those I used in my projects are added (mostly focused on time series operations and analysis). So **contributions are welcome!** 😃
+Currently the functionality set is still much smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So **contributions are welcome!** 😃
 
 # Install
-
-## Install manually
 
 1. Copy AccelerateWatch folder to your project (usually the Watch Extension folder).
 2. Check that every .swift and .c files has Watch Extension as target.
@@ -34,7 +32,11 @@ Currently the functionality set is still much small compared with Accelerate bec
 
 DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
 
-Create a DSBuffer object. If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more.
+#### Normal operations
+
+Create a DSBuffer object
+
+*Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
 
 ```Swift
 DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
@@ -64,7 +66,7 @@ Reset all buffer values to zero
 func clear()
 ```
 
-Vector operations
+#### Vector operations
 
 ```swift
 func add(value: Float) -> [Float]
@@ -76,7 +78,15 @@ func normalizedToUnitLength(centralized: Bool) -> [Float]
 func dotProduct(with: [Float]) -> Float
 ```
 
-Perform FFT
+#### Fast Fourier Transform
+
+**Note for FFT related methods**: 
+
+- Set fftIsSupported when creating the buffer.
+- Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
+- Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.
+
+Perform FFT on buffer
 
 ```Swift
 func fft() -> (real: [Float], imaginary: [Float])
@@ -111,11 +121,13 @@ Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
 func powerSpectralDensity(fs: Float) -> [Float]
 ```
 
-Average power on specified frequency band, i.e. mean(abs(fft(from...to))^2)
+Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
 
 ```swift
 func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 ```
+
+#### FIR filter
 
 Setup a FIR filter
 
@@ -151,9 +163,7 @@ Vector module includes operations on regular arrays.
 
 # Demo App
 
-```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target.
-
-
+```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For detail, see DSBuffer.test() method.
 
 # Acknowledgement
 
