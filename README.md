@@ -19,7 +19,7 @@ Currently the functionality set is still much smaller compared with Accelerate f
 # Install
 
 1. Copy AccelerateWatch folder to your project (usually the Watch Extension folder).
-2. Check that every .swift and .c files has Watch Extension as target.
+2. Check that every .swift and .c files has *Watch Extension* as target.
 3. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
 
 ```C
@@ -82,7 +82,7 @@ func dotProduct(with: [Float]) -> Float
 
 **Note for FFT related methods**: 
 
-- Set fftIsSupported when creating the buffer.
+- Set fftIsSupported to true when creating the buffer.
 - Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
 - Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.
 
@@ -163,10 +163,10 @@ Vector module includes operations on regular arrays.
 
 # Demo App
 
-```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For detail, see DSBuffer.test() method.
+```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see DSBuffer.test() method.
 
 # Acknowledgement
 
 - kissfft
 
-[kissfft](https://github.com/itdaniher/kissfft) is employed for FFT. It is a lightweighted and fast FFT library. Only the real-value FFT related part is included here.
+[kissfft](https://github.com/itdaniher/kissfft) is employed for FFT. It is a lightweight and fast FFT library. Only the real-value FFT related part is included here.
