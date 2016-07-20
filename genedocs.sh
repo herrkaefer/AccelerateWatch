@@ -8,8 +8,9 @@ jazzy \
   --source-directory ./AccelerateWatchDemoApp \
   --root-url http://herrkaefer.github.io/AccelerateWatch/ \
   --exclude ./AccelerateWatchDemoApp/Watch\ Extenion/ExtensionDelegate.swift, \
-            ./AccelerateWatchDemoApp/Watch\ Extenion/InterfaceController.swift,
+            ./AccelerateWatchDemoApp/Watch\ Extenion/InterfaceController.swift
 
-
+# Publish docs at https://herrkaefer.github.io/AccelerateWatch/
+git subtree push --prefix docs origin gh-pages
 
 
