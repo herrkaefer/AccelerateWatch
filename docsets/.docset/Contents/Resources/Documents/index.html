@@ -13,9 +13,9 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (73% documented)</p>
+        <p><a href="index.html"> Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/herrkaefer/AccelerateWatch"><img src="img/gh.png"/>View on GitHub</a></p>
-        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fgithub%2Ecom%2Fherrkaefer%2FAccelerateWatch%2Ftree%2Fmaster%2Fdocsets%2F%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
+        <p class="header-right"><a href="dash-feed://http%3A%2F%2Fherrkaefer%2Egithub%2Eio%2FAccelerateWatch%2Fdocsets%2F%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -33,12 +33,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Classes/DSBuffer.html">DSBuffer</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ExtensionDelegate.html">ExtensionDelegate</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/InterfaceController.html">InterfaceController</a>
               </li>
             </ul>
           </li>
@@ -95,9 +89,153 @@
         <section>
           <section class="section">
             
-            <a href='#authors' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='authors'>Authors</h3>
+            <a href='#acceleratewatch' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='acceleratewatch'>AccelerateWatch</h1>
 
-<p>Yang Liu</p>
+<p><img src="https://img.shields.io/badge/language-C-lightgrey.svg?style=flat" alt="Language">
+<img src="https://img.shields.io/badge/language-Swift-red.svg?style=flat" alt="Language">
+<a href="http://mit-license.org"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat" alt="License"></a>
+<a href="http://twitter.com/mrbeetle"><img src="https://img.shields.io/badge/twitter-mrbeetle-blue.svg?style=flat" alt="Twitter"></a></p>
+
+<p><code>AccelerateWatch</code>: High performance digital signal processing algorithms implemented in C, and wrapped in Swift.</p>
+<a href='#where-and-why-to-use-acceleratewatch' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='where-and-why-to-use-acceleratewatch'>Where and why to use AccelerateWatch?</h1>
+
+<p>Apple watchOS 3 opens opptunities to developers to obtain and process motion sensor data both in real time and longer background running time. Unfortunately, meanwhile, <a href="https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/">Accelerate framework</a> is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.</p>
+
+<ul>
+<li>Swift APIs.  C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.</li>
+<li>Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like <a href="https://github.com/mattt/Surge">Surge</a> exists. Would update to Swift 3 later.</li>
+</ul>
+
+<p>Currently the functionality set is still much smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So <strong>contributions are welcome!</strong> 😃</p>
+<a href='#install' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='install'>Install</h1>
+
+<ol>
+<li>Copy AccelerateWatch folder to your project (usually the Watch Extension folder).</li>
+<li>Check that every .swift and .c files has <em>Watch Extension</em> as target.</li>
+<li>Add a bridging header (here is a <a href="http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/">Instruction</a>), and add the following contents to it:</li>
+</ol>
+<pre class="highlight plaintext"><code>#include "acceleratelib.h"
+</code></pre>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='usage'>Usage</h1>
+
+<p>Full documentations <a href="https://herrkaefer.github.io/AccelerateWatch/">HERE</a>.</p>
+<a href='#dsbuffer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='dsbuffer'>DSBuffer</h2>
+
+<p>DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.</p>
+<a href='#normal-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='normal-operations'>Normal operations</h4>
+
+<p>Create a DSBuffer object</p>
+
+<p><em>Tips</em>: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.</p>
+<pre class="highlight plaintext"><code>DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
+</code></pre>
+
+<p>Push new data to the end of the buffer</p>
+<pre class="highlight plaintext"><code>func push(value: Float)
+</code></pre>
+
+<p>Get buffer size</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">bufferSize</span><span class="p">:</span> <span class="kt">Int</span>
+</code></pre>
+
+<p>Dump signal array</p>
+<pre class="highlight plaintext"><code>var signals: [Float]
+</code></pre>
+
+<p>Reset all buffer values to zero</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">clear</span><span class="p">()</span>
+</code></pre>
+<a href='#vector-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='vector-operations'>Vector operations</h4>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="kd">func</span> <span class="nf">multiply</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="k">var</span> <span class="nv">mean</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="kd">func</span> <span class="nf">centralized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="kd">func</span> <span class="nf">normalizedToUnitLength</span><span class="p">(</span><span class="nv">centralized</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="kd">func</span> <span class="nf">dotProduct</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+</code></pre>
+<a href='#fast-fourier-transform' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fast-fourier-transform'>Fast Fourier Transform</h4>
+
+<p><strong>Note for FFT related methods</strong>:</p>
+
+<ul>
+<li>Set fftIsSupported to true when creating the buffer.</li>
+<li>Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.</li>
+<li>Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.</li>
+</ul>
+
+<p>Perform FFT on buffer</p>
+<pre class="highlight plaintext"><code>func fft() -&gt; (real: [Float], imaginary: [Float])
+</code></pre>
+
+<p>Get FFT sample frequencies</p>
+<pre class="highlight plaintext"><code>func fftFrequencies(fs: Float) -&gt; [Float]
+</code></pre>
+
+<p>Get FFT magnitudes</p>
+<pre class="highlight plaintext"><code>func fftMagnitudes() -&gt; [Float]
+</code></pre>
+
+<p>Square of FFT Magnitude, i.e. (abs(fft()))^2</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">squaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+</code></pre>
+
+<p>Mean-squared power spectrum, i.e. (abs(fft()))^2 / N</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">meanSquaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+</code></pre>
+
+<p>Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)</p>
+<pre class="highlight plaintext"><code>func powerSpectralDensity(fs: Float) -&gt; [Float]
+</code></pre>
+
+<p>Average power over specified frequency band, i.e. mean(abs(fft(from&hellip;to))^2)</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">averageBandPower</span><span class="p">(</span><span class="nv">fromFreq</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">toFreq</span><span class="p">:</span> <span class="kt">Float</span><span class="p">,</span> <span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+</code></pre>
+<a href='#fir-filter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fir-filter'>FIR filter</h4>
+
+<p>Setup a FIR filter</p>
+<pre class="highlight plaintext"><code>buf.setupFIRFilter(FIRTaps: [Float])
+</code></pre>
+
+<p>Get latest FIR filter output</p>
+<pre class="highlight plaintext"><code>func latestFIROutput() -&gt; Float
+</code></pre>
+
+<p>Get FIR filtered signal series in buffer</p>
+<pre class="highlight plaintext"><code>func FIRFiltered() -&gt; [Float]
+</code></pre>
+<a href='#vector' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='vector'>Vector</h2>
+
+<p>Vector module includes operations on regular arrays.</p>
+
+<ul>
+<li>vMean</li>
+<li>vLength</li>
+<li>vAdd</li>
+<li>vMultiply</li>
+<li>vRemoveMean</li>
+<li>vNormalizeToUnitLength</li>
+<li>vDotProduct</li>
+</ul>
+<a href='#demo-app' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='demo-app'>Demo App</h1>
+
+<p><code>AccelerateWatchDemoApp</code> is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see DSBuffer.test() method.</p>
+<a href='#acknowledgement' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='acknowledgement'>Acknowledgement</h1>
+
+<ul>
+<li><a href="https://github.com/itdaniher/kissfft">kissfft</a></li>
+</ul>
+
+<p>kissfft is employed for FFT implementation. It is a lightweight and fast FFT library. Only the real-value FFT related part is included here.</p>
+
+<ul>
+<li><a href="https://github.com/realm/jazzy">jazzy</a></li>
+</ul>
+
+<p>For documentation generation.</p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='license'>License</h1>
+
+<p>MIT.</p>
 
           </section>
         </section>

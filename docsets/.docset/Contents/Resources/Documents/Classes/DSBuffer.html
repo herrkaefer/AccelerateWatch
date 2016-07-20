@@ -14,9 +14,9 @@
     <a title="DSBuffer Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (73% documented)</p>
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/herrkaefer/AccelerateWatch"><img src="../img/gh.png"/>View on GitHub</a></p>
-        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fgithub%2Ecom%2Fherrkaefer%2FAccelerateWatch%2Ftree%2Fmaster%2Fdocsets%2F%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+        <p class="header-right"><a href="dash-feed://http%3A%2F%2Fherrkaefer%2Egithub%2Eio%2FAccelerateWatch%2Fdocsets%2F%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -34,12 +34,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Classes/DSBuffer.html">DSBuffer</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/ExtensionDelegate.html">ExtensionDelegate</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/InterfaceController.html">InterfaceController</a>
               </li>
             </ul>
           </li>
@@ -121,7 +115,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>init: Initialization</p>
+                        <p>Initialization</p>
 
 <p><em>Tips</em>: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.</p>
 
@@ -556,6 +550,14 @@
                       <div class="abstract">
                         <p>Perform FFT</p>
 
+<p><strong>Note for FFT related methods</strong>:</p>
+
+<ul>
+<li>Set fftIsSupported to true when creating the buffer.</li>
+<li>Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.</li>
+<li>Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.</li>
+</ul>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -592,6 +594,11 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>array of size nfft/2+1</p>
+
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -618,6 +625,11 @@
                           <pre class="highlight"><code><span class="kd">func</span> <span class="nf">fftMagnitudes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>array of size nfft/2+1</p>
+
                       </div>
                     </section>
                   </div>
@@ -646,6 +658,11 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>array of size nfft/2+1</p>
+
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -672,6 +689,11 @@
                           <pre class="highlight"><code><span class="kd">func</span> <span class="nf">meanSquaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>array of size nfft/2+1</p>
+
                       </div>
                     </section>
                   </div>
@@ -700,6 +722,11 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>array of size nfft/2+1</p>
+
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -716,7 +743,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Average power over specified frequency band, i.e. mean(abs(fft(from&hellip;to))^2)</p>
+                        <p>Average power over specific frequency band, i.e. mean(abs(fft(from&hellip;to))^2)</p>
 
                       </div>
                       <div class="declaration">
@@ -734,10 +761,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/FIR"></a>
-                <a name="//apple_ref/swift/Section/FIR" class="dashAnchor"></a>
-                <a href="#/FIR">
-                  <h3 class="section-name">FIR</h3>
+                <a name="/FIR%20filter"></a>
+                <a name="//apple_ref/swift/Section/FIR filter" class="dashAnchor"></a>
+                <a href="#/FIR%20filter">
+                  <h3 class="section-name">FIR filter</h3>
                 </a>
               </div>
               <ul>
