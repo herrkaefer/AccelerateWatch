@@ -1,13 +1,13 @@
-//
-//  DSBuffer
-//
-//  Created by HerrKaefer (gloolar@gmail.com) on 16/6/20.
-//  Copyright © 2016年 HerrKaefer. All rights reserved.
-//
+/// DSBuffer
+///
+/// Created by Yang Liu (gloolar@gmail.com) on 16/6/20.
+/// Copyright © 2016年 Yang Liu. All rights reserved.
+
 
 import Foundation
 
 
+/// Fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
 public class DSBuffer {
     
     private var buffer: COpaquePointer
@@ -18,7 +18,13 @@ public class DSBuffer {
     private var fftIsUpdated: Bool?
     
     
-    // Initialization
+    /// init: Initialization
+    ///
+    /// - parameter size: Buffer length
+    /// - parameter fftIsSupported: Whether FFT will be performed on the buffer
+    /// - returns: DSBuffer object
+    ///
+    /// *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
     init(size: Int, fftIsSupported: Bool = true) {
         if (fftIsSupported && size % 2 == 1) {
             print("WARNING: size must be even for FFT. Reset size to: %d.", size+1)
@@ -42,7 +48,9 @@ public class DSBuffer {
     }
     
     
-    // Push new value to buffer
+    /// Push new value to buffer
+    ///
+    /// - parameter value: New value to be added
     func push(value: Float) {
         dsbuffer_push(self.buffer, value)
         if (self.fftIsSupported) {
@@ -51,13 +59,13 @@ public class DSBuffer {
     }
     
     
-    // Buffer size
+    /// Get Buffer size
     var bufferSize: Int {
         return self.size
     }
     
     
-    // Dump as array
+    /// Dump buffer as array
     var signals: [Float] {
         var dumpedSignal = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_dump(self.buffer, &dumpedSignal)
@@ -65,7 +73,7 @@ public class DSBuffer {
     }
     
     
-    // Reset buffer to be zero filled
+    /// Reset buffer to be zero filled
     func clear() {
         dsbuffer_clear(self.buffer)
         if (self.fftIsSupported) {
@@ -76,7 +84,7 @@ public class DSBuffer {
     
     // MARK: Vector operations
     
-    // Add value to buffer data
+    /// Add value to each buffer data
     func add(value: Float) -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_add(self.buffer, value, &result)
@@ -84,7 +92,7 @@ public class DSBuffer {
     }
     
     
-    // Multiply buffer data with value
+    /// Multiply each buffer data with value
     func multiply(value: Float) -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_multiply(self.buffer, value, &result)
@@ -92,19 +100,19 @@ public class DSBuffer {
     }
     
     
-    // Mean value
+    /// Mean value
     var mean: Float {
         return dsbuffer_mean(self.buffer)
     }
     
     
-    // Vector length
+    /// Vector length
     var length: Float {
         return dsbuffer_length(self.buffer)
     }
     
     
-    // Remove mean value (centralize)
+    /// Remove mean value (centralize)
     func centralized() -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_remove_mean(self.buffer, &result)
@@ -112,7 +120,7 @@ public class DSBuffer {
     }
     
     
-    // normalize vector to have unit length
+    /// Normalize vector to have unit length
     func normalizedToUnitLength(centralized: Bool) -> [Float] {
         var result = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
@@ -120,6 +128,7 @@ public class DSBuffer {
     }
     
     
+    /// Perform dot production with array
     func dotProduct(with: [Float]) -> Float {
         assert(self.size == with.count)
         return dsbuffer_dot_product(self.buffer, with)
@@ -137,7 +146,7 @@ public class DSBuffer {
     }
     
     
-    // Perform FFT
+    /// Perform FFT
     func fft() -> (real: [Float], imaginary: [Float]) {
         assert (self.fftIsSupported)
         dsbuffer_fftr(self.buffer, &self.fftData!)
@@ -146,7 +155,7 @@ public class DSBuffer {
     }
     
     
-    // Get FFT sample frequencies
+    /// FFT sample frequencies
     func fftFrequencies(fs: Float) -> [Float] {
         assert (self.fftIsSupported)
         var fftFreq = [Float](count: self.size/2+1, repeatedValue: 0.0)
@@ -155,14 +164,14 @@ public class DSBuffer {
     }
     
     
-    // Get FFT magnitudes, i.e. abs(fft())
+    /// FFT magnitudes, i.e. abs(fft())
     func fftMagnitudes() -> [Float] {
         updateFFT()
         return self.fftData!.map{sqrt($0.real*$0.real + $0.imag*$0.imag)}
     }
     
     
-    // Square of FFT magnitudes, i.e. (abs(fft()))^2
+    /// Square of FFT magnitudes, i.e. (abs(fft()))^2
     func squaredPowerSpectrum() -> [Float] {
         updateFFT()
         var sps = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2}
@@ -171,7 +180,7 @@ public class DSBuffer {
     }
     
     
-    // Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
+    /// Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
     func meanSquaredPowerSpectrum() -> [Float] {
         updateFFT()
         var pxx = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2 / Float(self.size)}
@@ -180,7 +189,7 @@ public class DSBuffer {
     }
     
     
-    // Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
+    /// Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
     func powerSpectralDensity(fs: Float) -> [Float] {
         updateFFT()
         var psd = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2.0 / (fs * Float(self.size))}
@@ -189,7 +198,7 @@ public class DSBuffer {
     }
     
     
-    // Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
+    /// Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
     func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
         assert (fromFreq >= 0)
         assert (toFreq <= fs/2.0)
@@ -212,17 +221,20 @@ public class DSBuffer {
     
     // MARK: FIR
     
+    // Setup FIR filter
     func setupFIRFilter(FIRTaps: [Float]) {
         assert (self.size >= FIRTaps.count)
         dsbuffer_setup_fir(self.buffer, FIRTaps, FIRTaps.count)
     }
     
     
+    /// Get latest FIR output
     func latestFIROutput() -> Float {
         return dsbuffer_latest_fir_output(self.buffer)
     }
     
     
+    /// FIR filtered buffer
     func FIRFiltered() -> [Float] {
         var output = [Float](count: self.size, repeatedValue: 0.0)
         dsbuffer_fir_filter(self.buffer, &output)
@@ -269,6 +281,3 @@ public class DSBuffer {
     }
     
 }
-
-
-

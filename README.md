@@ -28,6 +28,8 @@ Currently the functionality set is still much smaller compared with Accelerate f
 
 # Usage
 
+Full documentations [HERE]().
+
 ## DSBuffer
 
 DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
@@ -80,7 +82,7 @@ func dotProduct(with: [Float]) -> Float
 
 #### Fast Fourier Transform
 
-**Note for FFT related methods**: 
+**Note for FFT related methods**:
 
 - Set fftIsSupported to true when creating the buffer.
 - Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
