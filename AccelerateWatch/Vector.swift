@@ -1,8 +1,7 @@
+///  Vector
 //
-//  Vector.swift
-//
-//  Created by HerrKaefer (gloolar@gmail.com) on 16/7/9.
-//  Copyright © 2016年 HerrKaefer. All rights reserved.
+//  Created by Yang Liu (gloolar@gmail.com) on 16/7/9.
+//  Copyright © 2016年 Yang Liu. All rights reserved.
 //
 
 import Foundation

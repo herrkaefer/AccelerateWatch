@@ -6,23 +6,23 @@ provides-nominal:
 provides-member:
 - ["C22AccelerateWatchDemoApp11AppDelegate", ""]
 provides-dynamic-lookup:
-- "applicationDidEnterBackground"
-- "application"
 - "applicationWillResignActive"
-- "applicationWillTerminate"
-- "applicationDidBecomeActive"
 - "window"
+- "application"
+- "applicationDidEnterBackground"
+- "applicationWillTerminate"
 - "applicationWillEnterForeground"
+- "applicationDidBecomeActive"
 depends-top-level:
+- "UIApplicationDelegate"
+- "Bool"
 - "NSObject"
-- !private "BooleanLiteralType"
-- "AppDelegate"
 - "UIResponder"
+- "AnyObject"
+- !private "BooleanLiteralType"
 - "UIWindow"
 - "UIApplication"
-- "UIApplicationDelegate"
-- "AnyObject"
-- "Bool"
+- "AppDelegate"
 depends-member:
 - ["Ps9AnyObject", "application"]
 - ["Ps9AnyObject", "applicationDidBecomeActive"]

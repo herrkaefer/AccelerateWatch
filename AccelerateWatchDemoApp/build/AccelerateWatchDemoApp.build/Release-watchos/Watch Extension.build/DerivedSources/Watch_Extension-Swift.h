@@ -99,6 +99,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 
+
+/// :nodoc:
 SWIFT_CLASS("_TtC15Watch_Extension17ExtensionDelegate")
 @interface ExtensionDelegate : NSObject <WKExtensionDelegate>
 - (void)applicationDidFinishLaunching;
@@ -108,6 +110,8 @@ SWIFT_CLASS("_TtC15Watch_Extension17ExtensionDelegate")
 @end
 
 
+
+/// :nodoc:
 SWIFT_CLASS("_TtC15Watch_Extension19InterfaceController")
 @interface InterfaceController : WKInterfaceController
 - (void)awakeWithContext:(id _Nullable)context;

@@ -10,6 +10,7 @@ import WatchKit
 import Foundation
 
 
+/// :nodoc:
 class InterfaceController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {

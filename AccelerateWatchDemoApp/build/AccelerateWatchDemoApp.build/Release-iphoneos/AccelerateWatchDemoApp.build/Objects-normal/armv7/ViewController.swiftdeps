@@ -6,11 +6,11 @@ provides-nominal:
 provides-member:
 - ["C22AccelerateWatchDemoApp14ViewController", ""]
 provides-dynamic-lookup:
-- "viewDidLoad"
 - "didReceiveMemoryWarning"
+- "viewDidLoad"
 depends-top-level:
-- "UIViewController"
 - "ViewController"
+- "UIViewController"
 depends-member:
 - ["Ps9AnyObject", "didReceiveMemoryWarning"]
 - ["Ps9AnyObject", "init"]

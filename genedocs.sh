@@ -6,11 +6,12 @@ jazzy \
   --min-acl internal \
   --output ./docs \
   --source-directory ./AccelerateWatchDemoApp \
-  --root-url http://herrkaefer.github.io/AccelerateWatch/ \
-  --exclude ./AccelerateWatchDemoApp/Watch\ Extenion/ExtensionDelegate.swift, \
-            ./AccelerateWatchDemoApp/Watch\ Extenion/InterfaceController.swift
+  --readme ./README.md \
+  --root-url http://herrkaefer.github.io/AccelerateWatch/
+  # --exclude ./AccelerateWatchDemoApp/Watch\ Extenion/ExtensionDelegate.swift, \
+  #           ./AccelerateWatchDemoApp/Watch\ Extenion/InterfaceController.swift
 
 # Publish docs at https://herrkaefer.github.io/AccelerateWatch/
-git subtree push --prefix docs origin gh-pages
+# git subtree push --prefix docs origin gh-pages
 
 

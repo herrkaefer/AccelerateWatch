@@ -8,6 +8,7 @@
 
 import WatchKit
 
+/// :nodoc:
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {

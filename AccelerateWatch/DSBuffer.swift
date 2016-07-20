@@ -18,7 +18,7 @@ public class DSBuffer {
     private var fftIsUpdated: Bool?
     
     
-    /// init: Initialization
+    /// Initialization
     ///
     /// - parameter size: Buffer length
     /// - parameter fftIsSupported: Whether FFT will be performed on the buffer
@@ -147,6 +147,12 @@ public class DSBuffer {
     
     
     /// Perform FFT
+    ///
+    /// **Note for FFT related methods**:
+    ///
+    /// - Set fftIsSupported to true when creating the buffer.
+    /// - Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
+    /// - Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.
     func fft() -> (real: [Float], imaginary: [Float]) {
         assert (self.fftIsSupported)
         dsbuffer_fftr(self.buffer, &self.fftData!)
@@ -156,6 +162,8 @@ public class DSBuffer {
     
     
     /// FFT sample frequencies
+    ///
+    /// - returns: array of size nfft/2+1
     func fftFrequencies(fs: Float) -> [Float] {
         assert (self.fftIsSupported)
         var fftFreq = [Float](count: self.size/2+1, repeatedValue: 0.0)
@@ -165,6 +173,8 @@ public class DSBuffer {
     
     
     /// FFT magnitudes, i.e. abs(fft())
+    ///
+    /// - returns: array of size nfft/2+1
     func fftMagnitudes() -> [Float] {
         updateFFT()
         return self.fftData!.map{sqrt($0.real*$0.real + $0.imag*$0.imag)}
@@ -172,6 +182,8 @@ public class DSBuffer {
     
     
     /// Square of FFT magnitudes, i.e. (abs(fft()))^2
+    ///
+    /// - returns: array of size nfft/2+1
     func squaredPowerSpectrum() -> [Float] {
         updateFFT()
         var sps = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2}
@@ -181,6 +193,8 @@ public class DSBuffer {
     
     
     /// Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
+    ///
+    /// - returns: array of size nfft/2+1
     func meanSquaredPowerSpectrum() -> [Float] {
         updateFFT()
         var pxx = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2 / Float(self.size)}
@@ -190,6 +204,8 @@ public class DSBuffer {
     
     
     /// Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
+    /// 
+    /// - returns: array of size nfft/2+1
     func powerSpectralDensity(fs: Float) -> [Float] {
         updateFFT()
         var psd = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2.0 / (fs * Float(self.size))}
@@ -198,7 +214,7 @@ public class DSBuffer {
     }
     
     
-    /// Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
+    /// Average power over specific frequency band, i.e. mean(abs(fft(from...to))^2)
     func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
         assert (fromFreq >= 0)
         assert (toFreq <= fs/2.0)
@@ -219,7 +235,7 @@ public class DSBuffer {
     }
     
     
-    // MARK: FIR
+    // MARK: FIR filter
     
     // Setup FIR filter
     func setupFIRFilter(FIRTaps: [Float]) {

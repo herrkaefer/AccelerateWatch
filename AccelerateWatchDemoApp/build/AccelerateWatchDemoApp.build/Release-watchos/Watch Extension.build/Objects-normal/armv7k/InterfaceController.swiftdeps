@@ -6,14 +6,14 @@ provides-nominal:
 provides-member:
 - ["C15Watch_Extension19InterfaceController", ""]
 provides-dynamic-lookup:
+- "awakeWithContext"
 - "didDeactivate"
 - "willActivate"
-- "awakeWithContext"
 depends-top-level:
-- "InterfaceController"
-- "WKInterfaceController"
 - "AnyObject"
+- "InterfaceController"
 - !private "DSBuffer"
+- "WKInterfaceController"
 depends-member:
 - !private ["Ps9AnyObject", "DSBuffer"]
 - ["Ps9AnyObject", "awakeWithContext"]
