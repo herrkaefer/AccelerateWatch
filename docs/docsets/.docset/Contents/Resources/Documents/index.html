@@ -46,10 +46,16 @@
                 <a href="Functions.html#/s:F15Watch_Extension4vAddFTGSaSd_10valueToAddSd_GSaSd_">vAdd(_:valueToAdd:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension23vCorrelationCoefficientFTGSaSf_2v2GSaSf__Sf">vCorrelationCoefficient(_:v2:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension23vCorrelationCoefficientFTGSaSd_2v2GSaSd__Sd">vCorrelationCoefficient(_:v2:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSf_2v2GSaSf__Sf">vDotProduct(_:v2:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension7vLengthFGSaSf_Sf">vLength(_:)</a>
@@ -76,10 +82,10 @@
                 <a href="Functions.html#/s:F15Watch_Extension22vNormalizeToUnitLengthFTGSaSd_11centralizedSb_GSaSd_">vNormalizeToUnitLength(_:centralized:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSf_GSaSf_">vRemoveMean(_:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSd_GSaSd_">vRemoveMean(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSd_GSaSd_">vRemoveMean(_:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSf_GSaSf_">vRemoveMean(_:)</a>
               </li>
             </ul>
           </li>
@@ -93,24 +99,34 @@
 
 <p><img src="https://img.shields.io/badge/language-C-lightgrey.svg?style=flat" alt="Language">
 <img src="https://img.shields.io/badge/language-Swift-red.svg?style=flat" alt="Language">
-<a href="http://mit-license.org"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat" alt="License"></a>
-<a href="http://twitter.com/mrbeetle"><img src="https://img.shields.io/badge/twitter-mrbeetle-blue.svg?style=flat" alt="Twitter"></a></p>
+<a href="http://mit-license.org"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat" alt="License"></a></p>
 
-<p><code>AccelerateWatch</code>: High performance digital signal processing algorithms implemented in C, and wrapped in Swift.</p>
+<p><code>AccelerateWatch</code>: High performance digital signal processing and vector operations implemented in C, and wrapped in Swift, designed especially to be targeted at watchOS.</p>
 <a href='#where-and-why-to-use-acceleratewatch' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='where-and-why-to-use-acceleratewatch'>Where and why to use AccelerateWatch?</h1>
 
 <p>Apple watchOS 3 opens opptunities to developers to obtain and process motion sensor data both in real time and longer background running time. Unfortunately, meanwhile, <a href="https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/">Accelerate framework</a> is still unavailable on watchOS. This library will help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.</p>
 
 <ul>
-<li>Swift APIs.  C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.</li>
-<li>Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like <a href="https://github.com/mattt/Surge">Surge</a> exists. Would update to Swift 3 later.</li>
+<li>Swift APIs. C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.</li>
+<li>Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like <a href="https://github.com/mattt/Surge">Surge</a> exists.</li>
 </ul>
 
-<p>Currently the functionality set is still much smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So <strong>contributions are welcome!</strong> 😃</p>
+<p>Currently the functionality set is relatively smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So <strong>contributions are welcome!</strong> 😃</p>
+<a href='#working-version' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='working-version'>Working version</h1>
+
+<p>Currently all codes are built and tested on</p>
+
+<ul>
+<li>Xcode 8.0 beta 3</li>
+<li>iOS 10.0 beta 3</li>
+<li>watchOS 3.0 beta 3</li>
+</ul>
 <a href='#install' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='install'>Install</h1>
 
+<p>Manual install is recommended for now. <a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a> will be supported when it is ready.</p>
+
 <ol>
-<li>Copy AccelerateWatch folder to your project (usually the Watch Extension folder).</li>
+<li>Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove <code>selftest.c</code> in <code>acceleratelib</code> folder which is for testing C code.</li>
 <li>Check that every .swift and .c files has <em>Watch Extension</em> as target.</li>
 <li>Add a bridging header (here is a <a href="http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/">Instruction</a>), and add the following contents to it:</li>
 </ol>
@@ -118,7 +134,7 @@
 </code></pre>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='usage'>Usage</h1>
 
-<p>Full documentations <a href="https://herrkaefer.github.io/AccelerateWatch/">HERE</a>.</p>
+<p>Full documentation is <a href="https://herrkaefer.github.io/AccelerateWatch/">HERE</a>.</p>
 <a href='#dsbuffer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='dsbuffer'>DSBuffer</h2>
 
 <p>DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.</p>
@@ -206,7 +222,7 @@
 </code></pre>
 <a href='#vector' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='vector'>Vector</h2>
 
-<p>Vector module includes operations on regular arrays.</p>
+<p>Vector module includes operations on regular arrays. All functions have two versions, for float and double type respectively.</p>
 
 <ul>
 <li>vMean</li>
@@ -240,7 +256,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://herrkaefer.github.io" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-20)</p>
+          <p>&copy; 2016 <a class="link" href="https://herrkaefer.github.io" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-21)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

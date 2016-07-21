@@ -133,3 +133,4 @@ float vectorf_dot_product (const float *self, const float *vector2, size_t size)
         result += self[i] * vector2[i];
     return result;
 }
+

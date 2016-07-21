@@ -10,7 +10,7 @@ import Foundation
 /// Fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
 public class DSBuffer {
     
-    private var buffer: COpaquePointer
+    private var buffer: OpaquePointer
     private var size: Int
     
     private var fftIsSupported: Bool
@@ -18,14 +18,14 @@ public class DSBuffer {
     private var fftIsUpdated: Bool?
     
     
-    /// Initialization
+    /// Constructor
     ///
     /// - parameter size: Buffer length
     /// - parameter fftIsSupported: Whether FFT will be performed on the buffer
     /// - returns: DSBuffer object
     ///
     /// *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
-    init(size: Int, fftIsSupported: Bool = true) {
+    init(_ size: Int, fftIsSupported: Bool = true) {
         if (fftIsSupported && size % 2 == 1) {
             print("WARNING: size must be even for FFT. Reset size to: %d.", size+1)
             self.size = size + 1
@@ -33,25 +33,26 @@ public class DSBuffer {
         else {
             self.size = size
         }
-        self.buffer = dsbuffer_new (size, fftIsSupported)
+        self.buffer = dsbuffer_new(size, fftIsSupported)
         
         self.fftIsSupported = fftIsSupported
         if (fftIsSupported) {
-            self.fftData = [dsbuffer_complex](count: self.size/2+1, repeatedValue: dsbuffer_complex(real: 0.0, imag: 0.0))
+            self.fftData = [dsbuffer_complex](repeating: dsbuffer_complex(real: 0.0, imag: 0.0), count: self.size/2+1)
             self.fftIsUpdated = false
         }
     }
     
     
+    /// Destructor
     deinit {
-        dsbuffer_free(&self.buffer)
+        dsbuffer_free_unsafe(self.buffer)
     }
     
     
     /// Push new value to buffer
     ///
     /// - parameter value: New value to be added
-    func push(value: Float) {
+    func push(_ value: Float) {
         dsbuffer_push(self.buffer, value)
         if (self.fftIsSupported) {
             self.fftIsUpdated = false
@@ -67,7 +68,7 @@ public class DSBuffer {
     
     /// Dump buffer as array
     var signals: [Float] {
-        var dumpedSignal = [Float](count: self.size, repeatedValue: 0.0)
+        var dumpedSignal = [Float](repeating: 0.0, count: self.size)
         dsbuffer_dump(self.buffer, &dumpedSignal)
         return dumpedSignal
     }
@@ -86,7 +87,7 @@ public class DSBuffer {
     
     /// Add value to each buffer data
     func add(value: Float) -> [Float] {
-        var result = [Float](count: self.size, repeatedValue: 0.0)
+        var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_add(self.buffer, value, &result)
         return result
     }
@@ -94,7 +95,7 @@ public class DSBuffer {
     
     /// Multiply each buffer data with value
     func multiply(value: Float) -> [Float] {
-        var result = [Float](count: self.size, repeatedValue: 0.0)
+        var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_multiply(self.buffer, value, &result)
         return result
     }
@@ -114,7 +115,7 @@ public class DSBuffer {
     
     /// Remove mean value (centralize)
     func centralized() -> [Float] {
-        var result = [Float](count: self.size, repeatedValue: 0.0)
+        var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_remove_mean(self.buffer, &result)
         return result
     }
@@ -122,7 +123,7 @@ public class DSBuffer {
     
     /// Normalize vector to have unit length
     func normalizedToUnitLength(centralized: Bool) -> [Float] {
-        var result = [Float](count: self.size, repeatedValue: 0.0)
+        var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
         return result
     }
@@ -141,7 +142,7 @@ public class DSBuffer {
     private func updateFFT() {
         assert (self.fftIsSupported)
         if (!self.fftIsUpdated!) {
-            fft()
+            _ = fft()
         }
     }
     
@@ -166,7 +167,7 @@ public class DSBuffer {
     /// - returns: array of size nfft/2+1
     func fftFrequencies(fs: Float) -> [Float] {
         assert (self.fftIsSupported)
-        var fftFreq = [Float](count: self.size/2+1, repeatedValue: 0.0)
+        var fftFreq = [Float](repeating: 0.0, count: self.size/2+1)
         dsbuffer_fft_freq(self.buffer, fs, &fftFreq)
         return fftFreq
     }
@@ -252,7 +253,7 @@ public class DSBuffer {
     
     /// FIR filtered buffer
     func FIRFiltered() -> [Float] {
-        var output = [Float](count: self.size, repeatedValue: 0.0)
+        var output = [Float](repeating: 0.0, count: self.size)
         dsbuffer_fir_filter(self.buffer, &output)
         return output
     }
@@ -263,7 +264,7 @@ public class DSBuffer {
         print("DSBuffer test:\n\n")
         
         let size = 16
-        let buf = DSBuffer(size: size, fftIsSupported: true)
+        let buf = DSBuffer(size, fftIsSupported: true)
         
         let signalData: [Float] = [1.0, 4, 2, 5, 6, 7, -1, -8]
         for value in signalData {
@@ -271,11 +272,11 @@ public class DSBuffer {
 //            print(buf.signals)
         }
         
-//        let fft = buf.fft()
-//        print(fft)
-//        
-//        let fftSM = buf.SquaredPowerSpectrum()
-//        print(fftSM)
+        let fft = buf.fft()
+        print(fft)
+        
+        let fftSM = buf.squaredPowerSpectrum()
+        print(fftSM)
         
         
         buf.clear()
@@ -289,11 +290,11 @@ public class DSBuffer {
         }
         
         
-        let norm = buf.normalizedToUnitLength(true)
+        let norm = buf.normalizedToUnitLength(centralized: true)
         let coeff = vDotProduct(norm, v2: norm)
         print("coeff: %.2f\n", coeff)
         
-        print("\nDSBuffer test OK:\n\n")
+        print("\nDSBuffer test OK.\n\n")
     }
     
 }

@@ -389,6 +389,15 @@ void dsbuffer_free (dsbuffer_t **self_p) {
 }
 
 
+void dsbuffer_free_unsafe (dsbuffer_t *self) {
+    assert (self);
+    free (self->data);
+    if (self->fft_cfg)
+        free (self->fft_cfg);
+    free (self);
+}
+
+
 void dsbuffer_test () {
 
     #include "fir_taps.ini"

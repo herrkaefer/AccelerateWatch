@@ -30,6 +30,9 @@ dsbuffer_t *dsbuffer_new (size_t size, bool perform_fft);
 // Destroy dsbuffer object
 void dsbuffer_free (dsbuffer_t **self_p);
 
+// Destroy dsbuffer object
+void dsbuffer_free_unsafe (dsbuffer_t *self);
+    
 // Add new value to buffer
 void dsbuffer_push (dsbuffer_t *self, float new_value);
 

@@ -45,14 +45,14 @@ void vectorf_remove_mean (const float *self, size_t size, float *output);
 void vectorf_remove_mean_inplace (float *self, size_t size);
 
 // Normalize vectorf to have unit length.
-// Return results in param output which size is the same as the buffer.
+// Return results in param output which size is the same as the vector
 // Set remove_mean to true to centralize vectorf.
 void vectorf_normalize_to_unit_length (const float *self, size_t size, bool remove_mean, float *output);
 
 // Normalize vectorf to have unit length (in place)
 void vectorf_normalize_to_unit_length_inplace (float *self, size_t size, bool remove_mean);
 
-// Dot product with vectorf which size is same with buffer
+// Dot product with another vector which size is same with vector
 float vectorf_dot_product (const float *self, const float *vector2, size_t size);
 
 

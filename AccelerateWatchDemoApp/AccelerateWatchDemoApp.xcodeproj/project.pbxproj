@@ -10,7 +10,6 @@
 		EB03436B1D32A44F00519C73 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EB03435B1D32A44F00519C73 /* dsbuffer.c */; };
 		EB03436D1D32A44F00519C73 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343601D32A44F00519C73 /* kiss_fft.c */; };
 		EB03436E1D32A44F00519C73 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343621D32A44F00519C73 /* kiss_fftr.c */; };
-		EB03436F1D32A44F00519C73 /* selftest.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343641D32A44F00519C73 /* selftest.c */; };
 		EB0343701D32A44F00519C73 /* vectord.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343651D32A44F00519C73 /* vectord.c */; };
 		EB0343711D32A44F00519C73 /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343671D32A44F00519C73 /* vectorf.c */; };
 		EB74E4EB1D31486900BE5760 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB74E4EA1D31486900BE5760 /* Vector.swift */; };
@@ -80,7 +79,6 @@
 		EB0343611D32A44F00519C73 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
 		EB0343621D32A44F00519C73 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
 		EB0343631D32A44F00519C73 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
-		EB0343641D32A44F00519C73 /* selftest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = selftest.c; sourceTree = "<group>"; };
 		EB0343651D32A44F00519C73 /* vectord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectord.c; sourceTree = "<group>"; };
 		EB0343661D32A44F00519C73 /* vectord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectord.h; sourceTree = "<group>"; };
 		EB0343671D32A44F00519C73 /* vectorf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectorf.c; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 			children = (
 				EB03435E1D32A44F00519C73 /* kissfft */,
 				EB0343591D32A44F00519C73 /* acceleratelib.h */,
-				EB0343641D32A44F00519C73 /* selftest.c */,
 				EB03435B1D32A44F00519C73 /* dsbuffer.c */,
 				EB03435C1D32A44F00519C73 /* dsbuffer.h */,
 				EB0343651D32A44F00519C73 /* vectord.c */,
@@ -282,17 +279,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Herrkaefer;
 				TargetAttributes = {
 					EB8AD39D1D2128C200F63323 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6VM93P947X;
+						DevelopmentTeamName = "Yang Liu";
+						LastSwiftMigration = 0800;
 					};
 					EB8AD3B41D2128D900F63323 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6VM93P947X;
+						DevelopmentTeamName = "Yang Liu";
+						LastSwiftMigration = 0800;
 					};
 					EB8AD3C01D2128D900F63323 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6VM93P947X;
+						DevelopmentTeamName = "Yang Liu";
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -366,7 +372,6 @@
 				EB8AD3E71D2128EE00F63323 /* DSBuffer.swift in Sources */,
 				EB0343701D32A44F00519C73 /* vectord.c in Sources */,
 				EB8AD3C71D2128D900F63323 /* InterfaceController.swift in Sources */,
-				EB03436F1D32A44F00519C73 /* selftest.c in Sources */,
 				EB03436B1D32A44F00519C73 /* dsbuffer.c in Sources */,
 				EB03436E1D32A44F00519C73 /* kiss_fftr.c in Sources */,
 				EB0343711D32A44F00519C73 /* vectorf.c in Sources */,
@@ -453,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -493,7 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "AccelerateWatchDemoApp-Briding-Header.h";
@@ -509,6 +514,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.herrkaefer.AccelerateWatchDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -520,6 +526,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.herrkaefer.AccelerateWatchDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -532,6 +540,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -546,6 +555,8 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -554,14 +565,15 @@
 		EB8AD3D51D2128D900F63323 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.herrkaefer.AccelerateWatchDemoApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -570,14 +582,15 @@
 		EB8AD3D61D2128D900F63323 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.herrkaefer.AccelerateWatchDemoApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};

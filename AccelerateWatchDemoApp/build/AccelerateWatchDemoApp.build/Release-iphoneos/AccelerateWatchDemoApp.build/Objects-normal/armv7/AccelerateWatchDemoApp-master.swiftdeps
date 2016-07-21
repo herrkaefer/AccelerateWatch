@@ -1,6 +1,0 @@
-version: "Apple Swift version 2.2 (swiftlang-703.0.18.8 clang-703.0.31)"
-options: "f187935bfd3e2c527bf6ee80891f7c61"
-build_time: [522339654, 878332000]
-inputs:
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatchDemoApp/AccelerateWatchDemoApp/ViewController.swift": [520334786, 0]
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatchDemoApp/AccelerateWatchDemoApp/AppDelegate.swift": [520334786, 0]

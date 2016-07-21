@@ -1,8 +1,4 @@
 version: "Apple Swift version 2.2 (swiftlang-703.0.18.8 clang-703.0.31)"
-options: "0e99c9a3e7808190e5deed47a9b4c2c4"
-build_time: [522339638, 370698000]
+options: "00cbca09837b85dd45a8e960fc34ce54"
+build_time: [522396481, 893356000]
 inputs:
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatch/Vector.swift": [522326814, 0]
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatchDemoApp/Watch Extension/ExtensionDelegate.swift": [522326556, 0]
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatch/DSBuffer.swift": [522339605, 0]
-  "/Users/herrk/Dropbox/dev/AccelerateWatch/AccelerateWatchDemoApp/Watch Extension/InterfaceController.swift": [522326552, 0]
