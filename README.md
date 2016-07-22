@@ -3,8 +3,18 @@
 ![Language](https://img.shields.io/badge/language-C-lightgrey.svg?style=flat)
 ![Language](https://img.shields.io/badge/language-Swift-red.svg?style=flat)
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
+![Build](https://img.shields.io/wercker/ci/wercker/docs.svg?style=flat)
 
 ```AccelerateWatch```: High performance digital signal processing and vector operations implemented in C, and wrapped in Swift, designed especially to be targeted at watchOS.
+
+# Working version: 1.0.1
+
+Currently all codes are built and tested on
+
+- Xcode 8.0 beta 3
+- iOS 10.0 beta 3
+- watchOS 3.0 beta 3
+- Swift 3
 
 # Where and why to use AccelerateWatch?
 
@@ -15,22 +25,14 @@ Apple watchOS 3 opens opptunities to developers to obtain and process motion sen
 
 Currently the functionality set is relatively smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So **contributions are welcome!** 😃
 
-# Working version
-
-Currently all codes are built and tested on
-
-- Xcode 8.0 beta 3
-- iOS 10.0 beta 3
-- watchOS 3.0 beta 3
-- Swift 3
-
 # Install
 
 Manual install is recommended for now. [Swift Package Manager](https://github.com/apple/swift-package-manager) will be supported when it is ready.
 
-1. Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove `selftest.c` in `acceleratelib` folder which is for testing C code.
-2. Check that every .swift and .c files has *Watch Extension* as target.
-3. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
+1. Clone the latest version of this repo to your local machine.
+2. Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove `selftest.c` in `acceleratelib` folder which is for testing C code.
+3. Check that every .swift and .c files has *Watch Extension* as target.
+4. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
 
 ```C
 #include "acceleratelib.h"
@@ -60,6 +62,10 @@ Push new data to the end of the buffer
 func push(value: Float)
 ```
 
+```Swift
+func dataAt(index: Int)
+```
+
 Get buffer size
 
 ```swift
@@ -85,6 +91,7 @@ func add(value: Float) -> [Float]
 func multiply(value: Float) -> [Float]
 var mean: Float
 var length: Float
+var power: Float
 func centralized() -> [Float]
 func normalizedToUnitLength(centralized: Bool) -> [Float]
 func dotProduct(with: [Float]) -> Float
@@ -166,16 +173,18 @@ Vector module includes operations on regular arrays. All functions have two vers
 
 - vMean
 - vLength
+- vPower
 - vAdd
 - vMultiply
 - vRemoveMean
 - vNormalizeToUnitLength
 - vDotProduct
+- vCorrelationCoefficient
 
 
 # Demo App
 
-```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see DSBuffer.test() method.
+```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see `DSBuffer.test()` in DSBuffer.swift and `vTest` in Vector.swift.
 
 # Acknowledgement
 

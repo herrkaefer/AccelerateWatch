@@ -103,12 +103,17 @@ void vectord_normalize_to_unit_length (const double *self,
             length += output[i] * output[i];
         length = sqrt (length);
 
-        for (size_t i = 0; i < size; i++)
-            output[i] /= length;
+        if (length > 0) {
+            for (size_t i = 0; i < size; i++)
+                output[i] /= length;
+        }
     }
     else {
         double length = vectord_length (self, size);
-        vectord_multiply (self, size, 1/length, output);
+        if (length > 0)
+            vectord_multiply (self, size, 1/length, output);
+        else
+            vectord_multiply (self, size, 1, output);
     }
 }
 

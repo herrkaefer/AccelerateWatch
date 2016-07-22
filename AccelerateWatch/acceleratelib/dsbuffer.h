@@ -32,6 +32,9 @@ void dsbuffer_free (dsbuffer_t **self_p);
 
 // Destroy dsbuffer object
 void dsbuffer_free_unsafe (dsbuffer_t *self);
+
+// Get data at index
+float dsbuffer_at (dsbuffer_t *self, size_t idx);
     
 // Add new value to buffer
 void dsbuffer_push (dsbuffer_t *self, float new_value);
@@ -72,6 +75,9 @@ float dsbuffer_mean (dsbuffer_t *self);
 // Length of buffer data as vector
 float dsbuffer_length (dsbuffer_t *self);
 
+// Squared length of buffer data as vector
+float dsbuffer_power (dsbuffer_t *self);
+    
 // Add value to dsbuffer data.
 // Return results in param output.
 void dsbuffer_add (dsbuffer_t *self, float value, float *output);

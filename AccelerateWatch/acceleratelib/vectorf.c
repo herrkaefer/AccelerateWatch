@@ -102,13 +102,18 @@ void vectorf_normalize_to_unit_length (const float *self,
         for (size_t i = 0; i < size; i++)
             length += output[i] * output[i];
         length = sqrt (length);
-
-        for (size_t i = 0; i < size; i++)
-            output[i] /= length;
+        
+        if (length > 0) {
+            for (size_t i = 0; i < size; i++)
+                output[i] /= length;
+        }
     }
     else {
         float length = vectorf_length (self, size);
-        vectorf_multiply (self, size, 1/length, output);
+        if (length > 0)
+            vectorf_multiply (self, size, 1/length, output);
+        else
+            vectorf_multiply (self, size, 1, output);
     }
 }
 

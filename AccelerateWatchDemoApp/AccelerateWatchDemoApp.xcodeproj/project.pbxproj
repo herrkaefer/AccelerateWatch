@@ -26,6 +26,13 @@
 		EB8AD3CB1D2128D900F63323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB8AD3CA1D2128D900F63323 /* Assets.xcassets */; };
 		EB8AD3CF1D2128D900F63323 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB8AD3B51D2128D900F63323 /* Watch.app */; };
 		EB8AD3E71D2128EE00F63323 /* DSBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3DA1D2128EE00F63323 /* DSBuffer.swift */; };
+		EBB473E21D411B6F00D624CE /* DSBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8AD3DA1D2128EE00F63323 /* DSBuffer.swift */; };
+		EBB473E31D411B7200D624CE /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB74E4EA1D31486900BE5760 /* Vector.swift */; };
+		EBB473E41D411BCF00D624CE /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = EB03435B1D32A44F00519C73 /* dsbuffer.c */; };
+		EBB473E51D411BCF00D624CE /* vectord.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343651D32A44F00519C73 /* vectord.c */; };
+		EBB473E61D411BCF00D624CE /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343671D32A44F00519C73 /* vectorf.c */; };
+		EBB473E71D411BDD00D624CE /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343601D32A44F00519C73 /* kiss_fft.c */; };
+		EBB473E81D411BDD00D624CE /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = EB0343621D32A44F00519C73 /* kiss_fftr.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,7 +365,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8AD3A41D2128C200F63323 /* ViewController.swift in Sources */,
+				EBB473E51D411BCF00D624CE /* vectord.c in Sources */,
+				EBB473E21D411B6F00D624CE /* DSBuffer.swift in Sources */,
+				EBB473E61D411BCF00D624CE /* vectorf.c in Sources */,
+				EBB473E71D411BDD00D624CE /* kiss_fft.c in Sources */,
+				EBB473E31D411B7200D624CE /* Vector.swift in Sources */,
 				EB8AD3A21D2128C200F63323 /* AppDelegate.swift in Sources */,
+				EBB473E41D411BCF00D624CE /* dsbuffer.c in Sources */,
+				EBB473E81D411BDD00D624CE /* kiss_fftr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

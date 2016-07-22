@@ -6,6 +6,17 @@
 
 import Foundation
 
+
+private func scalarEqual(_ scalar1: Float, scalar2: Float) -> Bool {
+    return fabs(scalar1 - scalar2) < 1e-6
+}
+
+
+private func scalarEqual(_ scalar1: Double, scalar2: Double) -> Bool {
+    return fabs(scalar1 - scalar2) < 1e-6
+}
+
+
 /// Mean value. Float type version.
 public func vMean(_ v: [Float]) -> Float {
     return vectorf_mean(v, v.count)
@@ -18,15 +29,27 @@ public func vMean(_ v: [Double]) -> Double {
 }
 
 
-/// Vector Length. Float type version.
+/// Vector length. Float type version.
 public func vLength(_ v: [Float]) -> Float {
     return vectorf_length(v, v.count)
 }
 
 
-/// Vector Length. Double type version.
+/// Vector length. Double type version.
 public func vLength(_ v: [Double]) -> Double {
     return vectord_length(v, v.count)
+}
+
+
+/// Square of length. Float type version.
+public func vPower(_ v: [Float]) -> Float {
+    return vectorf_power(v, v.count)
+}
+
+
+/// Square of length. Double type version.
+public func vPower(_ v: [Double]) -> Double {
+    return vectord_power(v, v.count)
 }
 
 
@@ -119,4 +142,25 @@ public func vCorrelationCoefficient(_ v1: [Float], v2: [Float]) -> Float {
 public func vCorrelationCoefficient(_ v1: [Double], v2: [Double]) -> Double {
     assert (v1.count == v2.count)
     return vDotProduct(vNormalizeToUnitLength(v1, centralized: true), v2: vNormalizeToUnitLength(v2, centralized: true))
+}
+
+
+// Self test of Vector functions
+public func vTest() {
+    print("Vector test: \n")
+    
+    let v1 = Array(0..<10).map{Float($0)}
+    var v2 = Array(0..<10).map{Float($0)}
+    print(v1)
+    print(v2)
+    var cc = vCorrelationCoefficient(v1, v2: v2)
+    print("cc: \(cc)")
+    assert(scalarEqual(cc, scalar2: 1.0))
+    
+    v2 = vAdd(v2, valueToAdd: 3.0)
+    cc = vCorrelationCoefficient(v1, v2: v2)
+    print("cc: \(cc)")
+    assert(scalarEqual(cc, scalar2: 1.0))
+    
+    print("Vector test: OK.\n")
 }

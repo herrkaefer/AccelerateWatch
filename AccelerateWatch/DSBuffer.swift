@@ -17,6 +17,7 @@ public class DSBuffer {
     private var fftData: [dsbuffer_complex]?
     private var fftIsUpdated: Bool?
     
+    // MARK: Constructor and destructor
     
     /// Constructor
     ///
@@ -27,7 +28,7 @@ public class DSBuffer {
     /// *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
     init(_ size: Int, fftIsSupported: Bool = true) {
         if (fftIsSupported && size % 2 == 1) {
-            print("WARNING: size must be even for FFT. Reset size to: %d.", size+1)
+            print(String(format: "WARNING: size must be even for FFT. Reset size to: %d.", size+1))
             self.size = size + 1
         }
         else {
@@ -48,6 +49,7 @@ public class DSBuffer {
         dsbuffer_free_unsafe(self.buffer)
     }
     
+    // MARK: Regular operations
     
     /// Push new value to buffer
     ///
@@ -59,6 +61,10 @@ public class DSBuffer {
         }
     }
     
+    /// Get data at index
+    func dataAt(_ index: Int) -> Float {
+        return dsbuffer_at(self.buffer, index)
+    }
     
     /// Get Buffer size
     var bufferSize: Int {
@@ -67,10 +73,10 @@ public class DSBuffer {
     
     
     /// Dump buffer as array
-    var signals: [Float] {
-        var dumpedSignal = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_dump(self.buffer, &dumpedSignal)
-        return dumpedSignal
+    var data: [Float] {
+        var dumped = [Float](repeating: 0.0, count: self.size)
+        dsbuffer_dump(self.buffer, &dumped)
+        return dumped
     }
     
     
@@ -80,6 +86,16 @@ public class DSBuffer {
         if (self.fftIsSupported) {
             self.fftIsUpdated = false
         }
+    }
+    
+    
+    /// Print buffer
+    func printBuffer(dataFormat: String) {
+        print(String(format: "DSBuffer size: %d\n", self.size))
+        for idx in 0..<self.size {
+            print(String(format: dataFormat, dsbuffer_at(self.buffer, idx)), terminator: " ")
+        }
+        print("\n")
     }
     
     
@@ -113,6 +129,12 @@ public class DSBuffer {
     }
     
     
+    /// Squared length (power)
+    var power: Float {
+        return dsbuffer_power(self.buffer)
+    }
+    
+    
     /// Remove mean value (centralize)
     func centralized() -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
@@ -122,6 +144,8 @@ public class DSBuffer {
     
     
     /// Normalize vector to have unit length
+    ///
+    /// - parameter centralized: Should remove mean?
     func normalizedToUnitLength(centralized: Bool) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
@@ -155,7 +179,7 @@ public class DSBuffer {
     /// - Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
     /// - Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.
     func fft() -> (real: [Float], imaginary: [Float]) {
-        assert (self.fftIsSupported)
+        assert (self.fftIsSupported, "FFT is not supported on this buffer")
         dsbuffer_fftr(self.buffer, &self.fftData!)
         self.fftIsUpdated = true
         return (self.fftData!.map{$0.real}, self.fftData!.map{$0.imag})
@@ -228,7 +252,6 @@ public class DSBuffer {
         let fromIdx = Int(floor(fromFreq * Float(self.size) / fs))
         let toIdx = Int(ceil(toFreq * Float(self.size) / fs))
         
-//        let fftBand = Array(self.fftData![fromIdx...toIdx])
         let bandPower = self.fftData![fromIdx...toIdx].map{$0.real*$0.real+$0.imag*$0.imag}
         
         // Averaging
@@ -271,6 +294,7 @@ public class DSBuffer {
             buf.push(value)
 //            print(buf.signals)
         }
+        buf.printBuffer(dataFormat: "%.2f")
         
         let fft = buf.fft()
         print(fft)
@@ -283,7 +307,7 @@ public class DSBuffer {
         for _ in 0 ..< 10000 {
             let a = Float(arc4random_uniform(100))
             buf.push(a)
-            let signals = buf.signals
+            let signals = buf.data
 //            print(a)
 //            print(signals)
             assert(signals[size-1] == a)

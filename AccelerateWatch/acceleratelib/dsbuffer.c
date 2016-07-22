@@ -88,6 +88,7 @@ static float dsbuffer_fir_get_normal (dsbuffer_t *self) {
 }
 
 
+// Print buffer
 static void dsbuffer_print (dsbuffer_t *self, bool fft_supported) {
     assert (self);
     printf ("\ndsbuffer: size: %zu, fft_supported: %s, head: %zu\n",
@@ -160,6 +161,18 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
 }
 
 
+float dsbuffer_at (dsbuffer_t *self, size_t idx) {
+    assert (self);
+    assert (idx < self->size);
+    
+    if (self->fft_supported)
+        return self->data[self->head+idx];
+    else {
+        return self->data[(self->head + idx) % self->size];
+    }
+}
+
+
 void dsbuffer_push (dsbuffer_t *self, float new_value) {
     assert (self);
     return self->pusher (self, new_value);
@@ -205,7 +218,7 @@ void dsbuffer_setup_fir (dsbuffer_t *self, const float *fir_taps, size_t num_tap
     assert (self);
     assert (self->size >= num_taps);
     if (self->size > num_taps)
-        printf ("WARNING: dsbuffer size is larger than number of FIR taps.");
+        printf ("WARNING: dsbuffer size is larger than number of FIR taps.\n");
     self->fir_taps = fir_taps;
     self->num_fir_taps = num_taps;
 
@@ -243,7 +256,6 @@ void dsbuffer_fir_filter (dsbuffer_t *self, float *output) {
 }
 
 
-// Get mean value of data
 float dsbuffer_mean (dsbuffer_t *self) {
     assert (self);
     float sum = 0.0;
@@ -253,13 +265,21 @@ float dsbuffer_mean (dsbuffer_t *self) {
 }
 
 
-// Length of buffer data as vector
 float dsbuffer_length (dsbuffer_t *self) {
     assert (self);
     float ss = 0.0;
     for (size_t i = 0; i < self->size; i++)
         ss += self->data[i] * self->data[i];
     return sqrt (ss);
+}
+
+
+float dsbuffer_power (dsbuffer_t *self) {
+    assert (self);
+    float ss = 0.0;
+    for (size_t i = 0; i < self->size; i++)
+        ss += self->data[i] * self->data[i];
+    return ss;
 }
 
 
@@ -336,13 +356,18 @@ void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
             length += output[i] * output[i];
         }
         length = sqrtf (length);
-
-        for (size_t i = 0; i < self->size; i++)
-            output[i] /= length;
+        
+        if (length > 0) {
+            for (size_t i = 0; i < self->size; i++)
+                output[i] /= length;
+        }
     }
     else {
         float length = dsbuffer_length (self);
-        dsbuffer_multiply (self, 1/length, output);
+        if (length > 0)
+            dsbuffer_multiply (self, 1/length, output);
+        else
+            dsbuffer_dump (self, output);
     }
 }
 
