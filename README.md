@@ -30,9 +30,9 @@ Currently the functionality set is relatively smaller compared with Accelerate f
 Manual install is recommended for now. [Swift Package Manager](https://github.com/apple/swift-package-manager) will be supported when it is ready.
 
 1. Clone the latest version of this repo to your local machine.
-2. Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove `selftest.c` in `acceleratelib` folder which is for testing C code.
-3. Check that every .swift and .c files has *Watch Extension* as target.
-4. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following contents to it:
+2. Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove `acceleratelib/build` folder which is for C code testing.
+3. Check that every .swift and .c files has *Watch Extension* as target if your want it to be used on watch target.
+4. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following line to it:
 
 ```C
 #include "acceleratelib.h"
@@ -40,7 +40,7 @@ Manual install is recommended for now. [Swift Package Manager](https://github.co
 
 # Usage
 
-Full documentation is [HERE](https://herrkaefer.github.io/AccelerateWatch/).
+Full documentation [HERE](https://herrkaefer.github.io/AccelerateWatch/).
 
 ## DSBuffer
 
