@@ -34,7 +34,7 @@ Manual install is recommended for now. [Swift Package Manager](https://github.co
 3. Check that every .swift and .c files has *Watch Extension* as target if your want it to be used on watch target.
 4. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following line to it:
 
-```C
+```c
 #include "acceleratelib.h"
 ```
 
@@ -52,19 +52,19 @@ Create a DSBuffer object
 
 *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
 
-```Swift
+```swift
 DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
 ```
 
 Push new data to the end of the buffer
 
-```Swift
+```swift
 func push(value: Float)
 ```
 
 Get data by index
 
-```Swift
+```swift
 func dataAt(index: Int)
 ```
 
@@ -76,7 +76,7 @@ var bufferSize: Int
 
 Dump signal array
 
-```Swift
+```swift
 var signals: [Float]
 ```
 
@@ -109,19 +109,19 @@ func dotProduct(with: [Float]) -> Float
 
 Perform FFT on buffer
 
-```Swift
+```swift
 func fft() -> (real: [Float], imaginary: [Float])
 ```
 
 Get FFT sample frequencies
 
-```Swift
+```swift
 func fftFrequencies(fs: Float) -> [Float]
 ```
 
 Get FFT magnitudes
 
-```Swift
+```swift
 func fftMagnitudes() -> [Float]
 ```
 Square of FFT Magnitude, i.e. (abs(fft()))^2
@@ -138,7 +138,7 @@ func meanSquaredPowerSpectrum() -> [Float]
 
 Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
 
-```Swift
+```swift
 func powerSpectralDensity(fs: Float) -> [Float]
 ```
 
@@ -152,19 +152,19 @@ func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 
 Setup a FIR filter
 
-```Swift
+```swift
 buf.setupFIRFilter(FIRTaps: [Float])
 ```
 
 Get latest FIR filter output
 
-```Swift
+```swift
 func latestFIROutput() -> Float
 ```
 
 Get FIR filtered signal series in buffer
 
-```Swift
+```swift
 func FIRFiltered() -> [Float]
 ```
 
@@ -187,6 +187,10 @@ Vector module includes operations on regular arrays. All functions have two vers
 # Demo App
 
 ```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see `DSBuffer.test()` in DSBuffer.swift and `vTest()` in Vector.swift.
+
+# How to contribute
+
+(to be added.)
 
 # Acknowledgement
 
