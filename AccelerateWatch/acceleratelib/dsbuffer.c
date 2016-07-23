@@ -69,7 +69,7 @@ static void dsbuffer_push_normal (dsbuffer_t *self, float new_value) {
 // Get latest FIR filter output (fast version)
 static float dsbuffer_fir_get_fast (dsbuffer_t *self) {
     float fvalue = 0;
-    int index = self->head, i;
+    size_t index = self->head, i;
     for (i = 0; i < self->num_fir_taps; ++i)
         fvalue += self->data[(--index) & (self->size - 1)] * self->fir_taps[i];
     return fvalue;
@@ -79,7 +79,7 @@ static float dsbuffer_fir_get_fast (dsbuffer_t *self) {
 // Get latest FIR filter output (normal version)
 static float dsbuffer_fir_get_normal (dsbuffer_t *self) {
     float fvalue = 0;
-    int index = self->head, i;
+    size_t index = self->head, i;
     for (i = 0; i < self->num_fir_taps; ++i) {
         index = (index != 0) ? (index - 1) : (self->size - 1);
         fvalue += self->data[index] * self->fir_taps[i];
@@ -147,7 +147,7 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
 
     self->fft_supported = fft_supported;
     if (fft_supported) {
-        self->fft_cfg = kiss_fftr_alloc (size, 0, NULL, NULL);
+        self->fft_cfg = kiss_fftr_alloc ((int) size, 0, NULL, NULL);
         assert (self->fft_cfg);
     }
     else

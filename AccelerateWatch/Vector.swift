@@ -145,7 +145,8 @@ public func vCorrelationCoefficient(_ v1: [Double], v2: [Double]) -> Double {
 }
 
 
-// Self test of Vector functions
+/// :nodoc: 
+/// Self test of Vector functions
 public func vTest() {
     print("Vector test: \n")
     

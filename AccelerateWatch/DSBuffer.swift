@@ -44,7 +44,7 @@ public class DSBuffer {
     }
     
     
-    /// Destructor
+    /// :nodoc: Destructor
     deinit {
         dsbuffer_free_unsafe(self.buffer)
     }
@@ -61,7 +61,7 @@ public class DSBuffer {
         }
     }
     
-    /// Get data at index
+    /// Get data by index
     func dataAt(_ index: Int) -> Float {
         return dsbuffer_at(self.buffer, index)
     }
@@ -91,7 +91,7 @@ public class DSBuffer {
     
     /// Print buffer
     func printBuffer(dataFormat: String) {
-        print(String(format: "DSBuffer size: %d\n", self.size))
+        print("DSBuffer size: \(self.size)")
         for idx in 0..<self.size {
             print(String(format: dataFormat, dsbuffer_at(self.buffer, idx)), terminator: " ")
         }
@@ -282,7 +282,7 @@ public class DSBuffer {
     }
     
     
-    // Self test
+    /// :nodoc: Self test
     class func test() {
         print("DSBuffer test:\n\n")
         
