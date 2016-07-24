@@ -89,7 +89,7 @@ static float dsbuffer_fir_get_normal (dsbuffer_t *self) {
 
 
 // Print buffer
-static void dsbuffer_print (dsbuffer_t *self, bool fft_supported) {
+static void dsbuffer_print_raw (dsbuffer_t *self, bool fft_supported) {
     assert (self);
     printf ("\ndsbuffer: size: %zu, fft_supported: %s, head: %zu\n",
             self->size, fft_supported ? "true" : "false", self->head);
@@ -127,9 +127,11 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
     assert (self);
 
     // Create signal buffer and initilize to zero
-    size_t alloc_size = fft_supported ? size * 2 : size;
+    size_t alloc_size = fft_supported ? (size * 2) : size;
     self->data = (float *) calloc (alloc_size, sizeof (float));
+//    self->data = (float *) malloc (alloc_size * sizeof (float));
     assert (self->data);
+//    memset (self->data, 0, alloc_size * sizeof (float));
 
     self->size = size;
     self->head = 0;
@@ -164,9 +166,9 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
 float dsbuffer_at (dsbuffer_t *self, size_t idx) {
     assert (self);
     assert (idx < self->size);
-    
+
     if (self->fft_supported)
-        return self->data[self->head+idx];
+        return self->data[self->head + idx];
     else {
         return self->data[(self->head + idx) % self->size];
     }
@@ -265,6 +267,15 @@ float dsbuffer_mean (dsbuffer_t *self) {
 }
 
 
+float dsbuffer_sum (dsbuffer_t *self) {
+    assert (self);
+    float sum = 0.0;
+    for (size_t i = 0; i < self->size; i++)
+        sum += self->data[i];
+    return sum;
+}
+
+
 float dsbuffer_length (dsbuffer_t *self) {
     assert (self);
     float ss = 0.0;
@@ -289,7 +300,7 @@ void dsbuffer_add (dsbuffer_t *self, float value, float *output) {
 
     if (self->fft_supported) {
         for (size_t i = 0; i < self->size; i++)
-            output[i] = self->data[i] + value;
+            output[i] = self->data[self->head+i] + value;
     }
     else {
         size_t idx = self->head;
@@ -308,12 +319,50 @@ void dsbuffer_multiply (dsbuffer_t *self, float value, float *output) {
 
     if (self->fft_supported) {
         for (size_t i = 0; i < self->size; i++)
-            output[i] = self->data[i] * value;
+            output[i] = self->data[self->head+i] * value;
     }
     else {
         size_t idx = self->head;
         for (size_t i = 0; i < self->size; i++) {
             output[i] = self->data[idx] * value;
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+}
+
+
+void dsbuffer_mod (dsbuffer_t *self, float value, float *output) {
+    assert (self);
+    assert (output);
+
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            output[i] = fmodf(self->data[self->head+i], value);
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            output[i] = fmodf(self->data[idx], value);
+            if (++idx == self->size)
+                idx = 0;
+        }
+    }
+}
+
+
+void dsbuffer_sqrt (dsbuffer_t *self, float *output) {
+    assert (self);
+    assert (output);
+
+    if (self->fft_supported) {
+        for (size_t i = 0; i < self->size; i++)
+            output[i] = sqrtf(self->data[self->head+i]);
+    }
+    else {
+        size_t idx = self->head;
+        for (size_t i = 0; i < self->size; i++) {
+            output[i] = sqrtf(self->data[idx]);
             if (++idx == self->size)
                 idx = 0;
         }
@@ -356,7 +405,7 @@ void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
             length += output[i] * output[i];
         }
         length = sqrtf (length);
-        
+
         if (length > 0) {
             for (size_t i = 0; i < self->size; i++)
                 output[i] /= length;
@@ -401,6 +450,26 @@ void dsbuffer_clear (dsbuffer_t *self) {
 }
 
 
+void dsbuffer_print (dsbuffer_t *self) {
+    assert (self);
+    printf ("DSBuffer size: %zu\n", self->size);
+
+    if (self->fft_supported) {
+        for (size_t idx = 0; idx < self->size; idx++)
+            printf ("%.2f ", self->data[self->head + idx]);
+        printf ("\n");
+    }
+    else {
+        for (size_t cnt = 0, idx = 0; cnt < self->size; cnt++) {
+            printf ("%.2f ", self->data[self->head + idx]);
+            if (++idx == self->size)
+                idx = 0;
+        }
+        printf ("\n");
+    }
+}
+
+
 void dsbuffer_free (dsbuffer_t **self_p) {
     assert (self_p);
     if (*self_p) {
@@ -435,6 +504,9 @@ void dsbuffer_test () {
     // 1
     buf = dsbuffer_new (num_fir_taps, false);
     assert (buf);
+    for (size_t i = 0; i < num_fir_taps; i++)
+        assert (fabs (dsbuffer_at (buf, i) - 0) < 1e-8);
+
     dsbuffer_setup_fir (buf, fir_taps, num_fir_taps);
 
     for (size_t t = 0; t < 10000000; t++) {
@@ -462,7 +534,7 @@ void dsbuffer_test () {
         printf ("FIR output: %.3f\n", dsbuffer_latest_fir_output (buf));
     }
 
-    dsbuffer_print (buf, false);
+    dsbuffer_print_raw (buf, false);
 
     free (dumped);
 
@@ -483,13 +555,13 @@ void dsbuffer_test () {
 
     buf = dsbuffer_new (size, true);
     assert (buf);
-    dsbuffer_print (buf, true);
+    dsbuffer_print_raw (buf, true);
 
     dumped = (float *) malloc (sizeof (float) * size);
 
     for (size_t t = 0; t < size; t++) {
         dsbuffer_push (buf, signal2[t]);
-        dsbuffer_print (buf, true);
+        dsbuffer_print_raw (buf, true);
         // if (t == 3)
         //     dsbuffer_clear (buf);
         dsbuffer_dump (buf, dumped);

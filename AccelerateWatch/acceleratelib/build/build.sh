@@ -1,1 +1,1 @@
-gcc -o test ../dsbuffer.c ../vectorf.c ../vectord.c ../kissfft/kiss_fftr.c ../kissfft/kiss_fft.c selftest.c && ./test
+gcc -o test ../dsbuffer.c ../vectorf.c ../vectord.c ../kissfft/kiss_fftr.c ../kissfft/kiss_fft.c selftest.c -Wall -O2f && ./test

@@ -18,7 +18,7 @@ Currently all codes are built and tested on
 
 # Where and why to use AccelerateWatch?
 
-Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/), a powerful tool for ditigal signal processing and fast vector manipulations, is still unavailable on watchOS. This library is abstracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
+Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/), a powerful tool for ditigal signal processing and fast vector manipulations, is still unavailable on watchOS. This library is extracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
 - Swift APIs. C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.
 - Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like [Surge](https://github.com/mattt/Surge) exists.
@@ -53,7 +53,7 @@ Create a DSBuffer object
 *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
 
 ```swift
-DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
+init(size: Int, fftIsSupported: Bool = true)
 ```
 
 Push new data to the end of the buffer
@@ -153,7 +153,7 @@ func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 Setup a FIR filter
 
 ```swift
-buf.setupFIRFilter(FIRTaps: [Float])
+func setupFIRFilter(FIRTaps: [Float])
 ```
 
 Get latest FIR filter output
@@ -188,9 +188,13 @@ Vector module includes operations on regular arrays. All functions have two vers
 
 ```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see `DSBuffer.test()` in DSBuffer.swift and `vTest()` in Vector.swift.
 
+# Known issues
+
+- Setting any LLVM optimization level rather than `None [-O0]` would probably cause incorrect behavior of DSBuffer. 
+
 # How to contribute
 
-(to be added.)
+...
 
 # Acknowledgement
 

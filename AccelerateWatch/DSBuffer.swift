@@ -96,6 +96,8 @@ public class DSBuffer {
             print(String(format: dataFormat, dsbuffer_at(self.buffer, idx)), terminator: " ")
         }
         print("\n")
+        
+//        dsbuffer_print(self.buffer)
     }
     
     
@@ -117,9 +119,31 @@ public class DSBuffer {
     }
     
     
+    /// Modulus by value of each buffer data
+    func mod(value: Float) -> [Float] {
+        var result = [Float](repeating: 0.0, count: self.size)
+        dsbuffer_mod(self.buffer, value, &result)
+        return result
+    }
+    
+    
+    /// Square root of each buffer data
+//    func sqrt(value: Float) -> [Float] {
+//        var result = [Float](repeating: 0.0, count: self.size)
+//        dsbuffer_sqrt(self.buffer, &result)
+//        return result
+//    }
+    
+    
     /// Mean value
     var mean: Float {
         return dsbuffer_mean(self.buffer)
+    }
+    
+    
+    /// Mean value
+    var sum: Float {
+        return dsbuffer_sum(self.buffer)
     }
     
     
@@ -284,10 +308,11 @@ public class DSBuffer {
     
     /// :nodoc: Self test
     class func test() {
-        print("DSBuffer test:\n\n")
+        print("\nDSBuffer test: ==============\n")
         
-        let size = 16
+        let size = 10
         let buf = DSBuffer(size, fftIsSupported: true)
+        buf.printBuffer(dataFormat: "%.2f")
         
         let signalData: [Float] = [1.0, 4, 2, 5, 6, 7, -1, -8]
         for value in signalData {
@@ -295,6 +320,7 @@ public class DSBuffer {
 //            print(buf.signals)
         }
         buf.printBuffer(dataFormat: "%.2f")
+        
         
         let fft = buf.fft()
         print(fft)
@@ -316,8 +342,9 @@ public class DSBuffer {
         
         let norm = buf.normalizedToUnitLength(centralized: true)
         let coeff = vDotProduct(norm, v2: norm)
-        print("coeff: %.2f\n", coeff)
+        print(String(format: "coeff: %.2f\n", coeff))
         
+
         print("\nDSBuffer test OK.\n\n")
     }
     

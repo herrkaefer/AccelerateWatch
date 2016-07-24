@@ -45,6 +45,9 @@ void dsbuffer_dump (dsbuffer_t *self, float *output);
 // Reset buffer to zero values
 void dsbuffer_clear (dsbuffer_t *self);
 
+// Print buffer
+void dsbuffer_print (dsbuffer_t *self);
+    
 // Self test
 void dsbuffer_test (void);
 
@@ -69,9 +72,12 @@ float dsbuffer_latest_fir_output (dsbuffer_t *self);
 void dsbuffer_fir_filter (dsbuffer_t *self, float *output);
 
 // ---------------------------------------------------------------------------
-// Get mean value of data
+// Get mean value of buffer data
 float dsbuffer_mean (dsbuffer_t *self);
 
+// Get summation of buffer data
+float dsbuffer_sum (dsbuffer_t *self);
+    
 // Length of buffer data as vector
 float dsbuffer_length (dsbuffer_t *self);
 
@@ -85,7 +91,15 @@ void dsbuffer_add (dsbuffer_t *self, float value, float *output);
 // Multiply dsbuffer data with value.
 // Return results in param output.
 void dsbuffer_multiply (dsbuffer_t *self, float value, float *output);
+    
+// modulus by value on dsbuffer data.
+// Return results in param output.
+void dsbuffer_mod (dsbuffer_t *self, float value, float *output);
 
+// Square root of each dsbuffer data.
+// Return results in param output.
+void dsbuffer_sqrt (dsbuffer_t *self, float *output);
+    
 // Centralize buffer data as vector
 void dsbuffer_remove_mean (dsbuffer_t *self, float *output);
 

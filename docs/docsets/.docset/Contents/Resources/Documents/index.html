@@ -139,11 +139,11 @@
 <li>Check that every .swift and .c files has <em>Watch Extension</em> as target if your want it to be used on watch target.</li>
 <li>Add a bridging header (here is a <a href="http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/">Instruction</a>), and add the following line to it:</li>
 </ol>
-<pre class="highlight plaintext"><code>#include "acceleratelib.h"
-</code></pre>
+<pre class="highlight c"><code><span class="cp">#include "acceleratelib.h"
+</span></code></pre>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='usage'>Usage</h1>
 
-<p>Full documentation <a href="https://herrkaefer.github.io/AccelerateWatch/">HERE</a>.</p>
+<p>Full documentation <a href="http://herrkaefer.com/AccelerateWatch/">HERE</a>.</p>
 <a href='#dsbuffer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='dsbuffer'>DSBuffer</h2>
 
 <p>DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.</p>
@@ -152,15 +152,15 @@
 <p>Create a DSBuffer object</p>
 
 <p><em>Tips</em>: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.</p>
-<pre class="highlight plaintext"><code>DSBuffer(size: Int, fftIsSupported: Bool): DSBuffer
+<pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fftIsSupported</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
 </code></pre>
 
 <p>Push new data to the end of the buffer</p>
-<pre class="highlight plaintext"><code>func push(value: Float)
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span>
 </code></pre>
 
 <p>Get data by index</p>
-<pre class="highlight plaintext"><code>func dataAt(index: Int)
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">dataAt</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
 </code></pre>
 
 <p>Get buffer size</p>
@@ -168,7 +168,7 @@
 </code></pre>
 
 <p>Dump signal array</p>
-<pre class="highlight plaintext"><code>var signals: [Float]
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">signals</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 
 <p>Reset all buffer values to zero</p>
@@ -195,15 +195,15 @@
 </ul>
 
 <p>Perform FFT on buffer</p>
-<pre class="highlight plaintext"><code>func fft() -&gt; (real: [Float], imaginary: [Float])
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fft</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">real</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">],</span> <span class="nv">imaginary</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
 </code></pre>
 
 <p>Get FFT sample frequencies</p>
-<pre class="highlight plaintext"><code>func fftFrequencies(fs: Float) -&gt; [Float]
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fftFrequencies</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 
 <p>Get FFT magnitudes</p>
-<pre class="highlight plaintext"><code>func fftMagnitudes() -&gt; [Float]
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fftMagnitudes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 
 <p>Square of FFT Magnitude, i.e. (abs(fft()))^2</p>
@@ -215,7 +215,7 @@
 </code></pre>
 
 <p>Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)</p>
-<pre class="highlight plaintext"><code>func powerSpectralDensity(fs: Float) -&gt; [Float]
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">powerSpectralDensity</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 
 <p>Average power over specified frequency band, i.e. mean(abs(fft(from&hellip;to))^2)</p>
@@ -224,15 +224,15 @@
 <a href='#fir-filter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fir-filter'>FIR filter</h4>
 
 <p>Setup a FIR filter</p>
-<pre class="highlight plaintext"><code>buf.setupFIRFilter(FIRTaps: [Float])
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setupFIRFilter</span><span class="p">(</span><span class="kt">FIRTaps</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
 </code></pre>
 
 <p>Get latest FIR filter output</p>
-<pre class="highlight plaintext"><code>func latestFIROutput() -&gt; Float
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">latestFIROutput</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
 </code></pre>
 
 <p>Get FIR filtered signal series in buffer</p>
-<pre class="highlight plaintext"><code>func FIRFiltered() -&gt; [Float]
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">FIRFiltered</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 <a href='#vector' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='vector'>Vector</h2>
 
@@ -252,6 +252,9 @@
 <a href='#demo-app' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='demo-app'>Demo App</h1>
 
 <p><code>AccelerateWatchDemoApp</code> is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see <code>DSBuffer.test()</code> in DSBuffer.swift and <code>vTest()</code> in Vector.swift.</p>
+<a href='#how-to-contribute' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='how-to-contribute'>How to contribute</h1>
+
+<p>(to be added.)</p>
 <a href='#acknowledgement' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='acknowledgement'>Acknowledgement</h1>
 
 <ul>

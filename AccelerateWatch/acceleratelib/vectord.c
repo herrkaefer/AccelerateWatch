@@ -23,6 +23,15 @@ double vectord_mean (const double *self, size_t size) {
 }
 
 
+double vectord_sum (const double *self, size_t size) {
+    assert (self);
+    double sum = 0.0;
+    for (size_t i = 0; i < size; i++)
+        sum += self[i];
+    return sum;
+}
+
+
 double vectord_length (const double *self, size_t size) {
     assert (self);
     double ss = 0.0;
@@ -38,6 +47,14 @@ double vectord_power (const double *self, size_t size) {
     for (size_t i = 0; i < size; i++)
         ss += self[i] * self[i];
     return ss;
+}
+
+
+void vectord_sqrt (const double *self, size_t size, double *output) {
+    assert (self);
+    assert (output);
+    for (size_t i = 0; i < size; i++)
+        output[i] = sqrt(self[i]);
 }
 
 

@@ -29,6 +29,18 @@ public func vMean(_ v: [Double]) -> Double {
 }
 
 
+/// Summation. Float type version.
+public func vSum(_ v: [Float]) -> Float {
+    return vectorf_sum(v, v.count)
+}
+
+
+/// Summation. Double type version.
+public func vSum(_ v: [Double]) -> Double {
+    return vectord_sum(v, v.count)
+}
+
+
 /// Vector length. Float type version.
 public func vLength(_ v: [Float]) -> Float {
     return vectorf_length(v, v.count)
@@ -117,6 +129,22 @@ public func vNormalizeToUnitLength(_ v: [Double], centralized: Bool) -> [Double]
 }
 
 
+/// Sqrt. Float type version.
+public func vSqrt(_ v: [Float]) -> [Float] {
+    var result = [Float](repeating: 0.0, count: v.count)
+    vectorf_sqrt(v, v.count, &result)
+    return result
+}
+
+
+/// Sqrt. Double type version.
+public func vSqrt(_ v: [Double]) -> [Double] {
+    var result = [Double](repeating: 0.0, count: v.count)
+    vectord_sqrt(v, v.count, &result)
+    return result
+}
+
+
 /// Dot production between two vectors. Float type version.
 public func vDotProduct(_ v1: [Float], v2: [Float]) -> Float {
     assert (v1.count == v2.count)
@@ -162,6 +190,31 @@ public func vTest() {
     cc = vCorrelationCoefficient(v1, v2: v2)
     print("cc: \(cc)")
     assert(scalarEqual(cc, scalar2: 1.0))
+    
+    // time it
+    
+    let iterations = 100000
+    
+    let v3 = Array(1...100).map{Double($0)}
+    
+    // Naïve Swift Implementation
+    var startTime = CFAbsoluteTimeGetCurrent()
+    for _ in 0..<iterations {
+        let avg = v3.reduce(0.0, combine: +) / Double(v3.count)
+        let centralized = v3.map{$0-avg}
+        let length = centralized.reduce(0.0, combine: {$0+$1*$1})
+        _ = centralized.map{$0/length}
+    }
+    let deltaTime1 = CFAbsoluteTimeGetCurrent() - startTime
+    print(String(format: "deltaTime 1: %f\n", deltaTime1))
+    
+    startTime = CFAbsoluteTimeGetCurrent()
+    for _ in 0..<iterations {
+        _ = vNormalizeToUnitLength(v3, centralized: true)
+    }
+    let deltaTime2 = CFAbsoluteTimeGetCurrent() - startTime
+    print(String(format: "deltaTime 2: %f\n", deltaTime2))
+    print(String(format: "improve: %f\n", (deltaTime1-deltaTime2)/deltaTime2))
     
     print("Vector test: OK.\n")
 }

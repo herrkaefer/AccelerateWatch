@@ -18,12 +18,18 @@ extern "C" {
 // Mean value
 double vectord_mean (const double *self, size_t size);
 
+// Summation
+double vectord_sum (const double *self, size_t size);
+
 // Length
 double vectord_length (const double *self, size_t size);
 
 // Square of length
 double vectord_power (const double *self, size_t size);
 
+// Sqrt
+void vectord_sqrt (const double *self, size_t size, double *output);
+    
 // Add value
 // Return results in param output.
 void vectord_add (const double *self, size_t size, double value, double *output);

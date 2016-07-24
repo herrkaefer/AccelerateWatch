@@ -18,11 +18,17 @@ extern "C" {
 // Mean value
 float vectorf_mean (const float *self, size_t size);
 
+// Summation
+float vectorf_sum (const float *self, size_t size);
+    
 // Length
 float vectorf_length (const float *self, size_t size);
 
 // Square of length
 float vectorf_power (const float *self, size_t size);
+
+// Sqrt
+void vectorf_sqrt (const float *self, size_t size, float *output);
 
 // Add value
 // Return results in param output.

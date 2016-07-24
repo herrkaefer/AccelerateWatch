@@ -23,6 +23,15 @@ float vectorf_mean (const float *self, size_t size) {
 }
 
 
+float vectorf_sum (const float *self, size_t size) {
+    assert (self);
+    float sum = 0.0;
+    for (size_t i = 0; i < size; i++)
+        sum += self[i];
+    return sum;
+}
+
+
 float vectorf_length (const float *self, size_t size) {
     assert (self);
     float ss = 0.0;
@@ -38,6 +47,14 @@ float vectorf_power (const float *self, size_t size) {
     for (size_t i = 0; i < size; i++)
         ss += self[i] * self[i];
     return ss;
+}
+
+
+void vectorf_sqrt (const float *self, size_t size, float *output) {
+    assert (self);
+    assert (output);
+    for (size_t i = 0; i < size; i++)
+        output[i] = sqrtf(self[i]);
 }
 
 
