@@ -156,95 +156,97 @@
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='usage'>Usage</h1>
 
 <p>Full documentation <a href="http://herrkaefer.com/AccelerateWatch/">HERE</a>.</p>
+
+<p>The library currently has two modules:</p>
+
+<ul>
+<li><code>DSBuffer</code> is a class for windowed time series processing.</li>
+<li><code>Vector</code> is a set of functons for vector manipulations.</li>
+</ul>
+
+<p>Below is a summary of the APIs.</p>
 <a href='#dsbuffer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='dsbuffer'>DSBuffer</h2>
 
-<p>DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.</p>
+<p>DSBuffer represents a fixed length signal queue (Float type) which is suitable for storing and processing a windowed time series.</p>
 <a href='#normal-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='normal-operations'>Normal operations</h4>
+<pre class="highlight swift"><code><span class="c1">// Create a DSBuffer object</span>
+<span class="c1">// *Tips*: </span>
+<span class="c1">// - If you do not need to perform FFT on the buffer, set fftIsSupperted to be false could save 50% memory.</span>
+<span class="c1">// - If you need to perform FFT, set buffer size to power of 2 could accelerate more.</span>
+<span class="nf">init</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fftIsSupported</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
 
-<p>Create a DSBuffer object</p>
+<span class="c1">// Push new data to the end of the buffer (and the foremost will be dropped)</span>
+<span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span>
 
-<p><em>Tips</em>: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.</p>
-<pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fftIsSupported</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+<span class="c1">// Get data by index</span>
+<span class="kd">func</span> <span class="nf">dataAt</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="c1">// Get buffer size</span>
+<span class="k">var</span> <span class="nv">bufferSize</span><span class="p">:</span> <span class="kt">Int</span>
+
+<span class="c1">// Dump buffer as array</span>
+<span class="k">var</span> <span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+
+<span class="c1">// Reset all buffer values to zero</span>
+<span class="kd">func</span> <span class="nf">clear</span><span class="p">()</span>
 </code></pre>
-
-<p>Push new data to the end of the buffer</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span>
-</code></pre>
-
-<p>Get data by index</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">dataAt</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
-</code></pre>
-
-<p>Get buffer size</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">bufferSize</span><span class="p">:</span> <span class="kt">Int</span>
-</code></pre>
-
-<p>Dump signal array</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">signals</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
-
-<p>Reset all buffer values to zero</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">clear</span><span class="p">()</span>
-</code></pre>
-<a href='#vector-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='vector-operations'>Vector operations</h4>
+<a href='#vector-like-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='vector-like-operations'>Vector-like operations</h4>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 <span class="kd">func</span> <span class="nf">multiply</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-<span class="k">var</span> <span class="nv">mean</span><span class="p">:</span> <span class="kt">Float</span>
-<span class="k">var</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Float</span>
-<span class="k">var</span> <span class="nv">power</span><span class="p">:</span> <span class="kt">Float</span>
-<span class="kd">func</span> <span class="nf">centralized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="k">var</span> <span class="nv">centralized</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 <span class="kd">func</span> <span class="nf">normalizedToUnitLength</span><span class="p">(</span><span class="nv">centralized</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="kd">func</span> <span class="nf">normalizedToUnitVariance</span><span class="p">(</span><span class="nv">centralized</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 <span class="kd">func</span> <span class="nf">dotProduct</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
 </code></pre>
-<a href='#fast-fourier-transform' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fast-fourier-transform'>Fast Fourier Transform</h4>
+<a href='#time-domain-features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='time-domain-features'>Time-domain features</h4>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">mean</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">sum</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">energy</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">max</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">min</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">variance</span><span class="p">:</span> <span class="kt">Float</span>
+<span class="k">var</span> <span class="nv">std</span><span class="p">:</span> <span class="kt">Float</span>
+</code></pre>
+<a href='#fast-fourier-transform-and-frequency-domain-features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fast-fourier-transform-and-frequency-domain-features'>Fast Fourier Transform and frequency-domain features</h4>
 
 <p><strong>Note for FFT related methods</strong>:</p>
 
 <ul>
-<li>Set fftIsSupported to true when creating the buffer.</li>
-<li>Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.</li>
-<li>Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.</li>
+<li>Set <code>fftIsSupported</code> to true when creating the buffer.</li>
+<li>Buffer <code>size</code> should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.</li>
+<li>Only results in <strong>size/2+1</strong> complex frequency bins from DC to Nyquist are returned.</li>
 </ul>
+<pre class="highlight swift"><code><span class="c1">// Perform FFT on buffer</span>
+<span class="kd">func</span> <span class="nf">fft</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">real</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">],</span> <span class="nv">imaginary</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
 
-<p>Perform FFT on buffer</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fft</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">real</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">],</span> <span class="nv">imaginary</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
-</code></pre>
+<span class="c1">// Get FFT sample frequencies</span>
+<span class="kd">func</span> <span class="nf">fftFrequencies</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 
-<p>Get FFT sample frequencies</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fftFrequencies</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
+<span class="c1">// Get FFT magnitudes</span>
+<span class="kd">func</span> <span class="nf">fftMagnitudes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 
-<p>Get FFT magnitudes</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fftMagnitudes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
+<span class="c1">// Square of FFT Magnitude, i.e. (abs(fft()))^2</span>
+<span class="kd">func</span> <span class="nf">squaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 
-<p>Square of FFT Magnitude, i.e. (abs(fft()))^2</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">squaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
+<span class="c1">// Mean-squared power spectrum, i.e. (abs(fft()))^2 / N</span>
+<span class="kd">func</span> <span class="nf">meanSquaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 
-<p>Mean-squared power spectrum, i.e. (abs(fft()))^2 / N</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">meanSquaredPowerSpectrum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
+<span class="c1">// Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)</span>
+<span class="kd">func</span> <span class="nf">powerSpectralDensity</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 
-<p>Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">powerSpectralDensity</span><span class="p">(</span><span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
-</code></pre>
-
-<p>Average power over specified frequency band, i.e. mean(abs(fft(from&hellip;to))^2)</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">averageBandPower</span><span class="p">(</span><span class="nv">fromFreq</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">toFreq</span><span class="p">:</span> <span class="kt">Float</span><span class="p">,</span> <span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+<span class="c1">// Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)</span>
+<span class="kd">func</span> <span class="nf">averageBandPower</span><span class="p">(</span><span class="nv">fromFreq</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">toFreq</span><span class="p">:</span> <span class="kt">Float</span><span class="p">,</span> <span class="nv">fs</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
 </code></pre>
 <a href='#fir-filter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='fir-filter'>FIR filter</h4>
+<pre class="highlight swift"><code><span class="c1">// Setup a FIR filter</span>
+<span class="kd">func</span> <span class="nf">setupFIRFilter</span><span class="p">(</span><span class="kt">FIRTaps</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
 
-<p>Setup a FIR filter</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setupFIRFilter</span><span class="p">(</span><span class="kt">FIRTaps</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span>
-</code></pre>
+<span class="c1">// Get latest FIR filter output</span>
+<span class="kd">func</span> <span class="nf">latestFIROutput</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
 
-<p>Get latest FIR filter output</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">latestFIROutput</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
-</code></pre>
-
-<p>Get FIR filtered signal series in buffer</p>
-<pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">FIRFiltered</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
+<span class="c1">// Get FIR filtered signal series in buffer</span>
+<span class="kd">func</span> <span class="kt">FIRFiltered</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>
 </code></pre>
 <a href='#vector' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='vector'>Vector</h2>
 
@@ -252,12 +254,14 @@
 
 <ul>
 <li><code>vMean</code></li>
+<li><code>vSum</code></li>
 <li><code>vLength</code></li>
 <li><code>vPower</code></li>
 <li><code>vAdd</code></li>
 <li><code>vMultiply</code></li>
 <li><code>vRemoveMean</code></li>
 <li><code>vNormalizeToUnitLength</code></li>
+<li><code>vSqrt</code></li>
 <li><code>vDotProduct</code></li>
 <li><code>vCorrelationCoefficient</code></li>
 </ul>
@@ -267,7 +271,7 @@
 <a href='#known-issues' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='known-issues'>Known issues</h1>
 
 <ul>
-<li>Setting any LLVM optimization level rather than <code>None [-O0]</code> would probably cause incorrect behavior of DSBuffer.</li>
+<li>Setting any LLVM (v8) optimization level rather than <code>None [-O0]</code> would probably cause unexpected behavior of DSBuffer.</li>
 </ul>
 <a href='#how-to-contribute' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='how-to-contribute'>How to contribute</h1>
 

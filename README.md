@@ -44,8 +44,8 @@ Full documentation [HERE](http://herrkaefer.com/AccelerateWatch/).
 
 The library currently has two modules:
 
-- `DSBuffer` is a class for windowed time series processing.
-- `Vector` is a set of functons for vector manipulations.
+- `DSBuffer` is a class for windowed time series processing. You can simply push data into the buffer, and extract time-domain features, or perform Fourier transform and freqency analysis on it.
+- `Vector` is a set of functons for accelerating vector manipulations.
 
 Below is a summary of the APIs.
 
