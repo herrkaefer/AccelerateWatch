@@ -1,7 +1,7 @@
 /*  =========================================================================
     dsbuffer - fixed-length circular buffer for windowed signal processing
 
-    Copyright (c) 2016, Yang LIU <gloolar@gmail.com>
+    Copyright (c) 2016, Yang LIU <gloolar [at] gmail [dot] com>
     =========================================================================
 */
 
@@ -88,7 +88,7 @@ static float dsbuffer_fir_get_normal (dsbuffer_t *self) {
 }
 
 
-// Print buffer
+// Print raw buffer
 static void dsbuffer_print_raw (dsbuffer_t *self, bool fft_supported) {
     assert (self);
     printf ("\ndsbuffer: size: %zu, fft_supported: %s, head: %zu\n",
@@ -129,9 +129,7 @@ dsbuffer_t *dsbuffer_new (size_t size, bool fft_supported) {
     // Create signal buffer and initilize to zero
     size_t alloc_size = fft_supported ? (size * 2) : size;
     self->data = (float *) calloc (alloc_size, sizeof (float));
-//    self->data = (float *) malloc (alloc_size * sizeof (float));
     assert (self->data);
-//    memset (self->data, 0, alloc_size * sizeof (float));
 
     self->size = size;
     self->head = 0;

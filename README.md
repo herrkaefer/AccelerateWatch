@@ -18,7 +18,7 @@ Currently all codes are built and tested on
 
 # Where and why to use AccelerateWatch?
 
-Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/), a powerful tool for ditigal signal processing and fast vector manipulations, is still unavailable on watchOS. This library is extracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
+Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/), a powerful tool for high-performance computations, is still unavailable on watchOS. This library is extracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
 - Swift APIs. C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.
 - Friendly syntax. This is a reason that you even want to use this instead of Accelerate framework on iOS, though other similar libraries like [Surge](https://github.com/mattt/Surge) exists.
@@ -190,7 +190,7 @@ Vector module includes operations on regular arrays. All functions have two vers
 
 # Known issues
 
-- Setting any LLVM optimization level rather than `None [-O0]` would probably cause incorrect behavior of DSBuffer. 
+- Setting any LLVM optimization level rather than `None [-O0]` would probably cause incorrect behavior of DSBuffer.
 
 # How to contribute
 

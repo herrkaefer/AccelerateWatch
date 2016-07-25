@@ -1,7 +1,7 @@
 /*  =========================================================================
     dsbuffer - fixed-length circular buffer for windowed signal processing
 
-    Copyright (c) 2016, Yang LIU <gloolar@gmail.com>
+    Copyright (c) 2016, Yang LIU <gloolar [at] gmail [dot] com>
     =========================================================================
 */
 
@@ -22,7 +22,7 @@ typedef struct {
     float imag;
 } dsbuffer_complex;
 
-// Create a new dsbuffer
+// Create a new dsbuffer object
 // Set perform_fft to true if FFT will be performed on the buffer, otherwise
 // set it to false so as to save memory.
 dsbuffer_t *dsbuffer_new (size_t size, bool perform_fft);

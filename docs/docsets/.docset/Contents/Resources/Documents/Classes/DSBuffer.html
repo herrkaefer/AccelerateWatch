@@ -53,10 +53,10 @@
                 <a href="../Functions.html#/s:F15Watch_Extension23vCorrelationCoefficientFTGSaSf_2v2GSaSf__Sf">vCorrelationCoefficient(_:v2:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSf_2v2GSaSf__Sf">vDotProduct(_:v2:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSf_2v2GSaSf__Sf">vDotProduct(_:v2:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F15Watch_Extension7vLengthFGSaSf_Sf">vLength(_:)</a>
@@ -71,10 +71,10 @@
                 <a href="../Functions.html#/s:F15Watch_Extension5vMeanFGSaSd_Sd">vMean(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSd_15valueToMultiplySd_GSaSd_">vMultiply(_:valueToMultiply:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSf_15valueToMultiplySf_GSaSf_">vMultiply(_:valueToMultiply:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSf_15valueToMultiplySf_GSaSf_">vMultiply(_:valueToMultiply:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSd_15valueToMultiplySd_GSaSd_">vMultiply(_:valueToMultiply:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F15Watch_Extension22vNormalizeToUnitLengthFTGSaSf_11centralizedSb_GSaSf_">vNormalizeToUnitLength(_:centralized:)</a>
@@ -83,16 +83,28 @@
                 <a href="../Functions.html#/s:F15Watch_Extension22vNormalizeToUnitLengthFTGSaSd_11centralizedSb_GSaSd_">vNormalizeToUnitLength(_:centralized:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension6vPowerFGSaSf_Sf">vPower(_:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension6vPowerFGSaSd_Sd">vPower(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F15Watch_Extension6vPowerFGSaSd_Sd">vPower(_:)</a>
+                <a href="../Functions.html#/s:F15Watch_Extension6vPowerFGSaSf_Sf">vPower(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSf_GSaSf_">vRemoveMean(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSd_GSaSd_">vRemoveMean(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F15Watch_Extension5vSqrtFGSaSf_GSaSf_">vSqrt(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F15Watch_Extension5vSqrtFGSaSd_GSaSd_">vSqrt(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F15Watch_Extension4vSumFGSaSd_Sd">vSum(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F15Watch_Extension4vSumFGSaSf_Sf">vSum(_:)</a>
               </li>
             </ul>
           </li>
@@ -108,16 +120,16 @@
 
                 </div>
               </div>
-            <p>Fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.</p>
+            <p>Fixed-length buffer for windowed signal processing</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Constructor%20and%20destructor"></a>
-                <a name="//apple_ref/swift/Section/Constructor and destructor" class="dashAnchor"></a>
-                <a href="#/Constructor%20and%20destructor">
-                  <h3 class="section-name">Constructor and destructor</h3>
+                <a name="/Initializer%20and%20deinitializer"></a>
+                <a name="//apple_ref/swift/Section/Initializer and deinitializer" class="dashAnchor"></a>
+                <a href="#/Initializer%20and%20deinitializer">
+                  <h3 class="section-name">Initializer and deinitializer</h3>
                 </a>
               </div>
               <ul>
@@ -134,9 +146,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Constructor</p>
+                        <p>Initializer</p>
 
-<p><em>Tips</em>: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.</p>
+<p><em>Tips</em>:</p>
+
+<ul>
+<li>If you do not need to perform FFT on the buffer, set fftIsSupperted to be false could save 50% memory.</li>
+<li>If you need to perform FFT, set buffer size to power of 2 could accelerate more.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -159,7 +176,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Buffer length</p>
+                                  <p>Buffer length. If you set fftIsSupperted to be true, the size should be  number</p>
 
                                 </div>
                               </td>
@@ -449,6 +466,33 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:FC15Watch_Extension8DSBuffer3modFSfGSaSf_"></a>
+                    <a name="//apple_ref/swift/Method/mod(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC15Watch_Extension8DSBuffer3modFSfGSaSf_">mod(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Modulus by value of each buffer data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">mod</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:vC15Watch_Extension8DSBuffer4meanSf"></a>
                     <a name="//apple_ref/swift/Property/mean" class="dashAnchor"></a>
                     <a class="token" href="#/s:vC15Watch_Extension8DSBuffer4meanSf">mean</a>
@@ -467,6 +511,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="k">var</span> <span class="nv">mean</span><span class="p">:</span> <span class="kt">Float</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC15Watch_Extension8DSBuffer3sumSf"></a>
+                    <a name="//apple_ref/swift/Property/sum" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC15Watch_Extension8DSBuffer3sumSf">sum</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Mean value</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">sum</span><span class="p">:</span> <span class="kt">Float</span></code></pre>
 
                         </div>
                       </div>
@@ -958,7 +1029,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://herrkaefer.github.io" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-23)</p>
+          <p>&copy; 2016 <a class="link" href="https://herrkaefer.com" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-25)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

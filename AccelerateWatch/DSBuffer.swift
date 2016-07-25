@@ -1,13 +1,13 @@
 /// DSBuffer
 ///
-/// Created by Yang Liu (gloolar@gmail.com) on 16/6/20.
+/// Created by Yang Liu (gloolar [at] gmail [dot] com) on 16/6/20.
 /// Copyright © 2016年 Yang Liu. All rights reserved.
 
 
 import Foundation
 
 
-/// Fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
+/// Fixed-length buffer for windowed signal processing
 public class DSBuffer {
     
     private var buffer: OpaquePointer
@@ -17,15 +17,18 @@ public class DSBuffer {
     private var fftData: [dsbuffer_complex]?
     private var fftIsUpdated: Bool?
     
-    // MARK: Constructor and destructor
+    // MARK: Initializer and deinitializer
     
-    /// Constructor
+    /// Initializer
     ///
-    /// - parameter size: Buffer length
+    /// - parameter size: Buffer length. If you set fftIsSupperted to be true, the size should be **even** number
     /// - parameter fftIsSupported: Whether FFT will be performed on the buffer
     /// - returns: DSBuffer object
     ///
-    /// *Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
+    /// *Tips*:
+    ///
+    /// - If you do not need to perform FFT on the buffer, set fftIsSupperted to be false could save 50% memory.
+    /// - If you need to perform FFT, set buffer size to power of 2 could accelerate more.
     init(_ size: Int, fftIsSupported: Bool = true) {
         if (fftIsSupported && size % 2 == 1) {
             print(String(format: "WARNING: size must be even for FFT. Reset size to: %d.", size+1))
@@ -44,7 +47,7 @@ public class DSBuffer {
     }
     
     
-    /// :nodoc: Destructor
+    /// :nodoc: deinitializer
     deinit {
         dsbuffer_free_unsafe(self.buffer)
     }
@@ -96,8 +99,6 @@ public class DSBuffer {
             print(String(format: dataFormat, dsbuffer_at(self.buffer, idx)), terminator: " ")
         }
         print("\n")
-        
-//        dsbuffer_print(self.buffer)
     }
     
     
@@ -125,14 +126,6 @@ public class DSBuffer {
         dsbuffer_mod(self.buffer, value, &result)
         return result
     }
-    
-    
-    /// Square root of each buffer data
-//    func sqrt(value: Float) -> [Float] {
-//        var result = [Float](repeating: 0.0, count: self.size)
-//        dsbuffer_sqrt(self.buffer, &result)
-//        return result
-//    }
     
     
     /// Mean value
@@ -310,7 +303,7 @@ public class DSBuffer {
     class func test() {
         print("\nDSBuffer test: ==============\n")
         
-        let size = 10
+        let size = 16
         let buf = DSBuffer(size, fftIsSupported: true)
         buf.printBuffer(dataFormat: "%.2f")
         
@@ -321,8 +314,10 @@ public class DSBuffer {
         }
         buf.printBuffer(dataFormat: "%.2f")
         
-        
+        let startTime = CFAbsoluteTimeGetCurrent()
         let fft = buf.fft()
+        let deltaTime = CFAbsoluteTimeGetCurrent() - startTime
+        print("FFT time: \(deltaTime)")
         print(fft)
         
         let fftSM = buf.squaredPowerSpectrum()

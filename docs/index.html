@@ -52,10 +52,10 @@
                 <a href="Functions.html#/s:F15Watch_Extension23vCorrelationCoefficientFTGSaSf_2v2GSaSf__Sf">vCorrelationCoefficient(_:v2:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSf_2v2GSaSf__Sf">vDotProduct(_:v2:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSf_2v2GSaSf__Sf">vDotProduct(_:v2:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension11vDotProductFTGSaSd_2v2GSaSd__Sd">vDotProduct(_:v2:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension7vLengthFGSaSf_Sf">vLength(_:)</a>
@@ -70,10 +70,10 @@
                 <a href="Functions.html#/s:F15Watch_Extension5vMeanFGSaSd_Sd">vMean(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSd_15valueToMultiplySd_GSaSd_">vMultiply(_:valueToMultiply:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSf_15valueToMultiplySf_GSaSf_">vMultiply(_:valueToMultiply:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSf_15valueToMultiplySf_GSaSf_">vMultiply(_:valueToMultiply:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension9vMultiplyFTGSaSd_15valueToMultiplySd_GSaSd_">vMultiply(_:valueToMultiply:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension22vNormalizeToUnitLengthFTGSaSf_11centralizedSb_GSaSf_">vNormalizeToUnitLength(_:centralized:)</a>
@@ -82,16 +82,28 @@
                 <a href="Functions.html#/s:F15Watch_Extension22vNormalizeToUnitLengthFTGSaSd_11centralizedSb_GSaSd_">vNormalizeToUnitLength(_:centralized:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension6vPowerFGSaSf_Sf">vPower(_:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension6vPowerFGSaSd_Sd">vPower(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F15Watch_Extension6vPowerFGSaSd_Sd">vPower(_:)</a>
+                <a href="Functions.html#/s:F15Watch_Extension6vPowerFGSaSf_Sf">vPower(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSf_GSaSf_">vRemoveMean(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F15Watch_Extension11vRemoveMeanFGSaSd_GSaSd_">vRemoveMean(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension5vSqrtFGSaSf_GSaSf_">vSqrt(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension5vSqrtFGSaSd_GSaSd_">vSqrt(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension4vSumFGSaSd_Sd">vSum(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F15Watch_Extension4vSumFGSaSf_Sf">vSum(_:)</a>
               </li>
             </ul>
           </li>
@@ -121,7 +133,7 @@
 </ul>
 <a href='#where-and-why-to-use-acceleratewatch' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='where-and-why-to-use-acceleratewatch'>Where and why to use AccelerateWatch?</h1>
 
-<p>Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the <a href="https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/">Accelerate framework</a>, a powerful tool for ditigal signal processing and fast vector manipulations, is still unavailable on watchOS. This library is abstracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.</p>
+<p>Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the <a href="https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/">Accelerate framework</a>, a powerful tool for high-performance computations, is still unavailable on watchOS. This library is extracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.</p>
 
 <ul>
 <li>Swift APIs. C data structures and methods are wrapped in Swift, so that you can call them using Swift conveniently.</li>
@@ -252,9 +264,14 @@
 <a href='#demo-app' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='demo-app'>Demo App</h1>
 
 <p><code>AccelerateWatchDemoApp</code> is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see <code>DSBuffer.test()</code> in DSBuffer.swift and <code>vTest()</code> in Vector.swift.</p>
+<a href='#known-issues' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='known-issues'>Known issues</h1>
+
+<ul>
+<li>Setting any LLVM optimization level rather than <code>None [-O0]</code> would probably cause incorrect behavior of DSBuffer.</li>
+</ul>
 <a href='#how-to-contribute' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='how-to-contribute'>How to contribute</h1>
 
-<p>(to be added.)</p>
+<p>&hellip;</p>
 <a href='#acknowledgement' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='acknowledgement'>Acknowledgement</h1>
 
 <ul>
@@ -275,7 +292,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://herrkaefer.github.io" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-23)</p>
+          <p>&copy; 2016 <a class="link" href="https://herrkaefer.com" target="_blank" rel="external">Yang Liu</a>. All rights reserved. (Last updated: 2016-07-25)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

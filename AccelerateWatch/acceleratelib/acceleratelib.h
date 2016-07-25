@@ -1,7 +1,7 @@
 /*  =========================================================================
     acceleratelib - public API header
 
-    Copyright (c) 2016, Yang LIU <gloolar@gmail.com>
+    Copyright (c) 2016, Yang LIU <gloolar [at] gmail [dot] com>
     =========================================================================
 */
 

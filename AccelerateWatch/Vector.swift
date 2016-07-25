@@ -1,6 +1,6 @@
-///  Vector
+/// Vector
 //
-//  Created by Yang Liu (gloolar@gmail.com) on 16/7/9.
+//  Created by Yang Liu (gloolar [at] gmail [dot] com) on 16/7/9.
 //  Copyright © 2016年 Yang Liu. All rights reserved.
 //
 
@@ -193,7 +193,7 @@ public func vTest() {
     
     // time it
     
-    let iterations = 100000
+    let iterations = 10000
     
     let v3 = Array(1...100).map{Double($0)}
     

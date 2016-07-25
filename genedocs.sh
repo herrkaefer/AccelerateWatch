@@ -1,7 +1,7 @@
 jazzy \
   --clean \
   --author "Yang Liu" \
-  --author_url https://herrkaefer.github.io \
+  --author_url https://herrkaefer.com \
   --github_url https://github.com/herrkaefer/AccelerateWatch \
   --min-acl internal \
   --output ./docs \
