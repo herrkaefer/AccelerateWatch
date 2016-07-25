@@ -54,7 +54,7 @@ public class DSBuffer {
     
     // MARK: Regular operations
     
-    /// Push new value to buffer
+    /// Push new value to buffer (and the foremost will be dropped)
     ///
     /// - parameter value: New value to be added
     func push(_ value: Float) {
@@ -102,7 +102,7 @@ public class DSBuffer {
     }
     
     
-    // MARK: Vector operations
+    // MARK: Vector-like operations
     
     /// Add value to each buffer data
     func add(value: Float) -> [Float] {
@@ -128,6 +128,43 @@ public class DSBuffer {
     }
     
     
+    /// Remove mean value
+    var centralized: [Float] {
+        var result = [Float](repeating: 0.0, count: self.size)
+        dsbuffer_remove_mean(self.buffer, &result)
+        return result
+    }
+    
+    
+    /// Normalize vector to have unit length
+    ///
+    /// - parameter centralized: Should remove mean?
+    func normalizedToUnitLength(centralized: Bool) -> [Float] {
+        var result = [Float](repeating: 0.0, count: self.size)
+        dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
+        return result
+    }
+    
+    
+    /// Normalize vector to have unit variance
+    ///
+    /// - parameter centralized: Should remove mean?
+    func normalizedToUnitVariance(centralized: Bool) -> [Float] {
+        var result = [Float](repeating: 0.0, count: self.size)
+        dsbuffer_normalize_to_unit_variance(self.buffer, centralized, &result)
+        return result
+    }
+    
+    
+    /// Perform dot production with array
+    func dotProduct(with: [Float]) -> Float {
+        assert(self.size == with.count)
+        return dsbuffer_dot_product(self.buffer, with)
+    }
+    
+    
+    // MARK: Time-domain features
+    
     /// Mean value
     var mean: Float {
         return dsbuffer_mean(self.buffer)
@@ -146,34 +183,33 @@ public class DSBuffer {
     }
     
     
-    /// Squared length (power)
-    var power: Float {
-        return dsbuffer_power(self.buffer)
+    /// Square of length
+    var energy: Float {
+        return dsbuffer_energy(self.buffer)
     }
     
     
-    /// Remove mean value (centralize)
-    func centralized() -> [Float] {
-        var result = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_remove_mean(self.buffer, &result)
-        return result
+    /// Max value
+    var max: Float {
+        return dsbuffer_max(self.buffer)
+    }
+
+    
+    /// Min value
+    var min: Float {
+        return dsbuffer_min(self.buffer)
+    }
+
+    
+    /// Variance
+    var variance: Float {
+        return dsbuffer_variance(self.buffer)
     }
     
     
-    /// Normalize vector to have unit length
-    ///
-    /// - parameter centralized: Should remove mean?
-    func normalizedToUnitLength(centralized: Bool) -> [Float] {
-        var result = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
-        return result
-    }
-    
-    
-    /// Perform dot production with array
-    func dotProduct(with: [Float]) -> Float {
-        assert(self.size == with.count)
-        return dsbuffer_dot_product(self.buffer, with)
+    /// Standard deviation
+    var std: Float {
+        return dsbuffer_std(self.buffer)
     }
     
     

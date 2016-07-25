@@ -42,129 +42,107 @@ Manual install is recommended for now. [Swift Package Manager](https://github.co
 
 Full documentation [HERE](http://herrkaefer.com/AccelerateWatch/).
 
+The library currently has two modules:
+
+- `DSBuffer` is a class for windowed time series processing.
+- `Vector` is a set of functons for vector manipulations.
+
+Below is a summary of the APIs.
+
 ## DSBuffer
 
-DSBuffer represents a fixed length signal buffer (Float type) which is suitable for storing and processing a windowed time series.
+DSBuffer represents a fixed length signal queue (Float type) which is suitable for storing and processing a windowed time series.
 
 #### Normal operations
 
-Create a DSBuffer object
-
-*Tips*: If you do not need to perform FFT on the buffer, set fftIsSupperted to false would accelerate more. If you need to perform FFT, set buffer size to power of 2 would accelerate more.
-
 ```swift
+// Create a DSBuffer object
+// *Tips*: 
+// - If you do not need to perform FFT on the buffer, set fftIsSupperted to be false could save 50% memory.
+// - If you need to perform FFT, set buffer size to power of 2 could accelerate more.
 init(size: Int, fftIsSupported: Bool = true)
-```
 
-Push new data to the end of the buffer
-
-```swift
+// Push new data to the end of the buffer (and the foremost will be dropped)
 func push(value: Float)
-```
 
-Get data by index
-
-```swift
+// Get data by index
 func dataAt(index: Int)
-```
 
-Get buffer size
-
-```swift
+// Get buffer size
 var bufferSize: Int
-```
 
-Dump signal array
+// Dump buffer as array
+var data: [Float]
 
-```swift
-var signals: [Float]
-```
-
-Reset all buffer values to zero
-
-```swift
+// Reset all buffer values to zero
 func clear()
 ```
 
-#### Vector operations
+#### Vector-like operations
 
 ```swift
 func add(value: Float) -> [Float]
 func multiply(value: Float) -> [Float]
-var mean: Float
-var length: Float
-var power: Float
-func centralized() -> [Float]
+var centralized: [Float]
 func normalizedToUnitLength(centralized: Bool) -> [Float]
+func normalizedToUnitVariance(centralized: Bool) -> [Float]
 func dotProduct(with: [Float]) -> Float
 ```
 
-#### Fast Fourier Transform
+#### Time-domain features
+
+```swift
+var mean: Float
+var sum: Float
+var length: Float
+var energy: Float
+var max: Float
+var min: Float
+var variance: Float
+var std: Float
+```
+
+#### Fast Fourier Transform and frequency-domain features
 
 **Note for FFT related methods**:
 
-- Set fftIsSupported to true when creating the buffer.
-- Buffer size should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
-- Only results in nfft/2+1 complex frequency bins from DC to Nyquist are returned.
-
-Perform FFT on buffer
+- Set `fftIsSupported` to true when creating the buffer.
+- Buffer `size` should be even. If you pass odd size when creating the buffer, it is automatically increased by 1.
+- Only results in **size/2+1** complex frequency bins from DC to Nyquist are returned.
 
 ```swift
+// Perform FFT on buffer
 func fft() -> (real: [Float], imaginary: [Float])
-```
 
-Get FFT sample frequencies
-
-```swift
+// Get FFT sample frequencies
 func fftFrequencies(fs: Float) -> [Float]
-```
 
-Get FFT magnitudes
-
-```swift
+// Get FFT magnitudes
 func fftMagnitudes() -> [Float]
-```
-Square of FFT Magnitude, i.e. (abs(fft()))^2
 
-```swift
+// Square of FFT Magnitude, i.e. (abs(fft()))^2
 func squaredPowerSpectrum() -> [Float]
-```
 
-Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
-
-```swift
+// Mean-squared power spectrum, i.e. (abs(fft()))^2 / N
 func meanSquaredPowerSpectrum() -> [Float]
-```
 
-Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
-
-```swift
+// Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
 func powerSpectralDensity(fs: Float) -> [Float]
-```
 
-Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
-
-```swift
+// Average power over specified frequency band, i.e. mean(abs(fft(from...to))^2)
 func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 ```
 
 #### FIR filter
 
-Setup a FIR filter
-
 ```swift
+// Setup a FIR filter
 func setupFIRFilter(FIRTaps: [Float])
-```
 
-Get latest FIR filter output
-
-```swift
+// Get latest FIR filter output
 func latestFIROutput() -> Float
-```
 
-Get FIR filtered signal series in buffer
-
-```swift
+// Get FIR filtered signal series in buffer
 func FIRFiltered() -> [Float]
 ```
 
@@ -174,12 +152,14 @@ func FIRFiltered() -> [Float]
 Vector module includes operations on regular arrays. All functions have two versions, for float and double type respectively.
 
 - `vMean`
+- `vSum`
 - `vLength`
 - `vPower`
 - `vAdd`
 - `vMultiply`
 - `vRemoveMean`
 - `vNormalizeToUnitLength`
+- `vSqrt`
 - `vDotProduct`
 - `vCorrelationCoefficient`
 
@@ -190,7 +170,7 @@ Vector module includes operations on regular arrays. All functions have two vers
 
 # Known issues
 
-- Setting any LLVM optimization level rather than `None [-O0]` would probably cause incorrect behavior of DSBuffer.
+- Setting any LLVM (v8) optimization level rather than `None [-O0]` would probably cause unexpected behavior of DSBuffer.
 
 # How to contribute
 

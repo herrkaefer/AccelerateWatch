@@ -82,7 +82,19 @@ float dsbuffer_sum (dsbuffer_t *self);
 float dsbuffer_length (dsbuffer_t *self);
 
 // Squared length of buffer data as vector
-float dsbuffer_power (dsbuffer_t *self);
+float dsbuffer_energy (dsbuffer_t *self);
+    
+// Max value
+float dsbuffer_max (dsbuffer_t *self);
+    
+// Min value
+float dsbuffer_min (dsbuffer_t *self);
+
+// Variance
+float dsbuffer_variance (dsbuffer_t *self);
+
+// Standard deviation
+float dsbuffer_std (dsbuffer_t *self);
     
 // Add value to dsbuffer data.
 // Return results in param output.
@@ -105,9 +117,14 @@ void dsbuffer_remove_mean (dsbuffer_t *self, float *output);
 
 // Normalize buffer data as vector to have unit length.
 // Return results in param output which size is the same as the buffer.
-// Set remove_mean to true to centralize vector.
+// Set remove_mean to true to centralize.
 void dsbuffer_normalize_to_unit_length (dsbuffer_t *self, bool remove_mean, float *output);
 
+// Normalize buffer data as vector to have unit variance.
+// Return results in param output which size is the same as the buffer.
+// Set remove_mean to true to centralize.
+void dsbuffer_normalize_to_unit_variance (dsbuffer_t *self, bool remove_mean, float *output);
+    
 // Dot product with vector which size is same with buffer
 float dsbuffer_dot_product (dsbuffer_t *self, const float *vector);
 

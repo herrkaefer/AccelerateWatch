@@ -283,12 +283,52 @@ float dsbuffer_length (dsbuffer_t *self) {
 }
 
 
-float dsbuffer_power (dsbuffer_t *self) {
+float dsbuffer_energy (dsbuffer_t *self) {
     assert (self);
     float ss = 0.0;
     for (size_t i = 0; i < self->size; i++)
         ss += self->data[i] * self->data[i];
     return ss;
+}
+
+
+float dsbuffer_max (dsbuffer_t *self) {
+    assert (self);
+    assert (self->size > 0);
+    float maxv = self->data[0];
+    for (size_t i = 1; i < self->size; i++)
+        if (self->data[i] > maxv)
+            maxv = self->data[i];
+    return maxv;
+}
+
+
+float dsbuffer_min (dsbuffer_t *self) {
+    assert (self);
+    assert (self->size > 0);
+    float minv = self->data[0];
+    for (size_t i = 1; i < self->size; i++)
+        if (self->data[i] < minv)
+            minv = self->data[i];
+    return minv;
+}
+
+
+float dsbuffer_variance (dsbuffer_t *self) {
+    assert (self);
+    assert (self->size > 1);
+    float mean = dsbuffer_mean(self);
+    float ss = 0.0;
+    for (size_t i = 0; i < self->size; i++) {
+        float c = self->data[i] - mean;
+        ss += c * c;
+    }
+    return ss / (self->size - 1);
+}
+
+
+float dsbuffer_std (dsbuffer_t *self) {
+    return sqrtf(dsbuffer_variance(self));
 }
 
 
@@ -415,6 +455,48 @@ void dsbuffer_normalize_to_unit_length (dsbuffer_t *self,
             dsbuffer_multiply (self, 1/length, output);
         else
             dsbuffer_dump (self, output);
+    }
+}
+
+
+void dsbuffer_normalize_to_unit_variance (dsbuffer_t *self,
+                                          bool remove_mean,
+                                          float *output) {
+    assert (self);
+    assert (output);
+    
+    if (self->size == 0)
+        return;
+    
+    if (self->size == 1) {
+        output[0] = 1;
+        return;
+    }
+    
+    // Compute mean and std
+    float mean = dsbuffer_mean(self);
+    float ss = 0.0;
+    for (size_t i = 0; i < self->size; i++) {
+        float c = self->data[i] - mean;
+        ss += c * c;
+    }
+    float std = ss / (self->size - 1);
+    
+    if (remove_mean) {
+        // v -> (v-mean)/std
+        dsbuffer_add(self, -mean, output);
+        if (std > 0) {
+            for (size_t i = 0; i < self->size; i++)
+                output[i] /= std;
+        }
+    }
+    else {
+        // v -> v/std
+        if (std > 0) {
+            dsbuffer_multiply(self, 1/std, output);
+        }
+        else
+            dsbuffer_dump(self, output);
     }
 }
 
