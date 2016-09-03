@@ -93,7 +93,7 @@ public class DSBuffer {
     
     
     /// Print buffer
-    func printBuffer(dataFormat: String) {
+    func printBuffer(_ dataFormat: String) {
         print("DSBuffer size: \(self.size)")
         for idx in 0..<self.size {
             print(String(format: dataFormat, dsbuffer_at(self.buffer, idx)), terminator: " ")
@@ -105,25 +105,25 @@ public class DSBuffer {
     // MARK: Vector-like operations
     
     /// Add value to each buffer data
-    func add(value: Float) -> [Float] {
+    func add(_ withValue: Float) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_add(self.buffer, value, &result)
+        dsbuffer_add(self.buffer, withValue, &result)
         return result
     }
     
     
     /// Multiply each buffer data with value
-    func multiply(value: Float) -> [Float] {
+    func multiply(_ withValue: Float) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_multiply(self.buffer, value, &result)
+        dsbuffer_multiply(self.buffer, withValue, &result)
         return result
     }
     
     
     /// Modulus by value of each buffer data
-    func mod(value: Float) -> [Float] {
+    func mod(_ withValue: Float) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
-        dsbuffer_mod(self.buffer, value, &result)
+        dsbuffer_mod(self.buffer, withValue, &result)
         return result
     }
     
@@ -139,7 +139,7 @@ public class DSBuffer {
     /// Normalize vector to have unit length
     ///
     /// - parameter centralized: Should remove mean?
-    func normalizedToUnitLength(centralized: Bool) -> [Float] {
+    func normalizedToUnitLength(_ centralized: Bool) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_normalize_to_unit_length(self.buffer, centralized, &result)
         return result
@@ -149,7 +149,7 @@ public class DSBuffer {
     /// Normalize vector to have unit variance
     ///
     /// - parameter centralized: Should remove mean?
-    func normalizedToUnitVariance(centralized: Bool) -> [Float] {
+    func normalizedToUnitVariance(_ centralized: Bool) -> [Float] {
         var result = [Float](repeating: 0.0, count: self.size)
         dsbuffer_normalize_to_unit_variance(self.buffer, centralized, &result)
         return result
@@ -157,7 +157,7 @@ public class DSBuffer {
     
     
     /// Perform dot production with array
-    func dotProduct(with: [Float]) -> Float {
+    func dotProduct(_ with: [Float]) -> Float {
         assert(self.size == with.count)
         return dsbuffer_dot_product(self.buffer, with)
     }
@@ -213,7 +213,7 @@ public class DSBuffer {
     }
     
     
-    // MARK: FFT
+    // MARK: FFT & frequency-domain features
     
     // Perform FFT if it is not updated
     private func updateFFT() {
@@ -242,7 +242,7 @@ public class DSBuffer {
     /// FFT sample frequencies
     ///
     /// - returns: array of size nfft/2+1
-    func fftFrequencies(fs: Float) -> [Float] {
+    func fftFrequencies(_ fs: Float) -> [Float] {
         assert (self.fftIsSupported)
         var fftFreq = [Float](repeating: 0.0, count: self.size/2+1)
         dsbuffer_fft_freq(self.buffer, fs, &fftFreq)
@@ -284,7 +284,7 @@ public class DSBuffer {
     /// Power spectral density (PSD), i.e. (abs(fft()))^2 / (fs*N)
     /// 
     /// - returns: array of size nfft/2+1
-    func powerSpectralDensity(fs: Float) -> [Float] {
+    func powerSpectralDensity(_ fs: Float) -> [Float] {
         updateFFT()
         var psd = self.fftData!.map{($0.real*$0.real + $0.imag*$0.imag) * 2.0 / (fs * Float(self.size))}
         psd[0] /= 2.0 // DC
@@ -293,7 +293,7 @@ public class DSBuffer {
     
     
     /// Average power over specific frequency band, i.e. mean(abs(fft(from...to))^2)
-    func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
+    func averageBandPower(_ fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float {
         assert (fromFreq >= 0)
         assert (toFreq <= fs/2.0)
         assert (fromFreq <= toFreq)
@@ -315,7 +315,7 @@ public class DSBuffer {
     // MARK: FIR filter
     
     // Setup FIR filter
-    func setupFIRFilter(FIRTaps: [Float]) {
+    func setupFIRFilter(_ FIRTaps: [Float]) {
         assert (self.size >= FIRTaps.count)
         dsbuffer_setup_fir(self.buffer, FIRTaps, FIRTaps.count)
     }
@@ -341,14 +341,14 @@ public class DSBuffer {
         
         let size = 16
         let buf = DSBuffer(size, fftIsSupported: true)
-        buf.printBuffer(dataFormat: "%.2f")
+        buf.printBuffer("%.2f")
         
         let signalData: [Float] = [1.0, 4, 2, 5, 6, 7, -1, -8]
         for value in signalData {
             buf.push(value)
 //            print(buf.signals)
         }
-        buf.printBuffer(dataFormat: "%.2f")
+        buf.printBuffer("%.2f")
         
         let startTime = CFAbsoluteTimeGetCurrent()
         let fft = buf.fft()
@@ -371,7 +371,7 @@ public class DSBuffer {
         }
         
         
-        let norm = buf.normalizedToUnitLength(centralized: true)
+        let norm = buf.normalizedToUnitLength(true)
         let coeff = vDotProduct(norm, v2: norm)
         print(String(format: "coeff: %.2f\n", coeff))
         

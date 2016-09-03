@@ -214,7 +214,7 @@ public func vTest() {
     }
     let deltaTime2 = CFAbsoluteTimeGetCurrent() - startTime
     print(String(format: "deltaTime 2: %f\n", deltaTime2))
-    print(String(format: "improve: %f\n", (deltaTime1-deltaTime2)/deltaTime2))
+    print(String(format: "improve: %f\n", deltaTime1/deltaTime2))
     
     print("Vector test: OK.\n")
 }
