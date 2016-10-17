@@ -40,7 +40,7 @@ Manual install is recommended for now. [Swift Package Manager](https://github.co
 
 # Usage
 
-Full documentation [HERE](http://herrkaefer.com/AccelerateWatch/).
+Full documentation [HERE](http://herrkaefer.online/AccelerateWatch/).
 
 The library currently has two modules:
 

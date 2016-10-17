@@ -12,6 +12,6 @@ jazzy \
   #           ./AccelerateWatchDemoApp/Watch\ Extenion/InterfaceController.swift
 
 # Publish docs at https://herrkaefer.github.io/AccelerateWatch/
-# git subtree push --prefix docs origin gh-pages
+git subtree push --prefix docs origin gh-pages
 
 
