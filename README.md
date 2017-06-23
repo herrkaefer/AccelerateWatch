@@ -1,22 +1,13 @@
 # AccelerateWatch
 
-![Language](https://img.shields.io/badge/language-C-lightgrey.svg?style=flat)
-![Language](https://img.shields.io/badge/language-Swift-red.svg?style=flat)
-[![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
-![Build](https://img.shields.io/wercker/ci/wercker/docs.svg?style=flat)
+[![CI Status](http://img.shields.io/travis/HerrKaefer/AccelerateWatch.svg?style=flat)](https://travis-ci.org/HerrKaefer/AccelerateWatch)
+[![Version](https://img.shields.io/cocoapods/v/AccelerateWatch.svg?style=flat)](http://cocoapods.org/pods/AccelerateWatch)
+[![License](https://img.shields.io/cocoapods/l/AccelerateWatch.svg?style=flat)](http://cocoapods.org/pods/AccelerateWatch)
+[![Platform](https://img.shields.io/cocoapods/p/AccelerateWatch.svg?style=flat)](http://cocoapods.org/pods/AccelerateWatch)
 
 ```AccelerateWatch```: High performance digital signal processing and vector operations implemented in C, and wrapped in Swift, designed especially to be targeted at watchOS.
 
-# Working version: 1.0.1
-
-Currently all codes are built and tested on
-
-- Xcode 8.0 beta 3
-- iOS 10.0 beta 3
-- watchOS 3.0 beta 3
-- Swift 3
-
-# Where and why to use AccelerateWatch?
+## Where and why to use AccelerateWatch?
 
 Apple watchOS 3 opens opptunities to developers to access more motion sensor data both in real time and possible background tasks. Unfortunately meanwhile, the [Accelerate framework](https://developer.apple.com/library/ios/documentation/Accelerate/Reference/AccelerateFWRef/), a powerful tool for high-performance computations, is still unavailable on watchOS. This library is extracted from my other projects, and help those watchOS⌚️ apps which need to process sensor data in real time, just like what Accelerate does for iOS platform.
 
@@ -25,20 +16,22 @@ Apple watchOS 3 opens opptunities to developers to access more motion sensor dat
 
 Currently the functionality set is relatively smaller compared with Accelerate framework because only those I used in my projects are added (mostly focused on time series operations and analysis). So **contributions are welcome!** 😃
 
-# Install
+## Example
 
-Manual install is recommended for now. [Swift Package Manager](https://github.com/apple/swift-package-manager) will be supported when it is ready.
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-1. Clone the latest version of this repo to your local machine.
-2. Copy AccelerateWatch folder to your project (usually the Watch Extension folder). Remove `acceleratelib/build` folder which is for C code testing.
-3. Check that every .swift and .c files has *Watch Extension* as target if your want it to be used on watch target.
-4. Add a bridging header (here is a [Instruction](http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/)), and add the following line to it:
+## Requirements
 
-```c
-#include "acceleratelib.h"
+## Installation
+
+AccelerateWatch is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod "AccelerateWatch"
 ```
 
-# Usage
+## Usage
 
 Full documentation [HERE](http://herrkaefer.online/AccelerateWatch/).
 
@@ -49,11 +42,11 @@ The library currently has two modules:
 
 Below is a summary of the APIs.
 
-## DSBuffer
+### DSBuffer
 
 DSBuffer represents a fixed length signal queue (Float type) which is suitable for storing and processing a windowed time series.
 
-#### Normal operations
+##### Normal operations
 
 ```swift
 // Create a DSBuffer object
@@ -78,7 +71,7 @@ var data: [Float]
 func clear()
 ```
 
-#### Vector-like operations
+##### Vector-like operations
 
 ```swift
 func add(value: Float) -> [Float]
@@ -89,7 +82,7 @@ func normalizedToUnitVariance(centralized: Bool) -> [Float]
 func dotProduct(with: [Float]) -> Float
 ```
 
-#### Time-domain features
+##### Time-domain features
 
 ```swift
 var mean: Float
@@ -102,7 +95,7 @@ var variance: Float
 var std: Float
 ```
 
-#### Fast Fourier Transform and frequency-domain features
+##### Fast Fourier Transform and frequency-domain features
 
 **Note for FFT related methods**:
 
@@ -133,7 +126,7 @@ func powerSpectralDensity(fs: Float) -> [Float]
 func averageBandPower(fromFreq: Float = 0, toFreq: Float, fs: Float) -> Float
 ```
 
-#### FIR filter
+##### FIR filter
 
 ```swift
 // Setup a FIR filter
@@ -147,7 +140,7 @@ func FIRFiltered() -> [Float]
 ```
 
 
-## Vector
+### Vector
 
 Vector module includes operations on regular arrays. All functions have two versions, for float and double type respectively.
 
@@ -163,20 +156,15 @@ Vector module includes operations on regular arrays. All functions have two vers
 - `vDotProduct`
 - `vCorrelationCoefficient`
 
-
-# Demo App
-
-```AccelerateWatchDemoApp``` is a demo app showing how to integrate AccelerateWatch for watch target. For details, please see `DSBuffer.test()` in DSBuffer.swift and `vTest()` in Vector.swift.
-
-# Known issues
+## Known issues
 
 - Setting any LLVM (v8) optimization level rather than `None [-O0]` would probably cause unexpected behavior of DSBuffer.
 
-# How to contribute
+## Author
 
-...
+HerrKaefer, gloolar@gmail.com
 
-# Acknowledgement
+## Acknowledgement
 
 - [kissfft](https://github.com/itdaniher/kissfft)
 
@@ -186,6 +174,6 @@ kissfft is employed for FFT implementation. It is a lightweight and fast FFT lib
 
 For documentation generation.
 
-# License
+## License
 
-MIT
+AccelerateWatch is available under the MIT license. See the LICENSE file for more info.

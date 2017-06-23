@@ -1,0 +1,6 @@
+framework module AccelerateWatch {
+  umbrella header "AccelerateWatch-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - AccelerateWatch (0.1.0)
+
+DEPENDENCIES:
+  - AccelerateWatch (from `../`)
+
+EXTERNAL SOURCES:
+  AccelerateWatch:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AccelerateWatch: 1c23b04364c169ac057b0a49c841572747675ff4
+
+PODFILE CHECKSUM: 5540358f3f0c7be2672e5dec5de96e58fbf9937e
+
+COCOAPODS: 1.2.1

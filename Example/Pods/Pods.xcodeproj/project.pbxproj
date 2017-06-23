@@ -1,0 +1,665 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E60506A667B0DA5113AF728DF2CF761 /* vectord.h in Headers */ = {isa = PBXBuildFile; fileRef = FB7EDA606F6EBA7B8F5872065CE5F682 /* vectord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1D1A18BD623237C8CD1B077FF4824CCF /* vectord.c in Sources */ = {isa = PBXBuildFile; fileRef = D86ED51A8B503B69ADAE1522E788328F /* vectord.c */; };
+		49E7CA348258F32C911DCC9F1A396984 /* vectorf.h in Headers */ = {isa = PBXBuildFile; fileRef = A2DF36B76C1DD70F479DB8551E639813 /* vectorf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53E74D52AC24212AE56FC019AC8110A0 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 0292E88DEC5C02155D4607D40CB27919 /* kiss_fftr.c */; };
+		598A5ABD9EF848F8D80AF7D532B30CA7 /* selftest.c in Sources */ = {isa = PBXBuildFile; fileRef = B2B7E6978D15A60B3209568BFD1AFC23 /* selftest.c */; };
+		5CC3E5E92C3CFF55520BF01BD3813586 /* _kiss_fft_guts.h in Headers */ = {isa = PBXBuildFile; fileRef = 451A5138391E7D3195BC448BC2027727 /* _kiss_fft_guts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75760C8BB06B0F0776A37164514F5EDB /* DSBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5179BFADADD8BCF71C88E582D40A1 /* DSBuffer.swift */; };
+		80BFA492D05D1981783B4DA944178C6A /* kiss_fftr.h in Headers */ = {isa = PBXBuildFile; fileRef = A58E0F10BFD3EB534426A7F0F83D11DC /* kiss_fftr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		894B5CA6D40830831C57046D458CD51E /* acceleratelib.h in Headers */ = {isa = PBXBuildFile; fileRef = BB54459F4AE37F96E5D7F3279246949A /* acceleratelib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C74E009814211DC831FAA14B459A98B /* vectorf.c in Sources */ = {isa = PBXBuildFile; fileRef = B3B65E9A7E01C7FDF188835675F7C90D /* vectorf.c */; };
+		9224A88B8B321F00ADD8EC44C6367A8E /* AccelerateWatch-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89E774A888251178F5900940A50BA5 /* AccelerateWatch-dummy.m */; };
+		9980189E15234D6117BCD25E65FA1AE4 /* dsbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = DCA37B0A2372874D02EF55EB25529679 /* dsbuffer.c */; };
+		9E3606484CE4E2B827699F0DC0026F2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013A5FB9835E72E4AC5CE1028FB2C175 /* Foundation.framework */; };
+		A507A189BE808C0BBBED71761140A5F8 /* Pods-AccelerateWatchExampleForWatch Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B481E544DDF845381A69BF47E741BD6 /* Pods-AccelerateWatchExampleForWatch Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A51BE716FF419EF90E4ACEEAE38B1DC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013A5FB9835E72E4AC5CE1028FB2C175 /* Foundation.framework */; };
+		A9573C93B464D853CD81DB15E39BA248 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 49A1258C728E754D00E9DC20610561ED /* kiss_fft.c */; };
+		B202575B09F52769BB02F76FF5898EDE /* Pods-AccelerateWatchExampleForWatch Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 544EAFEA4791F99A339153F29A3E3AA9 /* Pods-AccelerateWatchExampleForWatch Extension-dummy.m */; };
+		D4589AA8EB3AF9C0DD514FAF76538B9B /* build.sh in Sources */ = {isa = PBXBuildFile; fileRef = 81D3CFF2EB229492A45DDE039FAE2C78 /* build.sh */; };
+		D8767C0311A2EFF5CD43A0BA2AADC5C2 /* kiss_fft.h in Headers */ = {isa = PBXBuildFile; fileRef = 2181F9B9489D6A47915C1233A812ADFA /* kiss_fft.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8AEA37687DAB4F5537B4BE98E88D7F0 /* fir_taps.ini in Sources */ = {isa = PBXBuildFile; fileRef = A75A3D4B200D0BF9DE6080A7DF50E6BB /* fir_taps.ini */; };
+		DA8B7A872DDEB4661FE0A3350CEB9C8F /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A384AFC442E185BFD038BBB18D67E1 /* Vector.swift */; };
+		DD312121F0AA511F267BAD8C9BBA776D /* dsbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E225E2BD608F0DF47BFBEE4FF3683F84 /* dsbuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB92F60A5FB24A7F4AE35690CEE666E2 /* AccelerateWatch-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C85A896EA59AF396080EDF447F405E42 /* AccelerateWatch-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		600C02F07B5373E02F4F049B9D3D4356 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0229521A937B3686CC543548EA9C272C;
+			remoteInfo = AccelerateWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00A09E44EE2A77C177DD813094781008 /* Pods-AccelerateWatchExampleForWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AccelerateWatchExampleForWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		013A5FB9835E72E4AC5CE1028FB2C175 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		0292E88DEC5C02155D4607D40CB27919 /* kiss_fftr.c */ = {isa = PBXFileReference; includeInIndex = 1; path = kiss_fftr.c; sourceTree = "<group>"; };
+		09A384AFC442E185BFD038BBB18D67E1 /* Vector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		2181F9B9489D6A47915C1233A812ADFA /* kiss_fft.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
+		3B89E774A888251178F5900940A50BA5 /* AccelerateWatch-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AccelerateWatch-dummy.m"; sourceTree = "<group>"; };
+		3E13FEAFB0455A0D550A67ACA5C35F97 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		451A5138391E7D3195BC448BC2027727 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
+		49A1258C728E754D00E9DC20610561ED /* kiss_fft.c */ = {isa = PBXFileReference; includeInIndex = 1; path = kiss_fft.c; sourceTree = "<group>"; };
+		4F3334297E8F79A37C6C5FA957549F7D /* Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.markdown"; sourceTree = "<group>"; };
+		544EAFEA4791F99A339153F29A3E3AA9 /* Pods-AccelerateWatchExampleForWatch Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AccelerateWatchExampleForWatch Extension-dummy.m"; sourceTree = "<group>"; };
+		5AAA06F251773FC180B8FE1E89890DDC /* Pods-AccelerateWatchExampleForWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AccelerateWatchExampleForWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
+		6B481E544DDF845381A69BF47E741BD6 /* Pods-AccelerateWatchExampleForWatch Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AccelerateWatchExampleForWatch Extension-umbrella.h"; sourceTree = "<group>"; };
+		6B7E85A4FE031AFC670F5B70AEB6893A /* Pods-AccelerateWatchExampleForWatch Extension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AccelerateWatchExampleForWatch Extension.modulemap"; sourceTree = "<group>"; };
+		81D3CFF2EB229492A45DDE039FAE2C78 /* build.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		84E5179BFADADD8BCF71C88E582D40A1 /* DSBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DSBuffer.swift; sourceTree = "<group>"; };
+		87E5E72CFADE01407347943A516777F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		916D7AA85CE33A7FE218668AF9DABA97 /* Pods-AccelerateWatchExampleForWatch Extension-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AccelerateWatchExampleForWatch Extension-frameworks.sh"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A2DF36B76C1DD70F479DB8551E639813 /* vectorf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = vectorf.h; sourceTree = "<group>"; };
+		A52DF35A56DCCB58F235D127B71FEB01 /* AccelerateWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AccelerateWatch.framework; path = AccelerateWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A58E0F10BFD3EB534426A7F0F83D11DC /* kiss_fftr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
+		A622C42A72A30A786E6A9A00F462DECF /* AccelerateWatch.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AccelerateWatch.xcconfig; sourceTree = "<group>"; };
+		A75A3D4B200D0BF9DE6080A7DF50E6BB /* fir_taps.ini */ = {isa = PBXFileReference; includeInIndex = 1; path = fir_taps.ini; sourceTree = "<group>"; };
+		A7CA4C0E51FFF86A4C79F6CFECF5BAA1 /* AccelerateWatch-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatch-prefix.pch"; sourceTree = "<group>"; };
+		B2B7E6978D15A60B3209568BFD1AFC23 /* selftest.c */ = {isa = PBXFileReference; includeInIndex = 1; path = selftest.c; sourceTree = "<group>"; };
+		B3B65E9A7E01C7FDF188835675F7C90D /* vectorf.c */ = {isa = PBXFileReference; includeInIndex = 1; path = vectorf.c; sourceTree = "<group>"; };
+		B66BD5AD2E6BB024A5F9D8D7AF8BC02E /* Pods-AccelerateWatchExampleForWatch Extension-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AccelerateWatchExampleForWatch Extension-resources.sh"; sourceTree = "<group>"; };
+		BB54459F4AE37F96E5D7F3279246949A /* acceleratelib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = acceleratelib.h; sourceTree = "<group>"; };
+		C85A896EA59AF396080EDF447F405E42 /* AccelerateWatch-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AccelerateWatch-umbrella.h"; sourceTree = "<group>"; };
+		D86ED51A8B503B69ADAE1522E788328F /* vectord.c */ = {isa = PBXFileReference; includeInIndex = 1; path = vectord.c; sourceTree = "<group>"; };
+		DCA37B0A2372874D02EF55EB25529679 /* dsbuffer.c */ = {isa = PBXFileReference; includeInIndex = 1; path = dsbuffer.c; sourceTree = "<group>"; };
+		E225E2BD608F0DF47BFBEE4FF3683F84 /* dsbuffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = dsbuffer.h; sourceTree = "<group>"; };
+		E2ED93360BC9426DC80AA5E9C9215A6D /* AccelerateWatch.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = AccelerateWatch.modulemap; sourceTree = "<group>"; };
+		E8468DF839D53EE059D69A26A3F7D207 /* Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.plist"; sourceTree = "<group>"; };
+		F35ABF461E332EE93937EEFA2A503E03 /* Pods_AccelerateWatchExampleForWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AccelerateWatchExampleForWatch_Extension.framework; path = "Pods-AccelerateWatchExampleForWatch Extension.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB7EDA606F6EBA7B8F5872065CE5F682 /* vectord.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = vectord.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA15A7C22128E066728F713E2442502A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E3606484CE4E2B827699F0DC0026F2E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C3FEBD7A72DE74A902FF0749E91CA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A51BE716FF419EF90E4ACEEAE38B1DC8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D1A905AE695AFBA10F4D5A9277BF51C /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				013A5FB9835E72E4AC5CE1028FB2C175 /* Foundation.framework */,
+			);
+			name = watchOS;
+			sourceTree = "<group>";
+		};
+		56AE1B38560FB84CE030994D76BC378D /* Pods-AccelerateWatchExampleForWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3E13FEAFB0455A0D550A67ACA5C35F97 /* Info.plist */,
+				6B7E85A4FE031AFC670F5B70AEB6893A /* Pods-AccelerateWatchExampleForWatch Extension.modulemap */,
+				4F3334297E8F79A37C6C5FA957549F7D /* Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.markdown */,
+				E8468DF839D53EE059D69A26A3F7D207 /* Pods-AccelerateWatchExampleForWatch Extension-acknowledgements.plist */,
+				544EAFEA4791F99A339153F29A3E3AA9 /* Pods-AccelerateWatchExampleForWatch Extension-dummy.m */,
+				916D7AA85CE33A7FE218668AF9DABA97 /* Pods-AccelerateWatchExampleForWatch Extension-frameworks.sh */,
+				B66BD5AD2E6BB024A5F9D8D7AF8BC02E /* Pods-AccelerateWatchExampleForWatch Extension-resources.sh */,
+				6B481E544DDF845381A69BF47E741BD6 /* Pods-AccelerateWatchExampleForWatch Extension-umbrella.h */,
+				00A09E44EE2A77C177DD813094781008 /* Pods-AccelerateWatchExampleForWatch Extension.debug.xcconfig */,
+				5AAA06F251773FC180B8FE1E89890DDC /* Pods-AccelerateWatchExampleForWatch Extension.release.xcconfig */,
+			);
+			name = "Pods-AccelerateWatchExampleForWatch Extension";
+			path = "Target Support Files/Pods-AccelerateWatchExampleForWatch Extension";
+			sourceTree = "<group>";
+		};
+		7907D11D5E9ED58BD18B0575E7A12ABD /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8BAA80FE253957548F22E47210C403BE /* AccelerateWatch */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				7907D11D5E9ED58BD18B0575E7A12ABD /* Development Pods */,
+				D0C944C1195A66362952211462CCD0FC /* Frameworks */,
+				E48F164ABE803E2463AC5177A91B6D92 /* Products */,
+				BC35AF01018DFA961C1E0259AE4BA1B7 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7DC813588538A2D5C1F31A1063AC27D6 /* AccelerateWatch */ = {
+			isa = PBXGroup;
+			children = (
+				E6639F23D2A655869E0E329558314E36 /* Classes */,
+			);
+			name = AccelerateWatch;
+			path = AccelerateWatch;
+			sourceTree = "<group>";
+		};
+		8BAA80FE253957548F22E47210C403BE /* AccelerateWatch */ = {
+			isa = PBXGroup;
+			children = (
+				7DC813588538A2D5C1F31A1063AC27D6 /* AccelerateWatch */,
+				DDE591B2699BE20C0B28C9FB7D666D38 /* Support Files */,
+			);
+			name = AccelerateWatch;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		92AEACFD9231175E8B562626EB605A96 /* kissfft */ = {
+			isa = PBXGroup;
+			children = (
+				451A5138391E7D3195BC448BC2027727 /* _kiss_fft_guts.h */,
+				49A1258C728E754D00E9DC20610561ED /* kiss_fft.c */,
+				2181F9B9489D6A47915C1233A812ADFA /* kiss_fft.h */,
+				0292E88DEC5C02155D4607D40CB27919 /* kiss_fftr.c */,
+				A58E0F10BFD3EB534426A7F0F83D11DC /* kiss_fftr.h */,
+			);
+			name = kissfft;
+			path = kissfft;
+			sourceTree = "<group>";
+		};
+		BC35AF01018DFA961C1E0259AE4BA1B7 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				56AE1B38560FB84CE030994D76BC378D /* Pods-AccelerateWatchExampleForWatch Extension */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BE1BDD6198BF6B4E6D1912014EDDAF4A /* acceleratelib */ = {
+			isa = PBXGroup;
+			children = (
+				BB54459F4AE37F96E5D7F3279246949A /* acceleratelib.h */,
+				DCA37B0A2372874D02EF55EB25529679 /* dsbuffer.c */,
+				E225E2BD608F0DF47BFBEE4FF3683F84 /* dsbuffer.h */,
+				A75A3D4B200D0BF9DE6080A7DF50E6BB /* fir_taps.ini */,
+				D86ED51A8B503B69ADAE1522E788328F /* vectord.c */,
+				FB7EDA606F6EBA7B8F5872065CE5F682 /* vectord.h */,
+				B3B65E9A7E01C7FDF188835675F7C90D /* vectorf.c */,
+				A2DF36B76C1DD70F479DB8551E639813 /* vectorf.h */,
+				D64DAF0C874068CA8C46C907128DEFE2 /* build */,
+				92AEACFD9231175E8B562626EB605A96 /* kissfft */,
+			);
+			name = acceleratelib;
+			path = acceleratelib;
+			sourceTree = "<group>";
+		};
+		D0C944C1195A66362952211462CCD0FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D1A905AE695AFBA10F4D5A9277BF51C /* watchOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D64DAF0C874068CA8C46C907128DEFE2 /* build */ = {
+			isa = PBXGroup;
+			children = (
+				81D3CFF2EB229492A45DDE039FAE2C78 /* build.sh */,
+				B2B7E6978D15A60B3209568BFD1AFC23 /* selftest.c */,
+			);
+			name = build;
+			path = build;
+			sourceTree = "<group>";
+		};
+		DDE591B2699BE20C0B28C9FB7D666D38 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E2ED93360BC9426DC80AA5E9C9215A6D /* AccelerateWatch.modulemap */,
+				A622C42A72A30A786E6A9A00F462DECF /* AccelerateWatch.xcconfig */,
+				3B89E774A888251178F5900940A50BA5 /* AccelerateWatch-dummy.m */,
+				A7CA4C0E51FFF86A4C79F6CFECF5BAA1 /* AccelerateWatch-prefix.pch */,
+				C85A896EA59AF396080EDF447F405E42 /* AccelerateWatch-umbrella.h */,
+				87E5E72CFADE01407347943A516777F4 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/AccelerateWatch";
+			sourceTree = "<group>";
+		};
+		E48F164ABE803E2463AC5177A91B6D92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A52DF35A56DCCB58F235D127B71FEB01 /* AccelerateWatch.framework */,
+				F35ABF461E332EE93937EEFA2A503E03 /* Pods_AccelerateWatchExampleForWatch_Extension.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6639F23D2A655869E0E329558314E36 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84E5179BFADADD8BCF71C88E582D40A1 /* DSBuffer.swift */,
+				09A384AFC442E185BFD038BBB18D67E1 /* Vector.swift */,
+				BE1BDD6198BF6B4E6D1912014EDDAF4A /* acceleratelib */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8EE21FE07A3E8796B431C146C0B8C555 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CC3E5E92C3CFF55520BF01BD3813586 /* _kiss_fft_guts.h in Headers */,
+				894B5CA6D40830831C57046D458CD51E /* acceleratelib.h in Headers */,
+				FB92F60A5FB24A7F4AE35690CEE666E2 /* AccelerateWatch-umbrella.h in Headers */,
+				DD312121F0AA511F267BAD8C9BBA776D /* dsbuffer.h in Headers */,
+				D8767C0311A2EFF5CD43A0BA2AADC5C2 /* kiss_fft.h in Headers */,
+				80BFA492D05D1981783B4DA944178C6A /* kiss_fftr.h in Headers */,
+				0E60506A667B0DA5113AF728DF2CF761 /* vectord.h in Headers */,
+				49E7CA348258F32C911DCC9F1A396984 /* vectorf.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB1D75FBB790E8D24A7BBCE73EF8A8CD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A507A189BE808C0BBBED71761140A5F8 /* Pods-AccelerateWatchExampleForWatch Extension-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0229521A937B3686CC543548EA9C272C /* AccelerateWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8F8DB86BECBCBAEE905F096E35265C2 /* Build configuration list for PBXNativeTarget "AccelerateWatch" */;
+			buildPhases = (
+				9B3532A4BC59D8E907D7F9EBED709FE7 /* Sources */,
+				AA15A7C22128E066728F713E2442502A /* Frameworks */,
+				8EE21FE07A3E8796B431C146C0B8C555 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AccelerateWatch;
+			productName = AccelerateWatch;
+			productReference = A52DF35A56DCCB58F235D127B71FEB01 /* AccelerateWatch.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4884D3416FCCC6CF295330BB6EC0A903 /* Pods-AccelerateWatchExampleForWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3529772ADEB8D76EA03A42BAD162E8BA /* Build configuration list for PBXNativeTarget "Pods-AccelerateWatchExampleForWatch Extension" */;
+			buildPhases = (
+				501BC05D8ABFB109E1705493912F8C88 /* Sources */,
+				D4C3FEBD7A72DE74A902FF0749E91CA0 /* Frameworks */,
+				DB1D75FBB790E8D24A7BBCE73EF8A8CD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				799DD17A258AF90F05A49D05440FCB6D /* PBXTargetDependency */,
+			);
+			name = "Pods-AccelerateWatchExampleForWatch Extension";
+			productName = "Pods-AccelerateWatchExampleForWatch Extension";
+			productReference = F35ABF461E332EE93937EEFA2A503E03 /* Pods_AccelerateWatchExampleForWatch_Extension.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = E48F164ABE803E2463AC5177A91B6D92 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0229521A937B3686CC543548EA9C272C /* AccelerateWatch */,
+				4884D3416FCCC6CF295330BB6EC0A903 /* Pods-AccelerateWatchExampleForWatch Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		501BC05D8ABFB109E1705493912F8C88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B202575B09F52769BB02F76FF5898EDE /* Pods-AccelerateWatchExampleForWatch Extension-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B3532A4BC59D8E907D7F9EBED709FE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9224A88B8B321F00ADD8EC44C6367A8E /* AccelerateWatch-dummy.m in Sources */,
+				D4589AA8EB3AF9C0DD514FAF76538B9B /* build.sh in Sources */,
+				9980189E15234D6117BCD25E65FA1AE4 /* dsbuffer.c in Sources */,
+				75760C8BB06B0F0776A37164514F5EDB /* DSBuffer.swift in Sources */,
+				D8AEA37687DAB4F5537B4BE98E88D7F0 /* fir_taps.ini in Sources */,
+				A9573C93B464D853CD81DB15E39BA248 /* kiss_fft.c in Sources */,
+				53E74D52AC24212AE56FC019AC8110A0 /* kiss_fftr.c in Sources */,
+				598A5ABD9EF848F8D80AF7D532B30CA7 /* selftest.c in Sources */,
+				DA8B7A872DDEB4661FE0A3350CEB9C8F /* Vector.swift in Sources */,
+				1D1A18BD623237C8CD1B077FF4824CCF /* vectord.c in Sources */,
+				8C74E009814211DC831FAA14B459A98B /* vectorf.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		799DD17A258AF90F05A49D05440FCB6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AccelerateWatch;
+			target = 0229521A937B3686CC543548EA9C272C /* AccelerateWatch */;
+			targetProxy = 600C02F07B5373E02F4F049B9D3D4356 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0F2C90E2A563EA511CA0CDDA3A3C5AA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00A09E44EE2A77C177DD813094781008 /* Pods-AccelerateWatchExampleForWatch Extension.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AccelerateWatchExampleForWatch Extension/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AccelerateWatchExampleForWatch Extension/Pods-AccelerateWatchExampleForWatch Extension.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AccelerateWatchExampleForWatch_Extension;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Debug;
+		};
+		49F674F9E17E51457360595B109E9912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AAA06F251773FC180B8FE1E89890DDC /* Pods-AccelerateWatchExampleForWatch Extension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AccelerateWatchExampleForWatch Extension/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AccelerateWatchExampleForWatch Extension/Pods-AccelerateWatchExampleForWatch Extension.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AccelerateWatchExampleForWatch_Extension;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Release;
+		};
+		58C39454835A7DBE486596B38F269157 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A622C42A72A30A786E6A9A00F462DECF /* AccelerateWatch.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AccelerateWatch/AccelerateWatch-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AccelerateWatch/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AccelerateWatch/AccelerateWatch.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AccelerateWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
+		6EBBC090BAFE04D5012C45F45E543E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Release;
+		};
+		BD87CD15F658D0F070F8E697AA317C45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A622C42A72A30A786E6A9A00F462DECF /* AccelerateWatch.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AccelerateWatch/AccelerateWatch-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AccelerateWatch/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AccelerateWatch/AccelerateWatch.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AccelerateWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		C1C0144C37660170C71BBFA737979A9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1C0144C37660170C71BBFA737979A9B /* Debug */,
+				6EBBC090BAFE04D5012C45F45E543E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3529772ADEB8D76EA03A42BAD162E8BA /* Build configuration list for PBXNativeTarget "Pods-AccelerateWatchExampleForWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F2C90E2A563EA511CA0CDDA3A3C5AA2 /* Debug */,
+				49F674F9E17E51457360595B109E9912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8F8DB86BECBCBAEE905F096E35265C2 /* Build configuration list for PBXNativeTarget "AccelerateWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD87CD15F658D0F070F8E697AA317C45 /* Debug */,
+				58C39454835A7DBE486596B38F269157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

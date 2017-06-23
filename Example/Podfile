@@ -1,0 +1,15 @@
+use_frameworks!
+
+#target 'AccelerateWatch_Example' do
+#  pod 'AccelerateWatch', :path => '../'
+#
+#  target 'AccelerateWatch_Tests' do
+#    inherit! :search_paths
+#  end
+#  
+#end
+
+
+target 'AccelerateWatchExampleForWatch Extension' do
+  pod 'AccelerateWatch', :path => '../'
+end
