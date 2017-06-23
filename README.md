@@ -20,8 +20,6 @@ Currently the functionality set is relatively smaller compared with Accelerate f
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
-
 ## Installation
 
 AccelerateWatch is available through [CocoaPods](http://cocoapods.org). To install
@@ -162,7 +160,7 @@ Vector module includes operations on regular arrays. All functions have two vers
 
 ## Author
 
-HerrKaefer, gloolar@gmail.com
+herrkaefer, gloolar@gmail.com
 
 ## Acknowledgement
 
