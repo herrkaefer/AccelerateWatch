@@ -308,7 +308,7 @@ public class DSBuffer {
         let bandPower = self.fftData![fromIdx...toIdx].map{$0.real*$0.real+$0.imag*$0.imag}
         
         // Averaging
-        return bandPower.reduce(0.0, combine: +) / Float(toIdx - fromIdx + 1)
+        return bandPower.reduce(0.0, +) / Float(toIdx - fromIdx + 1)
     }
     
     

@@ -200,9 +200,9 @@ public func vTest() {
     // Naïve Swift Implementation
     var startTime = CFAbsoluteTimeGetCurrent()
     for _ in 0..<iterations {
-        let avg = v3.reduce(0.0, combine: +) / Double(v3.count)
+        let avg = v3.reduce(0.0, +) / Double(v3.count)
         let centralized = v3.map{$0-avg}
-        let length = centralized.reduce(0.0, combine: {$0+$1*$1})
+        let length = centralized.reduce(0.0, {$0+$1*$1})
         _ = centralized.map{$0/length}
     }
     let deltaTime1 = CFAbsoluteTimeGetCurrent() - startTime
