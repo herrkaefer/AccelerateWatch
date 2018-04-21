@@ -31,7 +31,7 @@ pod "AccelerateWatch", :git => 'https://github.com/herrkaefer/AccelerateWatch.gi
 
 ## Usage
 
-Full documentation [HERE](http://herrkaefer.online/AccelerateWatch/).
+Full documentation [HERE](https://herrkaefer.com/AccelerateWatch/).
 
 The library currently has two modules:
 
@@ -48,7 +48,7 @@ DSBuffer represents a fixed length signal queue (Float type) which is suitable f
 
 ```swift
 // Create a DSBuffer object
-// *Tips*: 
+// *Tips*:
 // - If you do not need to perform FFT on the buffer, set fftIsSupperted to be false could save 50% memory.
 // - If you need to perform FFT, set buffer size to power of 2 could accelerate more.
 init(size: Int, fftIsSupported: Bool = true)
